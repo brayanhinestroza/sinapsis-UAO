@@ -1,0 +1,5 @@
+#Carpeta de nodemodules
+node_modules
+
+#Dependencias
+.env
