@@ -1,0 +1,29 @@
+body{
+    overflow: hidden;
+}
+
+.Cards{
+    text-align: center;
+}
+
+.Card{
+    display:inline-block;    
+}
+
+footer{
+	padding: 10px 10px 0px 10px;
+	margin-bottom: 0px;
+	margin-top: 35px;
+	background-color: black;
+	color: white;
+	font-size: 15px;
+}
+footer a{
+	color: #f2f5d0;
+	display: block;
+}
+
+footer h6{
+	font-weight: bold;
+	font-size: 18px;
+}
