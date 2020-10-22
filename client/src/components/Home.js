@@ -1,53 +1,89 @@
-import React, { Component } from 'react'
-import Card from './Card-Home';
+import React from 'react'
+import {Navbar, Card, CardDeck} from 'react-bootstrap'
+import {Link} from 'react-router-dom'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import logoSinapsis from '../imagenes/logosinapsis.png'
+import Home_Admin from '../imagenes/home-admin.jpg'
+import Home_Emprendedor from '../imagenes/home-emprendedor.jpg'
+import Home_Mentor from '../imagenes/home-mentor.jpg'
+
 import '../styles/app.css'
-import '../../node_modules/bootstrap/dist/css/bootstrap.min.css'
-import imagen from '../imagenes/emprendedor.jpg'
 
 
-class Home extends Component{    
 
-    render(){
-        return (
-        <React.Fragment>
-            <header>
-                <h1>Sinapsis Logo</h1>
-            </header>
-            <div className='text-center'>
-                <Card title='Emprendedor' img={imagen}/>
-                <Card title='Administrativo' img={imagen}/>
-                <Card title='Mentor' img={imagen}/>
-            </div>
+function Home() {
+    return (
+        <>
+        <Navbar bg="warning" variant="dark">
+            <Navbar.Brand href="/">
+                <img
+                    src={logoSinapsis}
+                    width="124"
+                    height="60"
+                    className="d-inline-block align-top"
+                    alt="Sinapsis logo"
+                />
+            </Navbar.Brand>                
+        </Navbar>
 
-            <footer>
-                <div className="row">		
-                    <div className="col-sm-4 d-flex flex-column align-items-start">
-                        <h6>Redes sociales</h6>
-                        <a href="http://www.facebook.com" target='_blank' rel='noopener noreferrer'>Facebook</a>
-                        <a href="http://www.Twitter.com"  target='_blank' rel='noopener noreferrer'>Twitter</a>
-                        <a href="http://www.Instagram.com" target='_blank' rel='noopener noreferrer'>Instagram</a>
-                        <a href="http://www.Google.com" target='_blank' rel='noopener noreferrer'>Google+</a>
-                    </div>
+        <h3 className="text-center mt-2">Elige tu perfil de usuario</h3>
 
-                    <div className="col-sm-4 d-flex flex-column align-items-center">
-                        <h6>Contactos</h6>
-                        <address>
-                            <p>Calle 80 WFJA 25#6</p>				
-                            <p>+57 65895447885454</p>
-                            <p>sinapsis@ejemplo.com</p>
-                        </address>						
-                    </div>
-                    
-                    <div className="col-sm-4 d-flex flex-column align-items-end">
-                        <h6>Acerca de...</h6>
-                        <a href="www.facebook.com">Nosotros</a>
-                        <a href="www.facebook.com">Terminos y condiciones</a>
-                    </div>
-                </div>
-            </footer>
-        </React.Fragment>
-        );
-    }
+        <CardDeck className="m-3 text-center">
+            <Card>
+                <Card.Img variant="top" src={Home_Emprendedor} height="250" />
+                <Card.Body>
+                <Card.Title>Emprendedor</Card.Title>
+                <Card.Text>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                Cras et dolor lorem. Donec ut erat id diam facilisis facilisis at vel diam. 
+                Etiam suscipit est eu suscipit tristique. 
+                </Card.Text>
+                <Link to="/Emprendedor" className="mt-2 btn btn-info w-100">
+                    <span className="font-weight-bolder">Seleccionar</span>
+                </Link>
+                </Card.Body>
+            </Card>
+            <Card>
+                <Card.Img variant="top" src={Home_Mentor} height="250"  />
+                <Card.Body>
+                <Card.Title>Mentor</Card.Title>
+                <Card.Text>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                    Cras et dolor lorem. Donec ut erat id diam facilisis facilisis at vel diam. 
+                    Etiam suscipit est eu suscipit tristique. 
+                </Card.Text>
+                <Link to="/Mentor" className="mt-2 btn btn-info w-100"> 
+                    <span className="font-weight-bolder">Seleccionar</span>
+                </Link>
+                </Card.Body>
+            </Card>
+            <Card>
+                <Card.Img variant="top" src={Home_Admin} height="250"  />
+                <Card.Body>
+                <Card.Title>Administrativo</Card.Title>
+                <Card.Text>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                    Cras et dolor lorem. Donec ut erat id diam facilisis facilisis at vel diam. 
+                    Etiam suscipit est eu suscipit tristique. 
+                </Card.Text>
+                <Link to="/Administrador" className="mt-2 btn btn-info w-100">
+                    <span className="font-weight-bolder">Seleccionar</span>
+                </Link>
+                </Card.Body>
+            </Card>
+        </CardDeck>
+
+        <Navbar className="Contactos" bg="warning" variant="dark">
+            <p className="Contacto">
+                <span className="Titulo-Contacto">Contacto</span>
+                Teléfono:
+                (+57) (2) 318 8000 
+                Línea gratuita: 01 8000 91 34 35
+                Ext: 11046
+            </p>
+        </Navbar>
+        </>
+    );
 }
 
-export default Home;
+export default Home

@@ -1,17 +1,15 @@
 import React, { Component } from 'react'
 import Banner from '../helpers/Banner'
 
-class Emprendedor extends Component {
+export default class Mentor extends Component {
     render() {
         return (
             <>
             <Banner/>
-                <div>
-                    Pagina inicio Emprendedor                  
-                </div>
+            <div>
+                Hola mentor
+            </div>
             </>
         )
     }
 }
-
-export default Emprendedor
