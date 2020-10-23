@@ -12,21 +12,39 @@ class Banner extends Component {
         }
     }
 
-    metodo(){
+    renderizaBreadcrumb(){
+        if (window.location.pathname !== "/") {
+            return (
+                <Breadcrumb>
+                    <Breadcrumb.Item href="/">
+                        <Link to="/">Home</Link>    
+                    </Breadcrumb.Item>                
+                    <Breadcrumb.Item active>{window.location.pathname.substr(1)}</Breadcrumb.Item>
+                </Breadcrumb>
+            )
+        }
+    }
+
+    RenderizarOpcionUser(){
         if (window.location.pathname === "/") {
             return 
         }
+
+        if(this.state.user === "Invitado"){
+            return (
+            <>
+                <p> { this.state.user } </p>
+                <p>_icon </p>
+            </>
+            );
+        }
         return (
-            <Navbar.Collapse className="justify-content-end d-inline">
+            <>
                 <p> { this.state.user } </p>
                 <p>_icon </p>
                 <p>_Exit</p>
-            </Navbar.Collapse>
-        )
-    }
-
-    componentDidMount(){
-
+            </>
+        );
     }
 
     render() {
@@ -42,17 +60,13 @@ class Banner extends Component {
                         alt="Sinapsis logo"
                     />
                 </Navbar.Brand>
+                <Navbar.Collapse className="justify-content-end d-inline">
+                    {this.RenderizarOpcionUser()}
+                </Navbar.Collapse>
+                { this.RenderizarOpcionUser}                
+            </Navbar>
 
-                { this.metodo}
-                
-            </Navbar> 
-
-            <Breadcrumb>
-                <Breadcrumb.Item href="/">
-                    <Link to="/">Home</Link>    
-                </Breadcrumb.Item>                
-                <Breadcrumb.Item active>{window.location.pathname.substr(1)}</Breadcrumb.Item>
-            </Breadcrumb>
+            {this.renderizaBreadcrumb()}           
         </>
         )
     }

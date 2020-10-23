@@ -2,29 +2,19 @@ import React from 'react'
 import {Navbar, Card, CardDeck} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import logoSinapsis from '../imagenes/logosinapsis.png'
 import Home_Admin from '../imagenes/home-admin.jpg'
 import Home_Emprendedor from '../imagenes/home-emprendedor.jpg'
 import Home_Mentor from '../imagenes/home-mentor.jpg'
 
 import '../styles/app.css'
+import Banner from './helpers/Banner'
 
 
 
 function Home() {
     return (
-        <>
-        <Navbar bg="warning" variant="dark">
-            <Navbar.Brand href="/">
-                <img
-                    src={logoSinapsis}
-                    width="124"
-                    height="60"
-                    className="d-inline-block align-top"
-                    alt="Sinapsis logo"
-                />
-            </Navbar.Brand>                
-        </Navbar>
+        <>        
+        <Banner/>
 
         <h3 className="text-center mt-2">Elige tu perfil de usuario</h3>
 
