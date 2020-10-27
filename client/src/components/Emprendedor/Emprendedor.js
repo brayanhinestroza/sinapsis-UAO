@@ -24,31 +24,15 @@ class Emprendedor extends Component {
                                 <Link className="nav-link" to="/Emprendedor/Diagnostico">Diagnostico</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/Emprendedor">Mi Ruta</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/Emprendedor/Login">Iniciar Sesion</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/Emprendedor/Registro">Registro</Link>
+                                <Link className="nav-link" to="/Emprendedor/Ruta">Mi Ruta</Link>
                             </li>
                         </ul>
                     </div>
                 </div>
             </nav>
 
-            <div className="text-center mt-5">
+            <div className="text-center mt-5 mb-5">
                 <img src={Imagen} alt="Sinapsis ruta" width="60%" height="70%" />
-            </div>
-
-            <div>
-                Pagina inicio Emprendedor
-                <Link className="d-block ml-5" to="/Emprendedor/Login">
-                    Login
-                </Link> 
-                <Link className="d-block ml-5" to="/Emprendedor/Registro">
-                    Registro
-                </Link>                    
             </div>
             </>
         )

@@ -190,7 +190,7 @@ class Diagnostico extends Component {
 
                 <Row className="d-flex justify-content-end mt-5 mb-5">
                     <Link to="/Emprendedor" className="mr-3">Cancelar</Link>     
-                    <Button type="submit" onClick={this.EnviarDatos()} className="w-50">Enviar Diagnostico</Button>
+                    <Button type="submit" onClick={this.EnviarDatos()} className="w-50 mr-5">Enviar Diagnostico</Button>
                 </Row>
             </Form>
         </>

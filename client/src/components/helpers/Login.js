@@ -42,7 +42,7 @@ class Login extends Component {
         return (
             <>
             <Banner/>
-            <Link className="nav-link" to={this.URL()}>Volver</Link>
+            <Link className="nav-link" to="/">Volver</Link>
             <div className="container">
                 <div className="row mt-5">
                     <div className="col-6">
@@ -55,6 +55,7 @@ class Login extends Component {
                             {this.Formulario()}
                             <p className="mt-2">No tienes una cuenta? 
                                 <Link to={this.URL() + "/Registro"}> Registrate</Link>
+                                <Link to={this.URL()}> Inicio</Link>
                             </p>                            
                         </Card.Body>
                     </Card>

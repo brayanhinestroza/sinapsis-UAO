@@ -1,14 +1,12 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import Banner from '../helpers/Banner'
+import Busqueda from './Busqueda'
 
-import Imagen from '../../imagenes/RutaSinapsis.png'
+class Diagnosticos extends Component {
 
-class Administrador extends Component {
-    render() {
-        return (
-        <>
-        <Banner/>
+    Navegacion(){
+        return <>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="container">
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar10">
@@ -16,26 +14,30 @@ class Administrador extends Component {
                 </button>
                 <div className="navbar-collapse collapse" id="navbar10">
                     <ul className="navbar-nav nav-fill w-100">
-                        <li className="nav-item active">
+                        <li className="nav-item">
                             <Link className="nav-link" to="/Administrador">Home</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="/Administrador/Diagnosticos">Diagnosticos Recientes</Link>
+                            <Link className="nav-link active" to="/Administrador/Diagnosticos">Diagnosticos Recientes</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="/Administrador/Ruta">Activar cuentas</Link>
+                            <Link className="nav-link" to="/Administrador/Cuentas">Activar cuentas</Link>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
-
-        <div className="text-center mt-5 mb-5">
-            <img src={Imagen} alt="Sinapsis ruta" width="60%" height="70%" />
-        </div>
         </>
-        )
+    }
+
+    render() {
+        return (
+        <>
+            <Banner/>
+            {this.Navegacion()}
+            <Busqueda Title="Diagnosticos"/>            
+        </>);
     }
 }
 
-export default Administrador
+export default Diagnosticos

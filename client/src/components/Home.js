@@ -28,7 +28,7 @@ function Home() {
                 Cras et dolor lorem. Donec ut erat id diam facilisis facilisis at vel diam. 
                 Etiam suscipit est eu suscipit tristique. 
                 </Card.Text>
-                <Link to="/Emprendedor" className="mt-2 btn btn-info w-100">
+                <Link to="/Emprendedor/Login" className="mt-2 btn btn-info w-100">
                     <span className="font-weight-bolder">Seleccionar</span>
                 </Link>
                 </Card.Body>
@@ -42,7 +42,7 @@ function Home() {
                     Cras et dolor lorem. Donec ut erat id diam facilisis facilisis at vel diam. 
                     Etiam suscipit est eu suscipit tristique. 
                 </Card.Text>
-                <Link to="/Mentor" className="mt-2 btn btn-info w-100"> 
+                <Link to="/Mentor/Login" className="mt-2 btn btn-info w-100"> 
                     <span className="font-weight-bolder">Seleccionar</span>
                 </Link>
                 </Card.Body>
@@ -56,7 +56,7 @@ function Home() {
                     Cras et dolor lorem. Donec ut erat id diam facilisis facilisis at vel diam. 
                     Etiam suscipit est eu suscipit tristique. 
                 </Card.Text>
-                <Link to="/Administrador" className="mt-2 btn btn-info w-100">
+                <Link to="/Administrador/Login" className="mt-2 btn btn-info w-100">
                     <span className="font-weight-bolder">Seleccionar</span>
                 </Link>
                 </Card.Body>
