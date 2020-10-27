@@ -8,9 +8,10 @@ import { Link } from 'react-router-dom'
 
 
 class Login extends Component {
+
     URL(){
         const cadena = window.location.pathname.split("/", 2)
-        return "/" + cadena[1] + "/Registro"
+        return "/" + cadena[1]
     }
 
     Formulario(){
@@ -41,9 +42,9 @@ class Login extends Component {
         return (
             <>
             <Banner/>
-
+            <Link className="nav-link" to={this.URL()}>Volver</Link>
             <div className="container">
-                <div className="row">
+                <div className="row mt-5">
                     <div className="col-6">
                         <img src={imagen} alt="Sinapsis" width="100%" height="100%" />
                     </div>
@@ -51,16 +52,14 @@ class Login extends Component {
                         <Card.Body>
                             <img src={logo} alt="sinapsis Logo" width="232" height="112" />
                             <h3 className="text-center mt-1 font-weight-bolder">Inicia sesion</h3>
-
                             {this.Formulario()}
-
-                            <p className="mt-2">No tienes una cuenta? <Link to={this.URL}> Registrate</Link>  </p>
-                            
+                            <p className="mt-2">No tienes una cuenta? 
+                                <Link to={this.URL() + "/Registro"}> Registrate</Link>
+                            </p>                            
                         </Card.Body>
                     </Card>
                 </div>
             </div>
-
             </>
         )
     }

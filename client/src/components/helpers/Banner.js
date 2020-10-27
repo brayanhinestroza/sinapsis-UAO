@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import {Navbar, Breadcrumb} from 'react-bootstrap'
-import {Link} from 'react-router-dom'
+import {Navbar} from 'react-bootstrap'
 import logoSinapsis from '../../imagenes/logosinapsis.png'
 
 class Banner extends Component {
@@ -9,19 +8,6 @@ class Banner extends Component {
         user: 'Invitado',
         navUser: {
             
-        }
-    }
-
-    renderizaBreadcrumb(){
-        if (window.location.pathname !== "/") {
-            return (
-                <Breadcrumb>
-                    <Breadcrumb.Item href="/">
-                        <Link to="/">Home</Link>    
-                    </Breadcrumb.Item>                
-                    <Breadcrumb.Item active>{window.location.pathname.substr(1)}</Breadcrumb.Item>
-                </Breadcrumb>
-            )
         }
     }
 
@@ -64,9 +50,7 @@ class Banner extends Component {
                     {this.RenderizarOpcionUser()}
                 </Navbar.Collapse>
                 { this.RenderizarOpcionUser}                
-            </Navbar>
-
-            {this.renderizaBreadcrumb()}           
+            </Navbar>    
         </>
         )
     }
