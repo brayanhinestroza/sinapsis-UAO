@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {Card, Form, Button} from 'react-bootstrap'
@@ -5,6 +6,13 @@ import imagen from '../../imagenes/home-mentor.jpg'
 import logo from '../../imagenes/logosinapsis.png'
 import Banner from './Banner'
 import { Link } from 'react-router-dom'
+=======
+import React from 'react'
+import img from '../../imagenes/img.png';
+import logo from '../../imagenes/sinapsis.png';
+import '../../styles/login.css';
+import {Button, Image} from 'react-bootstrap';
+>>>>>>> Stashed changes
 
 
 class Login extends Component {
