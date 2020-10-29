@@ -1,10 +1,11 @@
 const emprendedor = {};
 const Emprendedores  = require('../models/Emprendedor.model')
+const pool = require('../database')
 
-emprendedor.getEmprendedor =  (req,res) => {
-    Emprendedores.findAll()
-    .then((resp) => res.json(resp))
-    .catch(error => console.log('Fallo' , error));  
+emprendedor.getEmprendedor = async (req,res) => {
+    const user = await Emprendedores.GetAll;
+    res.json(user);
+    console.log(user);
 };
 
 emprendedor.postEmprendedor = (req,res) => {

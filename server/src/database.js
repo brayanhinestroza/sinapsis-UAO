@@ -1,34 +1,26 @@
-//const mysql = require('mysql2');
+const mysql = require('mysql');
 
-const { Sequelize } = require('sequelize');
+const {promisify} = require('util')
+const config = {
+    host     : 'localhost',
+    user     : 'root',
+    password : '1234',
+    database : 'sinapsisdb'
+}
 
-const sequelize = new Sequelize(
-   process.env.MYSQL_DATABASE, process.env.MYSQL_USER, process.env.MYSQL_PASSWORD,
-   {
-      host: process.env.MYSQL_HOST,
-      dialect: 'mysql'   
- });
+const pool = mysql.createPool(config);
 
-const conexion = sequelize.sync({force: false}).then(() => {
-   console.log('Conectado correctamente');
-}).catch(error => {
-   console.log('Se ha producido un error' , error);
-});
+pool.getConnection((err, connection) => {
+    if(err){
+        console.log('Error');
+    }
 
+    if(connection) connection.release();
+    console.log('DB conectada');
+    return;
+})
 
-module.exports = sequelize;
+//Convierte cadena en Promesa
+pool.query = promisify(pool.query);
 
-/*const connection = mysql.createConnection({
-   host: process.env.MYSQL_HOST,
-   user: process.env.MYSQL_USER,
-   password: process.env.MYSQL_PASSWORD,
-   database: process.env.MYSQL_DATABASE
-});
-connection.connect(function(error){
-   if(error){
-      throw error;
-   }else{
-      console.log('Conexion correcta.');
-   }
-});*/
-
+module.exports = pool;

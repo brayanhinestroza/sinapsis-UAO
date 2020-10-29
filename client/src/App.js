@@ -27,8 +27,7 @@ function App() {
       <Route  path='/Mentor/Login' component={Login}/> 
       <Route  path='/Administrador/Login' component={Login}/>       
       <Route  path='/Mentor/Registro' component={Registro}/> 
-      <Route  path='/Administrador/Registro' component={Registro}/> 
-
+      <Route  path='/Administrador/Registro' component={Registro}/>
     </Router>
   );
 }
