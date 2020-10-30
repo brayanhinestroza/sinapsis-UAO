@@ -2,13 +2,13 @@ import React from 'react'
 import img from '../../imagenes/img.png';
 import logo from '../../imagenes/sinapsis.png';
 import '../../styles/login.css';
-import {Button, Card, Form, Container, Row, Col, Image, InputGroup} from 'react-bootstrap';
+import {Button, Image} from 'react-bootstrap';
 
 class Login extends React.Component {
    
      Imagenhome() {
-        return (          
-              <Image className= "image" src={img}/> 
+        return (        
+            <Image className= "image" src={img}/> 
         );
       }
 
@@ -30,18 +30,14 @@ class Login extends React.Component {
 
    render(){
 
-
-
     return (
-        <div className= "containerprincipal" >
-     
-     { this.Imagenhome() }
-      
-      <div className="containerDerecha">
-
-        { this.CardLogin() }         
-      </div>      
-      
+      <div className= "containerprincipal" >     
+        <div className="imagehome">
+          { this.Imagenhome() }
+        </div>      
+        <div className="containerDerecha">
+          { this.CardLogin() }         
+        </div>     
     </div>
     )
 
