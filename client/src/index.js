@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './componentes/Administrador/ActivarCuentas/ActivarCuentas';
+import App from './componentes/Emprendedor/Ruta/Ruta';
 
 ReactDOM.render(
   <React.StrictMode>
