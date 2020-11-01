@@ -1,0 +1,22 @@
+.titulopagina
+{
+  margin-left: 2rem;
+  margin-top: 2rem;
+
+}
+
+.contenedorD
+{
+  width: 117rem;
+  display: flex;  
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 3rem;  
+}
+
+.crumb
+{
+    margin-top: 4rem;
+   
+}
+

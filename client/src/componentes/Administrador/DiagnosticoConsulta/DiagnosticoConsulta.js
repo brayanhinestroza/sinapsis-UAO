@@ -7,7 +7,7 @@ import {Button} from 'react-bootstrap';
 import Navegacion from '../Navegacion/Navegacion'
 
 
-function Diagnostico() {
+function DiagnosticoConsulta() {
     return (
         <div className="body-diagnostico">
           <div>
@@ -192,4 +192,4 @@ function Diagnostico() {
     )
 }
 
-export default Diagnostico
+export default DiagnosticoConsulta
