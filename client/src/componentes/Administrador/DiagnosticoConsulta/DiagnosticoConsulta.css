@@ -1,0 +1,164 @@
+.crumb
+{
+    margin-top: 4rem;
+   
+}
+
+.titulopagina
+{
+  margin-left: 2rem;
+  margin-top: 2rem;
+}
+
+.contenedorDiag 
+{
+  width: 86rem;
+  height: 55rem;
+  margin-left: 2rem;
+  margin-top: 2rem;
+  box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.16);
+  background-color: var(--white);
+  display: flex;  
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.contenedorIzqD
+{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 50rem;
+  margin-left: 2rem;
+  margin-top: 2rem;
+  padding-right:5rem ;
+}
+
+.contenedorDerD
+{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 30rem;
+  margin-left: 0rem;
+  margin-top: 2rem;
+  
+}
+
+.Subtitulo{
+
+    margin-right: 16rem;
+    margin-bottom: 1.5rem;
+
+}
+
+.inputlargo
+{
+    width: 30rem;
+    height: 2.5rem;
+    border-radius: 4px;
+    border: solid 1px rgba(154, 102, 168, 0.35);
+    margin-top: 0rem;
+    margin-bottom: 1.8rem;
+
+}
+.textarea
+{
+
+  width: 30rem;
+  height: 6rem;
+  margin-bottom: 1.5rem;
+  resize: vertical;
+  border-radius: 4px;
+  border: solid 1px rgba(154, 102, 168, 0.35);
+  background-color: var(--white);
+
+}
+
+.body-diagnostico
+{
+  background-color: #fbf9fb;
+}
+
+.inputDiag{
+  width:20rem ;
+  height: 2.5rem;
+  border-radius: 4px;
+  border: solid 1px rgba(154, 102, 168, 0.35); 
+  margin-bottom: 1.5rem;
+  margin-right: 1rem;
+}
+
+.nombreInput
+{
+ 
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.3;
+  letter-spacing: normal;
+  text-align: left;
+  color: #333333;
+}
+
+
+.buttonDiag
+{
+  border-radius: 5px;
+  background-color: #9a66a8;
+  width:15rem ;
+  height: 2.5rem ;
+  margin-top: 1rem;
+  border-color: #9a66a8;
+  align-content: center;
+  
+  
+}
+.buttonDiag:hover {
+  background-color: #5a2e66;
+  border-color: #5a2e66;
+}
+
+.buttonDiag:active {
+  background-color: #2a142f;
+  border-color: #2a142f;
+}
+
+.contenedorAsignar
+{  
+    width: 27rem;
+    height: 24rem;
+    border-radius: 4px;
+    box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.16);
+    background-color: var(--white);
+    margin-left: 2rem;
+    margin-top: 2rem; 
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    
+ 
+}
+.Subtitulo-asignar
+{
+  margin-left: 17.3rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  width: 40rem;
+}
+
+.contenedorD
+{
+  width: 117rem;
+  display: flex;  
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  
+}
+
+

@@ -1,0 +1,75 @@
+.Navbar
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: bisque;
+    height: 4.5rem;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    background-color: var(--white);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    
+}
+
+body { padding-top: 70px; }
+
+
+.contenedorDer
+{
+    display: flex;
+    flex-direction: row; 
+    align-items: center;
+    justify-content: space-around;
+}
+
+.contenedorIzq
+{
+    display: flex;
+    flex-direction: row; 
+    align-content: center;
+    justify-content: space-around;
+}
+
+.button
+{
+    margin: 1rem 1rem 1rem 1rem;
+}
+
+.nombre
+{
+    margin-top: 1rem;
+    font-size: 18px;
+    font-family: Roboto;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.21;
+    letter-spacing: normal;
+    text-align: center;
+    color: #000000;
+}
+
+.logo
+{
+    height: auto;
+    width:auto;   
+    object-fit: contain;
+    padding-left: 0rem;
+}
+
+.icono
+{
+    width: 2rem;
+    height:2rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.menu
+{
+    width: 2.5rem;
+    height:2.5rem;
+    margin-top: 1rem;
+}
