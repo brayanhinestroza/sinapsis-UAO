@@ -13,5 +13,6 @@ app.use(express.json());
 app.use('/emprendedor', require('./routes/emprendedor.route'));
 app.use('/Login', require('./routes/login.route'));
 app.use('/Registro', require('./routes/registro.route'));
+app.use('/Administrador', require('./routes/administrador.route'));
 
 module.exports = app;

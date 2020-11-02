@@ -1,7 +1,6 @@
 import React from 'react'
 import {Image} from 'react-bootstrap';
 import logo from '../../Imagenes/sinapsis.png';
-import menu from '../../Imagenes/menu.svg'; 
 import exit from '../../Imagenes/exit.svg'; 
 import user from '../../Imagenes/user.svg'; 
 import './Navbar.css'
