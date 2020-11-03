@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.22, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.19, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: sinapsisdb
 -- ------------------------------------------------------
--- Server version	8.0.22
+-- Server version	8.0.19
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -19,10 +19,6 @@
 -- Table structure for table `administrador`
 --
 
-CREATE IF NOT EXISTS DATABASE sinapsisdb;
-
-USE sinapsisdb;
-
 DROP TABLE IF EXISTS `administrador`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -31,7 +27,7 @@ CREATE TABLE `administrador` (
   `cedulaAd` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idadministrador`),
   KEY `fk_cedulaAd_idx` (`cedulaAd`),
-  CONSTRAINT `fk_cedulaAd` FOREIGN KEY (`cedulaAd`) REFERENCES `usuario` (`cedula`)
+  CONSTRAINT `fk_cedulaAd` FOREIGN KEY (`cedulaAd`) REFERENCES `usuarios` (`cedula`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -93,8 +89,8 @@ CREATE TABLE `emprendedor` (
   `programa` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idemprendedor`),
   KEY `fk_cedulaem_idx` (`cedulaEm`),
-  CONSTRAINT `fk_cedulaem` FOREIGN KEY (`cedulaEm`) REFERENCES `usuario` (`cedula`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `fk_cedulaem` FOREIGN KEY (`cedulaEm`) REFERENCES `usuarios` (`cedula`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -117,7 +113,7 @@ CREATE TABLE `etapa` (
   `idetapa` int NOT NULL AUTO_INCREMENT,
   `etapa` varchar(45) NOT NULL,
   PRIMARY KEY (`idetapa`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -126,6 +122,7 @@ CREATE TABLE `etapa` (
 
 LOCK TABLES `etapa` WRITE;
 /*!40000 ALTER TABLE `etapa` DISABLE KEYS */;
+INSERT INTO `etapa` VALUES (1,'Soñar'),(2,'Pensar'),(3,'Testear'),(4,'Arrancar');
 /*!40000 ALTER TABLE `etapa` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -141,7 +138,7 @@ CREATE TABLE `mentor` (
   `cedulaMe` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idmentor`),
   KEY `fk_cedulaMe_idx` (`cedulaMe`),
-  CONSTRAINT `fk_cedulaMe` FOREIGN KEY (`cedulaMe`) REFERENCES `usuario` (`cedula`)
+  CONSTRAINT `fk_cedulaMe` FOREIGN KEY (`cedulaMe`) REFERENCES `usuarios` (`cedula`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -240,13 +237,13 @@ LOCK TABLES `ruta` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `usuario`
+-- Table structure for table `usuarios`
 --
 
-DROP TABLE IF EXISTS `usuario`;
+DROP TABLE IF EXISTS `usuarios`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `usuario` (
+CREATE TABLE `usuarios` (
   `cedula` varchar(15) NOT NULL,
   `nombreCompleto` varchar(45) DEFAULT NULL,
   `correo` varchar(45) DEFAULT NULL,
@@ -258,13 +255,13 @@ CREATE TABLE `usuario` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `usuario`
+-- Dumping data for table `usuarios`
 --
 
-LOCK TABLES `usuario` WRITE;
-/*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES ('123','Sebastian','sebas@gmail.com','1234',1,1);
-/*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
+LOCK TABLES `usuarios` WRITE;
+/*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
+INSERT INTO `usuarios` VALUES ('1005943951','Brayan Andres Hinestroza','brayan.hinestroza@uao.edu.co','123',1,0),('123','Sebastian','sebas@gmail.com','1234',0,1);
+/*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -276,4 +273,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-10-28 13:44:28
+-- Dump completed on 2020-11-02 19:33:22
