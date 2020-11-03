@@ -8,6 +8,7 @@ import DiagnosticosADM from './componentes/Administrador/DiagnosticoBuscar/Diagn
 import DiagnosticoADM from './componentes/Administrador/DiagnosticoConsulta/DiagnosticoConsulta'
 import Emprendedor from './componentes/Emprendedor/Inicio/Inicio'
 import Diagnostico from './componentes/Emprendedor/Diagnostico/Diagnostico'
+import Ruta  from './componentes/Emprendedor/Ruta/Ruta'
 
 function App() {
   return (
@@ -17,9 +18,10 @@ function App() {
       <Route exact path='/Administrador' component={Administrador} />
       <Route exact path='/Administrador/Activar' component={ActivarCuenta} />
       <Route exact path='/Administrador/Diagnosticos' component={DiagnosticosADM} />
-      <Route exact path='/Administrador/Diagnosticos/:id' component={DiagnosticoADM} />
+      <Route exact path='/Administrador/Diagnostico' component={DiagnosticoADM} />
       <Route exact path='/Emprendedor' component={Emprendedor} />
       <Route exact path='/Emprendedor/Diagnostico' component={Diagnostico} />
+      <Route exact path='/Emprendedor/Ruta' component={Ruta} />
     </Router>
   );
 }

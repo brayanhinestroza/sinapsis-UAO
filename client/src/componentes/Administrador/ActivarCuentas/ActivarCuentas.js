@@ -3,25 +3,18 @@ import Navbar from '../../Navbar/Navbar'
 import '../Navegacion/Navegacion';
 import Navegacion from '../Navegacion/Navegacion';
 import '../../Navbar/Navbar.css'
-import Tabla from '../../Tabla/Tabla';
-import {Breadcrumb } from 'react-bootstrap';
+import Tabla from './TablaCuentas/Tabla';
 import './ActivarCuentas.css'
 
 
 class ActivarCuentas extends Component {
+
     render(){
         return (
             <div>
                 <Navbar></Navbar>
                 <Navegacion></Navegacion>
-                <div className="crumb" >
-            <Breadcrumb >
-                    <Breadcrumb.Item href="#">Home</Breadcrumb.Item>
-                    <Breadcrumb.Item href="https://getbootstrap.com/docs/4.0/components/breadcrumb/">
-                        Library
-                    </Breadcrumb.Item>
-                    <Breadcrumb.Item active>Data</Breadcrumb.Item>
-            </Breadcrumb>
+                <div className="crumb" >            
             </div>
             <div>    
             <div className="titulopagina">

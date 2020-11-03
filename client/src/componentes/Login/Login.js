@@ -39,24 +39,14 @@ class Login extends React.Component {
        this.setState({showModal: true});
        this.setState({serverMessage: res.data.message});
       }else{
-        console.log(res.data.usuario);
-        this.setState({usuarioValidado:true, usuario: res.data.usuario})     
+        this.setState({usuarioValidado:true, usuario: res.data.usuario});   
       }
     })
   }
 
   urlRedirect(){
     const tipoUser = this.state.usuario.tipoUsuario
-    console.log(tipoUser);
-    if(tipoUser === 1){
-      return "/Emprendedor"
-    }
-    if(tipoUser === 2){
-      return "/Mentor"
-    }
-    if(tipoUser === 0){
-      return "/Administrador"
-    }
+    return "/" + tipoUser
   }
 
   Imagenhome = () => {
@@ -82,10 +72,11 @@ class Login extends React.Component {
   }
 
   render(){
+
   return (
-    this.state.usuarioValidado ? <Redirect to={this.urlRedirect()}/> 
-    :
     
+    this.state.usuarioValidado ? <Redirect to={this.urlRedirect()}/> 
+    :    
     /*Bloque del if */
     this.state.showModal ? 
     <Modal centered show={this.state.showModal} onHide={this.handleClose}>

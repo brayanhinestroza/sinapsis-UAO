@@ -1,0 +1,32 @@
+body{
+    background-color: #fbf9fb ;
+}
+
+.Card-height{
+    height: fit-content;
+}
+
+.circulo {
+    display: flex;
+	border: solid 1px #9a66a8;
+	background-color: #9a66a8;	  
+	width: 50px;
+	height: 50px;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	border-radius: 50%;
+}
+
+.circulo span{
+	font-size: 26px;
+	font-weight: bolder;
+    margin-top: 5px;
+    margin-left: auto;
+    margin-right: auto;
+	color: white;
+}
+
+.bg-green{
+    background-color: green!important;
+}
+

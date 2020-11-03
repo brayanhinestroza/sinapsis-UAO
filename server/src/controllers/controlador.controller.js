@@ -30,6 +30,36 @@ controlador.postRegistro = async (req,res) => {
         });        
     });
 }
+/*
+controlador.postRegistroMentor = async (req,res) => {
+    Controlador.Registro(req, res)
+    .then((resp) => {
+        res.json({
+            "message": "Correcto",
+            "respuesta": resp
+        }); 
+    }).catch(error => {
+        console.log('Fallo' , error)
+        res.json({
+            "message": "Error"
+        });        
+    });
+}
 
+controlador.postRegistroAdministrativo = async (req,res) => {
+    Controlador.Registro(req, res)
+    .then((resp) => {
+        res.json({
+            "message": "Correcto",
+            "respuesta": resp
+        }); 
+    }).catch(error => {
+        console.log('Fallo' , error)
+        res.json({
+            "message": "Error"
+        });        
+    });
+}
+*/
 
 module.exports = controlador;

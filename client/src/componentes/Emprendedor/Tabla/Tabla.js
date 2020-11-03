@@ -11,7 +11,7 @@ export default class Tabla extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            datos: {}, 
+            datos: null, 
             loading: true
         };        
     }
@@ -33,7 +33,7 @@ export default class Tabla extends Component {
             header: "Acciones",
             td: (data) => {
               return <div>
-                <Button className= "buttonTable" variant="primary" onClick={() => alert("this is delete for id " + data.id)}>{this.props.textoBoton}</Button>                
+                <Button className= "buttonTable" variant="primary" onClick={() => alert("this is delete for id " + data.Cedula)}>{this.props.textoBoton}</Button>                
                 <Button className= "buttonTableO" class="btn btn-outline-primary" onClick={() => alert("this is delete for id " + data.id)}>Eliminar</Button>
               </div>
             }

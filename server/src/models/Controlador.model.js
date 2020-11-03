@@ -10,10 +10,15 @@ Controlador.Iniciar_Sesion = async (req , res) => {
 Controlador.Registro = async (req, res) => {
     const {cedula, nombreCompleto, correo, estado, contrasena, tipoUsuario } = req.body
     const query = "INSERT INTO usuarios (cedula, nombreCompleto,correo,estado,contraseña,tipoUsuario) VALUES" + 
-                " ('" + cedula + "','" +  nombreCompleto + "','" + correo + "'," + estado + ",'" + contrasena + "',"
-                + tipoUsuario + ")";
-    const result =  pool.query(query);
-    return result    
+                " ('" + cedula + "','" +  nombreCompleto + "','" + correo + "'," + estado + ",'" + contrasena + "','"
+                + tipoUsuario + "')";    
+    const query2 = "INSERT INTO "+ tipoUsuario +  " (cedula) values ('" + cedula + "')";
+      
+    pool.query(query).then((resultadoQ1) =>{
+        console.log(resultadoQ1);
+        const result2 =pool.query(query2);
+    }
+    )
 }
 
 module.exports = Controlador;

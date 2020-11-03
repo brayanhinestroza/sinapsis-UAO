@@ -8,15 +8,20 @@ emprendedor.getEmprendedor = async (req,res) => {
     console.log(user);
 };
 
-emprendedor.postEmprendedor = (req,res) => {
-    Emprendedores.create(
-        {username: 'Prueba',
-        tipo: 'Emprendedor'
-    })
-    .then((resp) => res.json(resp))
-    .catch(error => console.log('Fallo' , error));
+emprendedor.postDiagnostico = (req,res) => {
+    Emprendedores.postDiagnostico(req, res)
+    .then((resp) => {
+        res.json({
+            "message": "Correcto",
+            "respuesta": resp
+        }); 
+    }).catch(error => {
+        console.log('Fallo' , error)
+        res.json({
+            "message": "Error"
+        });        
+    });
 };
-
 
 emprendedor.getRuta = (req, res) => {
     Emprendedores.getRuta

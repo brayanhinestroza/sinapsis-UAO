@@ -12,9 +12,7 @@ class Login extends React.Component {
     super();
   
     this.state = {
-      cedula: "null",
-      contrasena: "",
-      tipoUsuario: "1",
+      tipoUsuario: "Emprendedor",
       serverMessage: null,
       showModal: false,
       usuarioValidado: false      
@@ -24,22 +22,21 @@ class Login extends React.Component {
   }
 
   handleSubmit = e => {
-    console.log("Entro aqui");
+
     Axios.post("http://localhost:5000/Registro",{
-    cedula: this.state.cedula,
-    nombreCompleto: this.state.nombreCompleto,
-    correo: this.state.correo,
-    estado: 0,
-    contrasena: this.state.contrasena,
-    tipoUsuario: this.state.tipoUsuario,
-    redirecionar: false
-  }) 
-    .then((respuesta) =>{
+      cedula: this.state.cedula,
+      nombreCompleto: this.state.nombreCompleto,
+      correo: this.state.correo,
+      estado: 0,
+      contrasena: this.state.contrasena,
+      tipoUsuario: this.state.tipoUsuario
+    }).then((respuesta) => {
       if(respuesta.data.message === "Correcto"){
         this.setState({usuarioValidado: true});
       }
       console.log(respuesta.data.message);
-    })    
+    });
+   
   }
 
   handleClose = () => this.setState({showModal:false})
@@ -68,9 +65,9 @@ class Login extends React.Component {
       <input name="cedula" className="input" placeholder="Cédula" type= "text" onChange={this.handleChange}></input> 
       <input name="correo" className="input" placeholder="Correo" type= "text" onChange={this.handleChange}></input> 
       <select value={this.state.tipoUsuario} name="tipoUsuario" className="input" placeholder="Tipo de usuario" type= "text" onChange={this.handleChange}>
-        <option className="input" value="1">Emprendedor</option> 
-        <option className="input" value="2">Mentor</option> 
-        <option className="input" value="0">Administrador</option>  
+        <option className="input" value="Emprendedor">Emprendedor</option> 
+        <option className="input" value="Mentor">Mentor</option> 
+        <option className="input" value="Administrador">Administrador</option>  
       </select>
       <input name="contrasena" className="input" placeholder="Contraseña" type= "password" onChange={this.handleChange}></input>
       <input className="input" placeholder="Confirmar contraseña" type= "password"></input>

@@ -12,15 +12,11 @@ function Inicio() {
         <div>
             <div>
                 <Navbar></Navbar>
-            </div>
-           
+            </div>           
            <div>
            <Navegacion></Navegacion>
-           </div>
-          
+           </div>          
            <Image className= "ruta" src={Ruta}/>
-
-
         </div>
     )
 }
