@@ -8,6 +8,10 @@ administrador.getCuentas = async (req , res) => {
     res.json(resultado)        
 }
 
+administrador.deleteCuenta = async (req,res) =>{
+    await Administrador.deleteCuenta(req,res);
+}
+
 administrador.getDiagnosticos = async(req,res) => {
     const resultado = await Administrador.getDiagnosticos(req, res);
     console.log(resultado);
@@ -20,6 +24,10 @@ administrador.getDiagnostico = async(req,res) => {
     res.json(resultado) 
 }
 
+administrador.deleteDiagnostico = async(req,res) =>{
+    await Administrador.deleteDiagnostico(req,res);    
+}
+
 administrador.updateEstado = async(req,res) => {
     const resultado = await Administrador.updateEstado(req, res);
     console.log(resultado);
@@ -27,9 +35,7 @@ administrador.updateEstado = async(req,res) => {
 }
 
 administrador.postRuta = async(req,res) => {
-    const resultado = await Administrador.postRuta(req, res);
-    console.log(resultado);
-    res.json(resultado)   
+    await Administrador.postRuta(req, res); 
 }
 
 module.exports = administrador;

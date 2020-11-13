@@ -10,6 +10,7 @@ import Emprendedor from './componentes/Emprendedor/Inicio/Inicio'
 import Diagnostico from './componentes/Emprendedor/Diagnostico/Diagnostico'
 import Ruta  from './componentes/Emprendedor/Ruta/Ruta'
 
+
 function App() {
   return (
     <Router>

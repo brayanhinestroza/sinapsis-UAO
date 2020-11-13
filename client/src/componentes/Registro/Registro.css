@@ -142,6 +142,7 @@ display: none;
     border: solid 1px rgba(154, 102, 168, 0.35);
     margin-top: 0rem;
     margin-bottom: 1rem;
+    padding-left: 0.5em;
 }
 @media only screen and (max-width: 768px) {   
 

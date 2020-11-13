@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.19, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: sinapsisdb
+-- Host: localhost    Database: sinapsisdb
 -- ------------------------------------------------------
 -- Server version	8.0.19
 
@@ -34,7 +34,7 @@ CREATE TABLE `administrador` (
   PRIMARY KEY (`idadministrador`),
   KEY `fk_cedulaAd_idx` (`cedula`),
   CONSTRAINT `fk_cedulaAd` FOREIGN KEY (`cedula`) REFERENCES `usuarios` (`cedula`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,6 +43,7 @@ CREATE TABLE `administrador` (
 
 LOCK TABLES `administrador` WRITE;
 /*!40000 ALTER TABLE `administrador` DISABLE KEYS */;
+INSERT INTO `administrador` VALUES (6,'1'),(7,'9');
 /*!40000 ALTER TABLE `administrador` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -69,7 +70,7 @@ CREATE TABLE `diagnostico` (
   KEY `fk_cedula_idx` (`idEmpDiag`),
   KEY `fk_cedula_10245` (`idEmpDiag`),
   CONSTRAINT `fk_cedula_10245` FOREIGN KEY (`idEmpDiag`) REFERENCES `emprendedor` (`cedula`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -78,7 +79,7 @@ CREATE TABLE `diagnostico` (
 
 LOCK TABLES `diagnostico` WRITE;
 /*!40000 ALTER TABLE `diagnostico` DISABLE KEYS */;
-INSERT INTO `diagnostico` VALUES (14,'Musica','Musica para la UAO','Social','Estudiantes de la UAO','Ninguna','Ninguna','Dinamico','Social y Solidario','1005943951',1),(16,'Cartas','Cartas','Cartas','Cartas','Cartas','Cartas','Dinamico','Digital','123',0),(18,'Periodicos','Periodicos','Periodicos','Periodicos','Periodicos','Periodicos','Dinamico','Creativo y Cultural','1234',0);
+INSERT INTO `diagnostico` VALUES (23,'Prueba','123','1231121','32131231','sadasdas','dasdasdasdasd','Dinamico','Digital','1005943951',0);
 /*!40000 ALTER TABLE `diagnostico` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -100,7 +101,7 @@ CREATE TABLE `emprendedor` (
   PRIMARY KEY (`idemprendedor`),
   KEY `fk_cedulaEm_idx` (`cedula`),
   CONSTRAINT `fk_cedulaEm` FOREIGN KEY (`cedula`) REFERENCES `usuarios` (`cedula`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -109,7 +110,7 @@ CREATE TABLE `emprendedor` (
 
 LOCK TABLES `emprendedor` WRITE;
 /*!40000 ALTER TABLE `emprendedor` DISABLE KEYS */;
-INSERT INTO `emprendedor` VALUES (6,'1005943951','2020-09-09','3012554698','Calle 1a','Masculino','Ingenieria Informatica'),(7,'123','2020-11-06','301255469831','Calle 1a2','Masculino','Ingenieria Multimedia'),(8,'1234','2021-02-12','301233454698','Calle 12a','Masculino','Ingenieria Electronica');
+INSERT INTO `emprendedor` VALUES (6,'1005943951','2020-11-13','Prueba','Prueba','Masculino','Ingeniera Ambiental'),(7,'123','2020-11-06','301255469831','Calle 1a2','Masculino','Ingenieria Multimedia'),(8,'1234','2020-10-29','301233454698','Calle 12a','Otro','Ingenieria Multimedia');
 /*!40000 ALTER TABLE `emprendedor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -147,10 +148,11 @@ DROP TABLE IF EXISTS `mentor`;
 CREATE TABLE `mentor` (
   `idmentor` int NOT NULL AUTO_INCREMENT,
   `cedula` varchar(45) DEFAULT NULL,
+  `nombre` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idmentor`),
   KEY `fk_cedulaMe_idx` (`cedula`),
   CONSTRAINT `fk_cedulaMe` FOREIGN KEY (`cedula`) REFERENCES `usuarios` (`cedula`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -159,7 +161,7 @@ CREATE TABLE `mentor` (
 
 LOCK TABLES `mentor` WRITE;
 /*!40000 ALTER TABLE `mentor` DISABLE KEYS */;
-INSERT INTO `mentor` VALUES (4,'9999'),(3,'sadasd');
+INSERT INTO `mentor` VALUES (4,'9999','Juan Esteban'),(6,'123456','Camilo');
 /*!40000 ALTER TABLE `mentor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -207,7 +209,7 @@ CREATE TABLE `mentor_principal` (
   KEY `fk_idMentorMP_idx` (`idMentorMP`),
   CONSTRAINT `fk_idEmprenMP` FOREIGN KEY (`idEmprenMP`) REFERENCES `emprendedor` (`cedula`),
   CONSTRAINT `fk_idMentorMP` FOREIGN KEY (`idMentorMP`) REFERENCES `mentor` (`cedula`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -216,7 +218,7 @@ CREATE TABLE `mentor_principal` (
 
 LOCK TABLES `mentor_principal` WRITE;
 /*!40000 ALTER TABLE `mentor_principal` DISABLE KEYS */;
-INSERT INTO `mentor_principal` VALUES (4,'9999','1005943951'),(5,'9999','123'),(6,'9999','1005943951'),(7,'9999','1005943951'),(8,'9999','1005943951'),(9,'9999','1005943951'),(10,'9999','1005943951');
+INSERT INTO `mentor_principal` VALUES (4,'9999','1005943951'),(5,'9999','123'),(6,'9999','1005943951'),(7,'9999','1005943951'),(8,'9999','1005943951'),(9,'9999','1005943951'),(10,'9999','1005943951'),(12,'9999','1005943951');
 /*!40000 ALTER TABLE `mentor_principal` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -236,7 +238,7 @@ CREATE TABLE `ruta` (
   KEY `fk_idEtapaRuta_idx` (`idEtapaRuta`),
   CONSTRAINT `fk_idEmprendedor` FOREIGN KEY (`idEmpRuta`) REFERENCES `emprendedor` (`cedula`),
   CONSTRAINT `fk_idEtapaRuta` FOREIGN KEY (`idEtapaRuta`) REFERENCES `etapa` (`idetapa`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -245,7 +247,7 @@ CREATE TABLE `ruta` (
 
 LOCK TABLES `ruta` WRITE;
 /*!40000 ALTER TABLE `ruta` DISABLE KEYS */;
-INSERT INTO `ruta` VALUES (1,'1005943951',1),(2,'1005943951',1),(3,'123',2),(4,'1005943951',1),(5,'1005943951',1),(6,'1005943951',1),(7,'1005943951',1),(8,'1005943951',1);
+INSERT INTO `ruta` VALUES (1,'1005943951',1),(2,'1005943951',1),(3,'123',2),(4,'1005943951',1),(5,'1005943951',1),(6,'1005943951',1),(7,'1005943951',1),(8,'1005943951',1),(14,'1005943951',1);
 /*!40000 ALTER TABLE `ruta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -273,7 +275,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES ('1005943951','Brayan','brayan.hinestroza@uao.edu.co','123','Emprendedor',1),('123','Juan','juan@uao.edu.co','1234','Emprendedor',1),('1234','Daniel','Daniel@uao.edu.co','123','Emprendedor',0),('9999','Juan Esteban','juan@uao.edu.co','123','Mentor',0),('sadasd','Brayan','asdasd','asdasd','mentor',0);
+INSERT INTO `usuarios` VALUES ('1','admin','admin','202cb962ac59075b964b07152d234b70','Administrador',1),('1005943951','Brayan','brayan.hinestroza@uao.edu.co','202cb962ac59075b964b07152d234b70','Emprendedor',1),('123','Juan','juan@uao.edu.co','81dc9bdb52d04dc20036dbd8313ed055','Emprendedor',1),('1234','Daniel','Daniel@uao.edu.co','202cb962ac59075b964b07152d234b70','Emprendedor',1),('123456','Mentor','mentor@gmail.com','202cb962ac59075b964b07152d234b70','Mentor',0),('9','Prueba','Prueba','202cb962ac59075b964b07152d234b70','Administrador',0),('9999','Juan Esteban','juan@uao.edu.co','202cb962ac59075b964b07152d234b70','Mentor',0);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -286,4 +288,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-11-03 15:38:22
+-- Dump completed on 2020-11-13 12:54:31

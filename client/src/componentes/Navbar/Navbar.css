@@ -73,3 +73,13 @@ body { padding-top: 70px; }
     height:2.5rem;
     margin-top: 1rem;
 }
+
+.btn-Controles, .btn-Controles:hover{
+    background: none;
+    border: 0;
+    color: inherit;
+    font: inherit;
+    line-height: normal;
+    overflow: visible;
+    padding: 0;
+}

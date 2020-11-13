@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, Container, Button } from 'react-bootstrap'
+import { Card, Button } from 'react-bootstrap'
 import Axios from 'axios'
 import Table from 'react-flexy-table'
 import "react-flexy-table/dist/index.css"
@@ -13,19 +13,30 @@ export default class Tabla extends Component {
         super(props);
         this.state = {
             datos: null, 
-            loading: true
+            loading: true,
+            eliminar: false
         };        
     }
 
-    async componentDidMount(){  
-        const URL = "http://localhost:5000/Administrador/Diagnosticos";
-        console.log(URL);
-        const res = await Axios.get(URL);
-        this.setState({datos:res.data, loading:false});
-        console.log(res.data);
-               
+    async componentDidMount(){        
+        await Axios.get("http://localhost:5000/Administrador/Diagnosticos")
+        .then(res =>{
+            if(res.data.length>0){
+                this.setState({datos:res.data, loading:false});
+            }
+        })           
     }
-    
+
+    eliminarDiagnostico =async e =>{
+        const dato = e.idUsuario;
+        await Axios.post('http://localhost:5000/Administrador/Diagnostico', {id:dato})
+        .then(res =>{
+            if(res.data.affectedRows === 1){
+                alert("Eliminacion exitosa");
+            }
+            console.log(res);
+        })       
+    }
 
     render() { 
         const data = this.state.datos
@@ -34,13 +45,13 @@ export default class Tabla extends Component {
             td: (data) => {
               return <div>
                 <Link className= "buttonTable btn btn-primary" to={{pathname: "/Administrador/Diagnostico", id: data.Emprendedor }}>{this.props.textoBoton}</Link>                
-                <Button className= "buttonTableO" class="btn btn-outline-primary" onClick={() => alert("this is delete for id " + data.id)}>Eliminar</Button>
+                <Button className= "buttonTableO" class="btn btn-outline-primary" onClick={() => this.eliminarDiagnostico({idUsuario: data.Emprendedor})}>Eliminar</Button>
               </div>
             }
         }]
 
         return (
-        this.state.loading ? <div>Cargando</div> :         
+        this.state.loading ? <div>Cargando datos</div> :         
         <div className="Contenedor">
             <div className="card" >
                 <Card.Body className="card">

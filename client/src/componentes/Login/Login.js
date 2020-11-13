@@ -3,8 +3,12 @@ import img from '../../Imagenes/img.png';
 import logo from '../../Imagenes/sinapsis.png';
 import './Login.css'
 import {Button, Image, Modal} from 'react-bootstrap';
-import {Link, Redirect} from 'react-router-dom'
-import Axios from 'axios'
+import {Link, Redirect} from 'react-router-dom';
+import Axios from 'axios';
+import Cookies from 'universal-cookie';
+import md5 from 'md5';
+
+const cookie = new Cookies();
 
 class Login extends React.Component {
 
@@ -12,12 +16,17 @@ class Login extends React.Component {
     super(props);
 
     this.state = {
-      cedula: "",
-      contrasena: "",
       showModal: false,
-      serverMessage: "",
+      respuestaServidor: null,
       usuarioValidado: false,
       usuario: null,
+    }
+  }
+
+  componentDidMount(){
+    if(cookie.get("cedula")){
+      alert("Ya has iniciado sesion");
+      window.location.href = "/" + cookie.get("tipoUsuario");
     }
   }
 
@@ -29,18 +38,25 @@ class Login extends React.Component {
     });
   }
 
-  handleSubmit = e => {
-    Axios.post("http://localhost:5000/Login",{
+  handleSubmit = async e => {
+    await Axios.post("http://localhost:5000/Login",{
       cedula: this.state.cedula,
-      contrasena: this.state.contrasena
-    }).then((res) => {
-
-      if(res.data.message !== "Correcto"){
-       this.setState({showModal: true});
-       this.setState({serverMessage: res.data.message});
+      contrasena: md5(this.state.contrasena)
+    })
+    .then(res =>{
+      if(res.data.length > 0){
+        const respuesta  = res.data[0];
+        cookie.set("cedula", respuesta.cedula, {path:"/"});
+        cookie.set("tipoUsuario", respuesta.tipoUsuario, {path:"/"});
+        cookie.set("nombreCompleto", respuesta.nombreCompleto, {path:"/"});
+        cookie.set("estado", respuesta.estado, {path:"/"});
+        this.setState({usuarioValidado:true, usuario: respuesta});                
       }else{
-        this.setState({usuarioValidado:true, usuario: res.data.usuario});   
+        this.setState({showModal: true, respuestaServidor: "Correo o contrasena invalidos"});
       }
+    })
+    .catch(err =>{
+      console.log(err);
     })
   }
 
@@ -62,8 +78,8 @@ class Login extends React.Component {
             <form onSubmit={this.handleSubmit} className="CardLogin">
             <Image className= "imagelogo" src={logo}/>   
             <h3 className="titulo">Inicia sesión en Sinapsis UAO</h3>
-            <input className="input" name="cedula" placeholder="Cédula" type= "text" onChange={this.handleChange}></input> 
-            <input className="input" name="contrasena" placeholder="Contraseña" type= "password" onChange={this.handleChange}></input>                  
+            <input name="cedula" placeholder="Cédula" type= "text" onChange={this.handleChange}></input> 
+            <input name="contrasena" placeholder="Contraseña" type= "password" onChange={this.handleChange}></input>                  
             <Button className= "button" variant="primary" type="button" onClick={this.handleSubmit} >Iniciar sesión </Button>                                  
             <p className="titulolink">¿No tienes una cuenta? <Link to="/Registro" >Regístrate</Link></p>
           </form>
@@ -83,7 +99,7 @@ class Login extends React.Component {
       <Modal.Header closeButton>
         <Modal.Title>Error</Modal.Title>
       </Modal.Header>
-      <Modal.Body> {this.state.serverMessage} </Modal.Body>
+      <Modal.Body> {this.state.respuestaServidor} </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={this.handleClose}>
           Cerrar

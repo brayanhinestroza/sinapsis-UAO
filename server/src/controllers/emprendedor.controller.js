@@ -8,19 +8,12 @@ emprendedor.getEmprendedor = async (req,res) => {
     console.log(user);
 };
 
+emprendedor.getDiagnostico = (req,res) =>{
+    Emprendedores.getDiagnostico(req,res)
+}
+
 emprendedor.postDiagnostico = (req,res) => {
     Emprendedores.postDiagnostico(req, res)
-    .then((resp) => {
-        res.json({
-            "message": "Correcto",
-            "respuesta": resp
-        }); 
-    }).catch(error => {
-        console.log('Fallo' , error)
-        res.json({
-            "message": "Error"
-        });        
-    });
 };
 
 emprendedor.getRuta = (req, res) => {

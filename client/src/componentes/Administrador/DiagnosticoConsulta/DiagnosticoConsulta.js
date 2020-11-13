@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import Navbar from '../../Navbar/Navbar'
 import './DiagnosticoConsulta.css'
 import '../../Registro/Registro.css'
-import {Button} from 'react-bootstrap';
 import Navegacion from '../Navegacion/Navegacion'
 import Axios from 'axios'
 import { Redirect } from 'react-router-dom';
+import ContenedorAsignar from './ContenedorAsignar';
 
 
 class DiagnosticoConsulta extends Component {
@@ -16,27 +16,8 @@ class DiagnosticoConsulta extends Component {
       idEmprendedor : props.location.id,
       loading: true,
       datos: null,
-      etapa: "1",
       diagnosticoRealizado:false
-    }
-    this.changeRuta = this.changeRuta.bind(this);
-    this.asignarRuta = this.asignarRuta.bind(this);
-
-  }
-  changeRuta(e) {
-    this.setState({etapa:e.target.value});
-  }
-
-  asignarRuta(){
-    console.log(this.state);
-    Axios.post("http://localhost:5000/Administrador/Ruta",{
-      etapa: this.state.etapa,
-      mentor: "9999",
-      emprendedor: this.state.idEmprendedor
-    }).then((resultado) =>{
-      console.log(resultado.data);
-      this.setState({diagnosticoRealizado:true});
-    })
+    }    
   }
 
   componentDidMount(){
@@ -48,7 +29,6 @@ class DiagnosticoConsulta extends Component {
     })
     .then((response) =>{
       this.setState({datos:response.data[0], loading:false});
-      console.log(this.state.datos);
     });
   }
 
@@ -191,41 +171,10 @@ class DiagnosticoConsulta extends Component {
                     <label className="nombreInput">Tipo de económia</label>
                     <br></br>
                     <label className="inputDiag" type= "text" disabled>{this.state.datos.tipoEconomia}</label> 
-                  </div>
-                
-              </div>
-
+                  </div>                  
+              </div>                
           </div>
-
-          <div className="contenedorAsignar">
-
-            <div className="Subtitulo-asignar">
-                  <h5>Asignar etapa inicial y mentor principal</h5>
-            </div>
-
-            <div>
-                    <label className="nombreInput">Etapa inicial</label>
-                    <br></br>
-                    <select className="inputDiag" type= "text" onChange={this.changeRuta}>
-                      <option className="inputDiag" value="1">Soñar</option> 
-                      <option className="inputDiag" value="2">Pensar</option> 
-                      <option className="inputDiag" value="3">Testear</option> 
-                      <option className="inputDiag" value="4">Arrancar</option>   
-                    </select> 
-            </div>
-            
-            <div>
-                    <label className="nombreInput">Mentor principal</label>
-                    <br></br>
-                    <select className="inputDiag" type= "text">
-                      <option className="inputDiag" value="9999">Benito Martinez</option> 
-                    </select> 
-            </div>
-            <div>
-                    <Button className= "buttonDiag" variant="primary" onClick={this.asignarRuta}>Asignar</Button>
-            </div>
-          </div>
-
+          <ContenedorAsignar emprendedor={this.state.idEmprendedor}/>
           </div>
         </div>
     )

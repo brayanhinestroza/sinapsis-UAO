@@ -7,6 +7,33 @@ Controlador.getCuentasPorActivar = async (req , res) => {
     return result;
 }
 
+Controlador.deleteCuenta = async (req,res) =>{
+    const {id} = req.body
+    const result = await pool.query("Select tipoUsuario from usuarios where cedula = '" + id +"'");
+    const tipoUsuario = result[0].tipoUsuario;
+
+    const query = "DELETE FROM " + tipoUsuario + " WHERE cedula = '" + id +"'";
+    const query2 = "DELETE FROM usuarios WHERE cedula = '" + id +"'";
+
+    await pool.query(query, async (err, data) =>{
+        if(err){
+            console.log(err);
+            res.send(err);
+        }else{
+            const resultado1 = data;
+            console.log(data);
+            await pool.query(query2,async (err,data) =>{
+                if(err){
+                    res.send(err);
+                }else{
+                    console.log(data);
+                    res.send({res1:resultado1, res2:data});         
+                }
+            })         
+        }
+    })
+}
+
 Controlador.getDiagnosticos = async (req , res) => {
     const QUERY = "SELECT idEmpDiag as Emprendedor, nombreIniciativa as 'Nombre Iniciativa', idea as 'Idea de proyecto', tipoEmprendimiento as 'Tipo Emprendimiento' FROM DIAGNOSTICO WHERE REVISADO = 0"
     const result = await pool.query(QUERY);
@@ -19,7 +46,17 @@ Controlador.getDiagnostico = async (req , res) => {
     return result;
 }
 
-
+Controlador.deleteDiagnostico = async (req,res) =>{
+    const {id} = req.body;
+    const query = "Delete FROM diagnostico where idEmpDiag =" + id;
+    await pool.query(query, (err, data)=>{
+        if(err){
+            res.send(err);
+        }else{
+            res.send(data);
+        }
+    })
+}
 
 Controlador.updateEstado = async (req , res) => {
     const QUERY = "UPDATE usuarios SET estado = 1 WHERE cedula = '"+ req.body.cedula + "'";
@@ -27,28 +64,38 @@ Controlador.updateEstado = async (req , res) => {
     return result;
 }
 
-Controlador.postRuta = (req , res) => {
+Controlador.postRuta = async (req , res) => {
     const {etapa, mentor, emprendedor} = req.body
-    const QUERY = "INSERT INTO ruta (idEmpRuta, idEtapaRuta) VALUES ('"+ emprendedor +"'," + etapa +")"
-    const QUERY2 = "INSERT INTO mentor_principal(idMentorMP, idEmprenMP) VALUES ('"+ mentor +"','" + emprendedor +"')"
-    const QUERY3 = "UPDATE diagnostico SET revisado = 1 WHERE idEmpDiag = '"+ emprendedor + "'"
-    console.log(QUERY);
-    console.log(QUERY2);
-    console.log(QUERY3);
-    pool.query(QUERY).then(async (resultadoQ1) =>{
-        console.log(resultadoQ1);        
+    const QUERY = "INSERT INTO ruta (idEmpRuta, idEtapaRuta) VALUES ('"+ emprendedor +"'," + etapa +")";
+    const QUERY2 = "INSERT INTO mentor_principal(idMentorMP, idEmprenMP) VALUES ('"+ mentor +"','" + emprendedor +"')";
+    const QUERY3 = "UPDATE diagnostico SET revisado = 1 WHERE idEmpDiag = '"+ emprendedor + "'";
+
+    await pool.query(QUERY, async (err, data) =>{
+        if(err){
+            console.log(err);
+            res.send(err);
+        }else{
+            const resultado1 = data;
+            console.log(data);
+            await pool.query(QUERY2, async (err,data) =>{
+                if(err){
+                    console.log(err);
+                    res.send(err);
+                }else{
+                    const resultado2 = data;
+                    console.log(data);
+                    await pool.query(QUERY3,async (err,data) =>{
+                        if(err){
+                            res.send(err);
+                        }else{
+                            console.log(data);
+                            res.send({res1:resultado1, res2:resultado2, res3:data });         
+                        }
+                    })         
+                }
+            })         
         }
-    );
-
-    pool.query(QUERY2).then(async (resultadoQ2) =>{
-        console.log(resultadoQ2);
-    }
-    )
-
-    pool.query(QUERY3).then(async (resultadoQ3) =>{
-        console.log(resultadoQ3);
-    }
-    )
+    })
 }
 
 module.exports = Controlador;

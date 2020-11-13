@@ -1,6 +1,5 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Navbar from '../../Navbar/Navbar'
-import Bienvenida from '../../Bienvenida/Bienvenida';
 import {Image} from 'react-bootstrap';
 import Ruta from '../../../Imagenes/ruta.png'; 
 import './Inicio.css';
@@ -8,22 +7,20 @@ import '../Navegacion/Navegacion';
 import Navegacion from '../Navegacion/Navegacion';
 import '../../Navbar/Navbar.css'
 
-function Inicio() {
-    return (
-        <div>
+class Inicio extends Component {
+    render(){
+        return (            
             <div>
-                <Navbar></Navbar>
+                <div>
+                    <Navbar></Navbar>
+                </div>       
+                <div>
+                    <Navegacion></Navegacion>
+                </div>             
+                <Image className= "ruta" src={Ruta}/>
             </div>
-           
-           <div>
-           <Navegacion></Navegacion>
-           </div>
-          
-           <Image className= "ruta" src={Ruta}/>
-
-
-        </div>
-    )
+        )
+    }
 }
 
 export default Inicio

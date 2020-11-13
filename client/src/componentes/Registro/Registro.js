@@ -5,6 +5,10 @@ import './Registro.css'
 import {Button, Image, Modal} from 'react-bootstrap';
 import {Link, Redirect} from 'react-router-dom'
 import Axios from 'axios'
+import Cookies from 'universal-cookie';
+import md5 from 'md5'
+
+const cookie = new Cookies();
 
 class Login extends React.Component {
    
@@ -21,22 +25,28 @@ class Login extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSubmit = e => {
+  componentDidMount(){
+    if(cookie.get("cedula")){
+      alert("Ya has iniciado sesion");
+      window.location.href = "/" + cookie.get("tipoUsuario");
+    }
+  }
 
-    Axios.post("http://localhost:5000/Registro",{
+  handleSubmit = async e => {
+    await Axios.post("http://localhost:5000/Registro",{
       cedula: this.state.cedula,
       nombreCompleto: this.state.nombreCompleto,
       correo: this.state.correo,
-      estado: 0,
-      contrasena: this.state.contrasena,
+      contrasena: md5(this.state.contrasena),
       tipoUsuario: this.state.tipoUsuario
-    }).then((respuesta) => {
-      if(respuesta.data.message === "Correcto"){
+    })
+    .then(res => {
+      if(res.data.res1.affectedRows && res.data.res2.affectedRows){
         this.setState({usuarioValidado: true});
+      }else{
+        alert("Ha ocurrido un error");
       }
-      console.log(respuesta.data.message);
-    });
-   
+    });   
   }
 
   handleClose = () => this.setState({showModal:false})
@@ -47,7 +57,6 @@ class Login extends React.Component {
       [e.target.name]: e.target.value 
     });
   }
-
 
     Imagenhome() {
       return (          

@@ -7,6 +7,7 @@ router.route('/')
 
 router.route('/Diagnostico')
     .post(Emprendedor.postDiagnostico)
+    .get(Emprendedor.getDiagnostico)
 
 router.route('/MiRuta')
 .get(Emprendedor.getRuta);
