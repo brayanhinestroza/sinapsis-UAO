@@ -5,8 +5,9 @@ import Table from 'react-flexy-table'
 import "react-flexy-table/dist/index.css"
 import "./Tabla.css"
 import { Link } from 'react-router-dom'
+import Cookies from 'universal-cookie'
 
-
+const cookies =  new Cookies();
 export default class Tabla extends Component {
 
     constructor(props) {
@@ -14,7 +15,6 @@ export default class Tabla extends Component {
         this.state = {
             datos: null, 
             loading: true,
-            eliminar: false
         };        
     }
 
@@ -31,10 +31,10 @@ export default class Tabla extends Component {
         const dato = e.idUsuario;
         await Axios.post('http://localhost:5000/Administrador/Diagnostico', {id:dato})
         .then(res =>{
-            if(res.data.affectedRows === 1){
+            if(res.data.affectedRows > 0){
                 alert("Eliminacion exitosa");
+                window.location.href = "/Administrador/Diagnosticos"
             }
-            console.log(res);
         })       
     }
 
@@ -43,9 +43,16 @@ export default class Tabla extends Component {
         const ColumnaAcciones = [{
             header: "Acciones",
             td: (data) => {
-              return <div>
-                <Link className= "buttonTable btn btn-primary" to={{pathname: "/Administrador/Diagnostico", id: data.Emprendedor }}>{this.props.textoBoton}</Link>                
-                <Button className= "buttonTableO" class="btn btn-outline-primary" onClick={() => this.eliminarDiagnostico({idUsuario: data.Emprendedor})}>Eliminar</Button>
+              return <div>              
+                <Link className= "buttonTable btn btn-primary" onClick={() => cookies.set("idEmprendedor", data.Cedula)} to={{pathname: "/Administrador/Diagnostico", id: data.Emprendedor }}>{this.props.textoBoton}</Link>                
+                <Button className= "buttonTableO" class="btn btn-outline-primary" 
+                onClick={() =>{ 
+                  if(window.confirm("Esta seguro que desea eliminar el diagnostico?")){
+                    this.eliminarDiagnostico({idUsuario: data.Cedula})
+                  }
+                  }
+                }>
+                    Eliminar</Button>
               </div>
             }
         }]

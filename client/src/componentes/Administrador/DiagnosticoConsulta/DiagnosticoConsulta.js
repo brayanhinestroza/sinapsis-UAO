@@ -6,6 +6,9 @@ import Navegacion from '../Navegacion/Navegacion'
 import Axios from 'axios'
 import { Redirect } from 'react-router-dom';
 import ContenedorAsignar from './ContenedorAsignar';
+import Cookies from 'universal-cookie'
+
+const cookies =  new Cookies();
 
 
 class DiagnosticoConsulta extends Component {
@@ -13,7 +16,7 @@ class DiagnosticoConsulta extends Component {
     super(props);
 
     this.state = {
-      idEmprendedor : props.location.id,
+      idEmprendedor : cookies.get("idEmprendedor"),
       loading: true,
       datos: null,
       diagnosticoRealizado:false

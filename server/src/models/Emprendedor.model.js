@@ -8,6 +8,7 @@ Emprendedor.postDiagnostico = async (req , res) => {
     const query2 = "INSERT INTO diagnostico(nombreIniciativa,idea,necesidad,cliente,desValidaciones,instrumentoValidacion,tipoEmprendimiento,tipoEconomia,idEmpDiag) VALUES "
     + "('" + nombreEmprendimiento + "','" + descripcionEmprendimiento + "','" + necedidadEmprendimiento + "','" + clienteEmprendimiento + "','" + 
     validacionesEmprendimeinto + "','" + instrumentosValidacion + "','" + tipoEmprendimiento + "','" + tipoEconomia + "','" + cedula + "')";
+    
     await pool.query(query, async (err, data) =>{
         if(err){
             console.log(err);

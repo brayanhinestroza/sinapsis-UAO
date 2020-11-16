@@ -35,13 +35,14 @@ Controlador.deleteCuenta = async (req,res) =>{
 }
 
 Controlador.getDiagnosticos = async (req , res) => {
-    const QUERY = "SELECT idEmpDiag as Emprendedor, nombreIniciativa as 'Nombre Iniciativa', idea as 'Idea de proyecto', tipoEmprendimiento as 'Tipo Emprendimiento' FROM DIAGNOSTICO WHERE REVISADO = 0"
+    const QUERY = "SELECT U.cedula as 'Cedula', U.nombreCompleto as 'Nombre Completo', D.nombreIniciativa as 'Nombre Iniciativa', D.idea as 'Idea de proyecto', D.tipoEmprendimiento as 'Tipo Emprendimiento' FROM diagnostico AS D JOIN emprendedor AS E ON E.cedula = D.idEmpDiag JOIN usuarios AS U ON U.cedula = E.cedula WHERE D.revisado = 0"
     const result = await pool.query(QUERY);
     return result;
 }
 
 Controlador.getDiagnostico = async (req , res) => {
     const QUERY = "SELECT U.nombreCompleto, U.cedula, E.fechaNacimiento, E.direccion, E.celular, E.genero, E.Programa, D.nombreIniciativa, D.idea, D.necesidad, D.cliente, D.desValidaciones, D.instrumentoValidacion, D.tipoEmprendimiento, D.tipoEconomia FROM diagnostico AS D JOIN emprendedor AS E ON E.cedula = D.idEmpDiag JOIN usuarios AS U ON U.cedula = E.cedula WHERE U.cedula = '" + req.query.idEmprendedor + "'";
+    console.log(QUERY);
     const result = await pool.query(QUERY);
     return result;
 }

@@ -3,8 +3,8 @@ const Controlador = {}
 
 Controlador.Iniciar_Sesion = async (req , res) => {
     const {cedula, contrasena} = req.body ;
-    const query = "SELECT cedula FROM usuarios WHERE cedula = " + cedula
-    const query2 = "SELECT * FROM usuarios WHERE contraseña = '" + contrasena + "'";
+    const query = "SELECT cedula FROM usuarios WHERE cedula = '" + cedula + "'"
+    const query2 = "SELECT * FROM usuarios WHERE contraseña = '" + contrasena + "' AND cedula = " + cedula;
     
     await pool.query(query,async (err,data) =>{
         if(data.length>0){
@@ -34,12 +34,10 @@ Controlador.Registro = async (req, res) => {
             res.send(err);
         }else{
             const resultado1 = data;
-            console.log(data);
             await pool.query(query2,async (err,data) =>{
                 if(err){
                     res.send(err);
                 }else{
-                    console.log(data);
                     res.send({res1:resultado1, res2:data});         
                 }
             })         

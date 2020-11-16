@@ -12,13 +12,21 @@ constructor(props){
         emprendedor: this.props.emprendedor
     }
 }
-
+//Ciclo de vida del componente
 async componentDidMount(){
     this.consultarEtapas();
     this.consultarMentores();
     this.setState({loading:false})
 }
 
+//Eventos del componente
+HandleChange(e){
+    if(this.state.loading === false){
+       this.setState({[e.target.name]: e.target.value});
+    }
+   }
+
+//Metodos del componente - Consulta mentores, etapas , asignacion de ruta -
 async consultarMentores(){
     await Axios.get("http://localhost:5000/Mentor")
     .then(res =>{
@@ -42,17 +50,13 @@ asignarRuta(){
         mentor: this.state.mentorPrincipal
     }).then(res =>{
         if(res.data.res1.affectedRows === 1 && res.data.res2.affectedRows === 1 && res.data.res3.affectedRows === 1 ){
-
+            alert("Se ha asignado correctamente la etapa de la ruta y el mentor");
+            window.location.href = "/Administrador/Diagnosticos"
         }
-        console.log(res);
-        this.setState({diagnosticoRealizado:true});
+        else{
+            alert("Ocurrio algun un error")
+        }
     })
-}
-
-HandleChange(e){
- if(this.state.loading === false){
-    this.setState({[e.target.name]: e.target.value});
- }
 }
 
 render() {    
