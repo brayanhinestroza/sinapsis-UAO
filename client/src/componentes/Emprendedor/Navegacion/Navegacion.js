@@ -19,13 +19,13 @@ class Navegacion extends Component {
         })
         .then(res => {
             if(res.data.length >0){
-                if(res.data[0] == 1){
+                // eslint-disable-next-line 
+                if(res.data[0] == 1 ){  
                     this.setState({diagnostico: true});
                 }
             }
         })
     }
-
 
     render(){
         return (

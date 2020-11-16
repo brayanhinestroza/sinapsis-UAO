@@ -1,28 +1,52 @@
 import React from 'react'
-import img from '../../Imagenes/img.png';
-import logo from '../../Imagenes/sinapsis.png';
-import './Login.css'
 import {Button, Image, Modal} from 'react-bootstrap';
-import {Link, Redirect} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import Axios from 'axios';
 import Cookies from 'universal-cookie';
 import md5 from 'md5';
+import img from '../../Imagenes/img.png';
+import logo from '../../Imagenes/sinapsis.png';
+import './Login.css'
 
 const cookie = new Cookies();
+const validaciones = valores =>{
+  console.log(valores);
+  const errors = {};
+  const {cedula, contrasena} = valores
+  //Validaciones de Cedula
+  if(!cedula){
+    errors.cedula = "Este campo es obligatorio"
+  }else{
+    const regExp = /^\D*\d{5,11}$/
+    if(!regExp.test(cedula)){
+      errors.cedula = "Solo se permiten numeros de 5 a 11 digitos"
+    }
+    
+  }
+
+  //Validaciones de Contrasena
+  if(!contrasena){
+    errors.contrasena = "Este campo es obligatorio"
+  }
+  const regExp1 = /^(?=.*\d).{4,8}$/
+  if(!regExp1.test(contrasena)){
+    errors.contrasena = "La contraseña debe tener entre 4 y 8 caracteres y al menos un dígito"
+  }
+  return errors;
+}
+
 
 class Login extends React.Component {
-
   constructor(props){
     super(props);
 
     this.state = {
-      showModal: false,
-      respuestaServidor: null,
-      usuarioValidado: false,
-      usuario: null,
+      errors: {},
+      mensaje: null
     }
   }
 
+  //Ciclo de vida del componente
   componentDidMount(){
     if(cookie.get("cedula")){
       alert("Ya has iniciado sesion");
@@ -30,41 +54,47 @@ class Login extends React.Component {
     }
   }
 
+  //Eventos del componente
   handleClose = () => this.setState({showModal:false})
 
+  //Se activa cuando se cambia algun campo en el formulario y lo asigna al estado
   handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value
     });
   }
 
+  //Se activa cuando se presiona el boton de iniciar sesion
   handleSubmit = async e => {
+    e.preventDefault();
+    const {errors, mensaje, ...SinErrors} = this.state
+    const result = validaciones(SinErrors);
+    if(Object.keys(result).length){
+      this.setState({errors: result})      
+    }else{ 
+    this.setState({errors:result})
     await Axios.post("http://localhost:5000/Login",{
       cedula: this.state.cedula,
       contrasena: md5(this.state.contrasena)
     })
     .then(res =>{
-      if(res.data.length > 0){
+      if(!res.data.message){
         const respuesta  = res.data[0];
         cookie.set("cedula", respuesta.cedula, {path:"/"});
         cookie.set("tipoUsuario", respuesta.tipoUsuario, {path:"/"});
         cookie.set("nombreCompleto", respuesta.nombreCompleto, {path:"/"});
         cookie.set("estado", respuesta.estado, {path:"/"});
-        this.setState({usuarioValidado:true, usuario: respuesta});                
+        window.location.href = "/" + respuesta.tipoUsuario;
       }else{
-        this.setState({showModal: true, respuestaServidor: "Correo o contrasena invalidos"});
+        this.setState({mensaje: res.data.message, showModal: true});
       }
     })
     .catch(err =>{
       console.log(err);
     })
   }
-
-  urlRedirect(){
-    const tipoUser = this.state.usuario.tipoUsuario
-    return "/" + tipoUser
-  }
-
+}
+  //Subcomponentes
   Imagenhome = () => {
     return (          
           <Image className= "image" src={img}/> 
@@ -73,13 +103,20 @@ class Login extends React.Component {
 
   CardLogin()
   {
+    const {errors} = this.state
     return(
         <div className="home">
             <form onSubmit={this.handleSubmit} className="CardLogin">
             <Image className= "imagelogo" src={logo}/>   
             <h3 className="titulo">Inicia sesión en Sinapsis UAO</h3>
-            <input name="cedula" placeholder="Cédula" type= "text" onChange={this.handleChange}></input> 
-            <input name="contrasena" placeholder="Contraseña" type= "password" onChange={this.handleChange}></input>                  
+            <div className="form-controls">
+              <input name="cedula" placeholder="Cédula" type= "text" onChange={this.handleChange}></input>
+                {errors.cedula && <small class="form-text font-weight-bold text-danger">{errors.cedula}</small>} 
+            </div>
+            <div className="form-controls">
+              <input name="contrasena" placeholder="Contraseña" type= "password" onChange={this.handleChange}></input>   
+              {errors.contrasena && <small class="form-text font-weight-bold text-danger">{errors.contrasena}</small>}   
+            </div>             
             <Button className= "button" variant="primary" type="button" onClick={this.handleSubmit} >Iniciar sesión </Button>                                  
             <p className="titulolink">¿No tienes una cuenta? <Link to="/Registro" >Regístrate</Link></p>
           </form>
@@ -89,17 +126,14 @@ class Login extends React.Component {
 
   render(){
 
-  return (
-    
-    this.state.usuarioValidado ? <Redirect to={this.urlRedirect()}/> 
-    :    
+  return (       
     /*Bloque del if */
     this.state.showModal ? 
     <Modal centered show={this.state.showModal} onHide={this.handleClose}>
       <Modal.Header closeButton>
         <Modal.Title>Error</Modal.Title>
       </Modal.Header>
-      <Modal.Body> {this.state.respuestaServidor} </Modal.Body>
+      <Modal.Body> {this.state.mensaje} </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={this.handleClose}>
           Cerrar

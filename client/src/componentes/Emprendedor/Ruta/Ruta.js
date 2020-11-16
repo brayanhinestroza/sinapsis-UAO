@@ -7,8 +7,6 @@ import Navegacion from '../Navegacion/Navegacion'
 
 class Ruta extends Component {
 
-
-    
     Progress(){
         return <div>
             <div className="d-flex justify-content-around mb-1">

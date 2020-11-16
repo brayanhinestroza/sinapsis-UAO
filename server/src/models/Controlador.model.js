@@ -3,13 +3,21 @@ const Controlador = {}
 
 Controlador.Iniciar_Sesion = async (req , res) => {
     const {cedula, contrasena} = req.body ;
-    const query = "SELECT * FROM usuarios WHERE cedula = '" + cedula + "' AND contraseña = '" + contrasena + "'";
-    await pool.query(query, (err, data) =>{
-        if(err){
-            res.send(err);
+    const query = "SELECT cedula FROM usuarios WHERE cedula = " + cedula
+    const query2 = "SELECT * FROM usuarios WHERE contraseña = '" + contrasena + "'";
+    
+    await pool.query(query,async (err,data) =>{
+        if(data.length>0){
+            await pool.query(query2,async (err,data) =>{
+                if(data.length>0){
+                    res.send(data)
+                }else{
+                    res.send({message: "Contraseña invalida"});
+                }
+            });
         }else{
-            res.send(data);         
-        }
+            res.send({message: "Cedula no existe"})
+        }        
     } )
 }
 

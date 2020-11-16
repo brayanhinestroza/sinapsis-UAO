@@ -17,6 +17,7 @@ class Navbar extends Component {
 
     componentDidMount(){                
         if(cookie.get("cedula")){
+            // eslint-disable-next-line 
             if(cookie.get("estado") == 0){
                 this.setState({showModal:true})
             }else{
