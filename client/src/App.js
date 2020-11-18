@@ -9,11 +9,12 @@ import DiagnosticoADM from './componentes/Administrador/DiagnosticoConsulta/Diag
 import Emprendedor from './componentes/Emprendedor/Inicio/Inicio'
 import Diagnostico from './componentes/Emprendedor/Diagnostico/Diagnostico'
 import Ruta  from './componentes/Emprendedor/Ruta/Ruta'
-
+import Mentor  from './componentes/Mentor/EmprendedorBuscar/EmprendedorBuscar'
 
 function App() {
   return (
     <Router>
+      <Route exact path='/' component={Mentor} /> 
       <Route exact path='/' component={Login} /> 
       <Route exact path='/Registro' component={Registro} />
       <Route exact path='/Administrador' component={Administrador} />

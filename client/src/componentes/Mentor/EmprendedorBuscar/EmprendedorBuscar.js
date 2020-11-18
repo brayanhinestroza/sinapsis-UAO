@@ -4,23 +4,27 @@ import '../Navegacion/Navegacion';
 import Navegacion from '../Navegacion/Navegacion';
 import '../../Navbar/Navbar.css'
 import Tabla from './TablaBuscar/Tabla';
-import './DiagnosticoBuscar.css'
+import './EmprendedorBuscar.css'
 
-function DiagnosticoBuscar() {
+
+
+function EmprendedorBuscar() {
     return (
-    <div>
-      <Navbar></Navbar>
-      <Navegacion></Navegacion>     
-      <div> 
+        <div>
+            <Navbar></Navbar>
+            <Navegacion></Navegacion> 
+
+        <div> 
           <div className="titulopagina">
-            <h3>Diagnósticos</h3>
+            <h3>Emprendedores</h3>
           </div>
           <div className= "contenedorD">
             <Tabla dato="Diagnosticos" textoBoton="Revisar" title="diagnóstico"></Tabla>
           </div>
       </div>
-    </div>
+
+        </div>
     )
 }
 
-export default DiagnosticoBuscar
+export default EmprendedorBuscar
