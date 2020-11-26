@@ -16,7 +16,7 @@ class Navbar extends Component {
     }
 
     componentDidMount(){                
-        if(cookie.get("cedula")){
+       /* if(cookie.get("cedula")){
             // eslint-disable-next-line 
             if(cookie.get("estado") == 0){
                 this.setState({showModal:true})
@@ -31,7 +31,7 @@ class Navbar extends Component {
         }else{
             alert("Debes iniciar sesion primero");
             window.location.href = "/";
-        }
+        }*/
         this.setState({loading:false});
     }
 

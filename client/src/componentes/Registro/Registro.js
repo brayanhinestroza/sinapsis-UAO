@@ -119,54 +119,54 @@ class Login extends React.Component {
 
   Imagenhome() {
     return (          
-          <Image className= "image" src={img}/> 
+          <Image className= "imageR" src={img}/> 
     );
   }
 
   CardRegistro() {
     const {errors} = this.state
     return(
-      <div className="home">
-        <form className="CardRegistro">              
-        <h3 className="titulo">Registrate en Sinapsis UAO</h3>
+      <div className="homeR">
+        <form className="CardRegistroR">              
+        <p className="tituloR">Registrate en Sinapsis UAO</p>
 
         <div className="form-controls">
-          <input name="nombreCompleto" className="input" placeholder="Nombre completo" type="text" onChange={this.handleChange} ></input>
+          <input name="nombreCompleto" className="inputR" placeholder="Nombre completo" type="text" onChange={this.handleChange} ></input>
           {errors.nombreCompleto && <small class="form-text font-weight-bold text-danger">{errors.nombreCompleto}</small>}
         </div> 
 
         <div className="form-controls">
-          <input name="cedula" className="input" placeholder="Cédula" type= "text" onChange={this.handleChange}></input> 
+          <input name="cedula" className="inputR" placeholder="Cédula" type= "text" onChange={this.handleChange}></input> 
           {errors.cedula && <small class="form-text font-weight-bold text-danger">{errors.cedula}</small>}
         </div>
 
         <div className="form-controls">
-          <input name="correo" className="input" placeholder="Correo" type= "text" onChange={this.handleChange}></input>  
+          <input name="correo" className="inputR" placeholder="Correo" type= "text" onChange={this.handleChange}></input>  
           {errors.correo && <small class="form-text font-weight-bold text-danger">{errors.correo}</small>}
         </div> 
 
         <div className="form-controls">
-          <select value={this.state.tipoUsuario} name="tipoUsuario" className="input" placeholder="Tipo de usuario" type= "text" onChange={this.handleChange}>
-          <option className="input" value="-1" disabled selected>Tipo de usuario</option> 
-            <option className="input" value="Emprendedor">Emprendedor</option> 
-            <option className="input" value="Mentor">Mentor</option> 
-            <option className="input" value="Administrador">Administrador</option>  
+          <select value={this.state.tipoUsuario} name="tipoUsuario" className="inputR" placeholder="Tipo de usuario" type= "text" onChange={this.handleChange}>
+          <option className="inputR" value="-1" disabled selected>Tipo de usuario</option> 
+            <option className="inputR" value="Emprendedor">Emprendedor</option> 
+            <option className="inputR" value="Mentor">Mentor</option> 
+            <option className="inputR" value="Administrador">Administrador</option>  
           </select>
           {errors.tipoUsuario && <small class="form-text font-weight-bold text-danger">{errors.tipoUsuario}</small>}
         </div>
 
         <div className="form-controls">
-          <input name="contrasena" className="input" placeholder="Contraseña" type= "password" onChange={this.handleChange}></input>
+          <input name="contrasena" className="inputR" placeholder="Contraseña" type= "password" onChange={this.handleChange}></input>
           {errors.contrasena && <small class="form-text font-weight-bold text-danger">{errors.contrasena}</small>}
         </div>
 
         <div className="form-controls">
-          <input name="confirmContrasena" className="input" placeholder="Confirmar contraseña" type= "password" onChange={this.handleChange}></input>
+          <input name="confirmContrasena" className="inputR" placeholder="Confirmar contraseña" type= "password" onChange={this.handleChange}></input>
           {errors.confirmContrasena && <small class="form-text font-weight-bold text-danger">{errors.confirmContrasena}</small>}
         </div>
 
-        <Button className="button" variant="primary" type="button" onClick={this.handleSubmit}> Registrarse </Button>
-        <p className="titulolink">¿Ya tienes una cuenta? <Link to="/" >Iniciar sesión</Link></p>      
+        <Button className="buttonR" variant="primary" type="button" onClick={this.handleSubmit}> Registrarse </Button>
+        <p className="titulolinkR">¿Ya tienes una cuenta? <Link to="/" >Iniciar sesión</Link></p>      
         </form>          
     </div>
     );
@@ -188,10 +188,10 @@ class Login extends React.Component {
       </Modal>      
       )   
     :      
-    <div className= "containerprincipal" >     
+    <div className= "containerprincipalR" >     
       { this.Imagenhome() }      
-      <div className="containerDerecha">
-        <Image className= "imagelogo" src={logo}/> 
+      <div className="containerDerechaR">
+        <Image className= "imagelogoR" src={logo}/> 
         { this.CardRegistro() }         
       </div>     
     </div>

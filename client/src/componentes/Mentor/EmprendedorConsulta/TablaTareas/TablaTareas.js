@@ -3,7 +3,7 @@ import { Card, Button } from 'react-bootstrap'
 import Axios from 'axios'
 import Table from 'react-flexy-table'
 import "react-flexy-table/dist/index.css"
-import "./Tabla.css"
+import "./TablaTareas.css"
 import { Link } from 'react-router-dom'
 import Cookies from 'universal-cookie'
 
@@ -59,9 +59,9 @@ export default class Tabla extends Component {
 
         return (
         this.state.loading ? <div>Cargando datos</div> :         
-        <div className="Contenedor">
-            <div className="card" >
-                <Card.Body className="card">
+        <div className="ContenedorT">
+            <div className="cardT" >
+                <Card.Body className="cardT">
                     <h5>Lista de {this.props.title}</h5>
                     <Table className="table" data={data} filteredDataText= "Datos filtrados:" nextText= "Siguiente" previousText = "Anterior"  totalDataText ="Total datos:" rowsText="Número de filas" pageText="Página" ofText =" de" filterable additionalCols={ColumnaAcciones}/>
                 </Card.Body>

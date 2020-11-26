@@ -3,7 +3,7 @@ import Navbar from '../../Navbar/Navbar'
 import '../Navegacion/Navegacion';
 import Navegacion from '../Navegacion/Navegacion';
 import '../../Navbar/Navbar.css'
-import Tabla from './TablaBuscar/Tabla';
+import TablaEmp from './TablaBuscar/TablaMBuscar';
 import './EmprendedorBuscar.css'
 
 
@@ -15,11 +15,11 @@ function EmprendedorBuscar() {
             <Navegacion></Navegacion> 
 
         <div> 
-          <div className="titulopagina">
+          <div className="titulopaginaME">
             <h3>Emprendedores</h3>
           </div>
-          <div className= "contenedorD">
-            <Tabla dato="Diagnosticos" textoBoton="Revisar" title="diagnóstico"></Tabla>
+          <div className= "contenedorDME">
+            <TablaEmp dato="Diagnosticos" textoBoton="Revisar" title="emprendedores"></TablaEmp>
           </div>
       </div>
 

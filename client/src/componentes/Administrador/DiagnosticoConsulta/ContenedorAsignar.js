@@ -64,12 +64,12 @@ render() {
         this.state.etapas && this.state.mentores ? 
         this.state.loading ? <>Cargando</>
         :
-        <div className="contenedorAsignar">
-            <div className="Subtitulo-asignar">
+        <div className="contenedorAsignarDC">
+            <div className="Subtitulo-asignarDC">
                 <h5>Asignar etapa inicial y mentor principal</h5>
             </div>
             <div>
-                <label className="nombreInput">Etapa inicial</label>
+                <label className="nombreInputDC">Etapa inicial</label>
                 <br></br>
                 <select name="etapa" className="inputDiag" type= "text" onChange={(e)=> this.HandleChange(e)}>
                     <option className="inputDiag" value="-1" disabled selected>Seleccione una...</option>
@@ -81,18 +81,18 @@ render() {
             </div>
             
             <div>
-                <label className="nombreInput">Mentor principal</label>
+                <label className="nombreInputDC">Mentor principal</label>
                 <br></br>                
                 <select name="mentorPrincipal" className="inputDiag" type= "text" onChange={(e)=> this.HandleChange(e)}>
-                    <option className="inputDiag" value="-1" disabled selected>Seleccione uno...</option>
+                    <option className="inputDiagDC" value="-1" disabled selected>Seleccione uno...</option>
                     {                        
                         this.state.mentores.map(v => (
-                        <option className="inputDiag" value={v.cedula}>{v.nombre}</option>))
+                        <option className="inputDiagDC" value={v.cedula}>{v.nombre}</option>))
                     }
                 </select> 
             </div>
             <div>
-                <Button className= "buttonDiag" variant="primary" onClick={()=> this.asignarRuta()}>Asignar</Button>
+                <Button className= "buttonDiagDC" variant="primary" onClick={()=> this.asignarRuta()}>Asignar</Button>
             </div>
         </div>
 

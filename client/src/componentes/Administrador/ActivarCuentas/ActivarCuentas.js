@@ -14,13 +14,12 @@ class ActivarCuentas extends Component {
             <div>
                 <Navbar></Navbar>
                 <Navegacion></Navegacion>
-                <div className="crumb" >            
-            </div>
+              
             <div>    
-            <div className="titulopagina">
+            <div className="titulopaginaAA">
                 <h3>Activar cuentas</h3>
             </div>
-            <div className= "contenedorD">
+            <div className= "contenedorDAA">
             <Tabla dato="Cuentas" textoBoton="Activar" title="cuentas a activar"></Tabla>
             </div>           
             

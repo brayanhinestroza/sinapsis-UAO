@@ -42,7 +42,7 @@ class DiagnosticoConsulta extends Component {
       this.state.loading ? 
       <div>Cargando</div>
       :
-        <div className="body-diagnostico">
+        <div className="body-diagnosticoDC">
           <div>
           <Navbar></Navbar>
           </div>
@@ -51,129 +51,135 @@ class DiagnosticoConsulta extends Component {
             <Navegacion></Navegacion>
           </div>
 
-          <div className="titulopagina">
+          <div className="titulopaginaDC">
               <h3>Diagnósticos</h3>
           </div>
 
-          <div className= "contenedorD">
+          <div className= "contenedorDDC">
 
-          <div className="contenedorDiag">
+          <div className="contenedorDiagDC">
 
-              <div className="contenedorIzqD">
-                  <div className="Subtitulo">
+              <div className="contenedorIzqDDC">
+                  <div className="SubtituloDC">
                   <h5>Información del emprendedor</h5>
                   </div>
                 
                   <div>
-                    <label className="nombreInput">Nombre completo</label>
+                    <label className="nombreInputDC">Nombre completo</label>
                     <br></br>
-                    <label className="inputDiag" disabled> {this.state.datos.nombreCompleto} </label> 
+                    <label className="inputDiagDC" disabled> {this.state.datos.nombreCompleto} </label> 
                   </div>
 
                   <div>
-                    <label className="nombreInput">Cédula</label>
+                    <label className="nombreInputDC">Cédula</label>
                     <br></br>
-                    <label className="inputDiag" type= "text" disabled> {this.state.datos.cedula} </label> 
+                    <label className="inputDiagDC" type= "text" disabled> {this.state.datos.cedula} </label> 
+                  </div>
+
+                  <div>
+                    <label className="nombreInputDC">Correo</label>
+                    <br></br>
+                    <label className="inputDiagDC" type= "text" disabled> {this.state.datos.cedula} </label> 
                   </div>
                   
                   <div>
-                    <label className="nombreInput">Fecha de nacimiento</label>
+                    <label className="nombreInputDC">Fecha de nacimiento</label>
                     <br></br>
-                    <label className="inputDiag" type= "text" disabled> {this.state.datos.fechaNacimiento} </label> 
+                    <label className="inputDiagDC" type= "text" disabled> {this.state.datos.fechaNacimiento} </label> 
                   </div>
 
                   <div>
-                    <label className="nombreInput">Ciudad</label>
+                    <label className="nombreInputDC">Ciudad</label>
                     <br></br>
-                    <label className="inputDiag" type= "text" disabled></label> 
+                    <label className="inputDiagDC" type= "text" disabled></label> 
                   </div>
 
                   <div>
-                    <label className="nombreInput">Dirección</label>
+                    <label className="nombreInputDC">Dirección</label>
                     <br></br>
-                    <label className="inputDiag" type= "text" disabled>{this.state.datos.direccion}</label>  
+                    <label className="inputDiagDC" type= "text" disabled>{this.state.datos.direccion}</label>  
                   </div>
 
                   <div>
-                    <label className="nombreInput">Celular</label>
+                    <label className="nombreInputDC">Celular</label>
                     <br></br>
-                    <label className="inputDiag" type= "text" disabled>{this.state.datos.celular}</label> 
+                    <label className="inputDiagDC" type= "text" disabled>{this.state.datos.celular}</label> 
                   </div>
 
                   <div>
-                    <label className="nombreInput">Género</label>
+                    <label className="nombreInputDC">Género</label>
                     <br></br>
-                    <label className="inputDiag" type= "text" disabled>{this.state.datos.genero}</label> 
+                    <label className="inputDiagDC" type= "text" disabled>{this.state.datos.genero}</label> 
                   </div>
 
                   <div>
-                    <label className="nombreInput">Vinculo con la universidad</label>
+                    <label className="nombreInputDC">Vinculo con la universidad</label>
                     <br></br>
-                    <label className="inputDiag" type= "text" disabled></label> 
+                    <label className="inputDiagDC" type= "text" disabled></label> 
                   </div>
 
                   <div>
-                    <label className="nombreInput">Programa</label>
+                    <label className="nombreInputDC">Programa</label>
                     <br></br>
-                    <label className="inputDiag" type= "text" disabled>{this.state.datos.programa}</label> 
+                    <label className="inputDiagDC" type= "text" disabled>{this.state.datos.programa}</label> 
                   </div>
                   
 
-                  <div className="Subtitulo">
+                  <div className="SubtituloDC">
                   <h5>Información del emprendimiento</h5>
                   </div>
 
                   <div>
-                    <label className="nombreInput">Nombre del emprendimiento</label>
+                    <label className="nombreInputDC">Nombre del emprendimiento</label>
                     <br></br>
-                    <label className="inputDiag" type= "text" disabled>{this.state.datos.nombreIniciativa}</label>  
+                    <label className="inputDiagDC" type= "text" disabled>{this.state.datos.nombreIniciativa}</label>  
                   </div>
 
                   <div>
-                    <label className="nombreInput">Descripción del emprendimiento</label>
+                    <label className="nombreInputDC">Descripción del emprendimiento</label>
                     <br></br>
-                    <label className="textarea" disabled>{this.state.datos.idea}</label>
+                    <label className="textareaDC" disabled>{this.state.datos.idea}</label>
                   </div>
                   
 
               </div>
 
-               <div className="contenedorDerD">
+               <div className="contenedorDerDDC">
 
                   <div>
-                    <label className="nombreInput">Necesidad o problema que soluciona</label>
+                    <label className="nombreInputDC">Necesidad o problema que soluciona</label>
                     <br></br>
-                    <label className="textarea" disabled>{this.state.datos.necesidad}</label>
+                    <label className="textareaDC" disabled>{this.state.datos.necesidad}</label>
                   </div>
 
                   <div>
-                    <label className="nombreInput">Principal cliente o usuario</label>
+                    <label className="nombreInputDC">Principal cliente o usuario</label>
                     <br></br>
-                    <label className="textarea" disabled>{this.state.datos.cliente}</label>
+                    <label className="textareaDC" disabled>{this.state.datos.cliente}</label>
                   </div>
 
                   <div>
-                    <label className="nombreInput">Validaciones que ha realizado</label>
+                    <label className="nombreInputDC">Validaciones que ha realizado</label>
                     <br></br>
-                    <label className="textarea" disabled>{this.state.datos.desValidaciones}</label>
+                    <label className="textareaDC" disabled>{this.state.datos.desValidaciones}</label>
                   </div>                
                
                   <div>
-                    <label className="nombreInput">Instrumentos que ha utilizado para realizar las validaciones</label>
+                    <label className="nombreInputDC">Instrumentos que ha utilizado para realizar las validaciones</label>
                     <br></br>
-                    <label className="textarea" disabled>{this.state.datos.instrumentoValidacion}</label>
+                    <label className="textareaDC" disabled>{this.state.datos.instrumentoValidacion}</label>
                   </div>
 
                   <div>
-                    <label className="nombreInput">Tipo de emprendimiento</label>
+                    <label className="nombreInputDC">Tipo de emprendimiento</label>
                     <br></br>
-                    <label className="inputDiag" type= "text" disabled>{this.state.datos.tipoEmprendimiento}</label> 
+                    <label className="inputDiagDC" type= "text" disabled>{this.state.datos.tipoEmprendimiento}</label> 
                   </div>
 
                   <div>
-                    <label className="nombreInput">Tipo de económia</label>
+                    <label className="nombreInputDC">Tipo de económia</label>
                     <br></br>
-                    <label className="inputDiag" type= "text" disabled>{this.state.datos.tipoEconomia}</label> 
+                    <label className="inputDiagDC" type= "text" disabled>{this.state.datos.tipoEconomia}</label> 
                   </div>                  
               </div>                
           </div>

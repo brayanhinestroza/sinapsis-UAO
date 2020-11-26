@@ -46,9 +46,9 @@ class Ruta extends Component {
             <Navbar></Navbar>
             <Navegacion user="Juan Sebastian"></Navegacion>
             <Breadcrumb></Breadcrumb>
-
+            <div className="conruta">
             <div className="container-fluid pt-2 pr-5 pl-5">
-                <h5 className="mt-3">Mi Ruta</h5>
+                <h3 className="mt-3">Mi Ruta</h3>
                 <Row className="h-100">
                     <Col md = '8' className='mr-1'>
                         <Row>                        
@@ -81,6 +81,8 @@ class Ruta extends Component {
                     </Col>
                 </Row>
             </div>
+            </div>
+            
             
         </div>
     )

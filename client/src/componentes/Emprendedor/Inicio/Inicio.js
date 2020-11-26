@@ -16,7 +16,7 @@ function Inicio() {
            <div>
            <Navegacion></Navegacion>
            </div>          
-           <Image className= "ruta" src={Ruta}/>
+           <Image className= "rutaImg" src={Ruta}/>
         </div>
     )
 }

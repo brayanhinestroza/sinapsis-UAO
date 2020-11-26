@@ -1,11 +1,11 @@
-.titulopagina
+.titulopaginaAD
 {
   margin-left: 2rem;
-  margin-top: 2rem;
+  margin-top: 9rem;
 
 }
 
-.contenedorD
+.contenedorDAD
 {
   width: 117rem;
   display: flex;  
@@ -14,9 +14,5 @@
   margin-top: 3rem;  
 }
 
-.crumb
-{
-    margin-top: 4rem;
-   
-}
+
 

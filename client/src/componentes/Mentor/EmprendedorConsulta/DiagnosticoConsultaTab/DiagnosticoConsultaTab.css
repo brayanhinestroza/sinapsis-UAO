@@ -1,35 +1,37 @@
-.titulopaginaDC
+.titulopaginaDCT
 {
   margin-left: 2rem;
   margin-top: 9rem;
 }
 
-.contenedorDiagDC
+.contenedorDiagDCT
 {
-  width: 86rem;
+  width: 96%;
   height: 55rem;
   margin-left: 2rem;
   margin-top: 2rem;
-  box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.16);
+  margin-bottom:2rem ;
+  
   background-color: var(--white);
   display: flex;  
   flex-direction: column;
   flex-wrap: wrap;
+  
 }
 
-.contenedorIzqDDC
+.contenedorIzqDDCT
 {
   display: flex;
   justify-content: space-between;
   flex-direction: row;
   flex-wrap: wrap;
   width: 50rem;
-  margin-left: 2rem;
+  margin-left: 7rem;
   margin-top: 2rem;
-  padding-right:5rem ;
+  padding-right:0rem ;
 }
 
-.contenedorDerDDC
+.contenedorDerDDCT
 {
   display: flex;
   justify-content: space-between;
@@ -41,14 +43,14 @@
   
 }
 
-.SubtituloDC{
+.SubtituloDCT{
 
     margin-right: 16rem;
     margin-bottom: 1.5rem;
 
 }
 
-.inputlargoDC
+.inputlargoDCT
 {
     width: 30rem;
     height: 2.5rem;
@@ -58,10 +60,10 @@
     margin-bottom: 1.8rem;
 
 }
-.textareaDC
+.textareaDCT
 {
 
-  width: 30rem;
+  width: 35rem;
   height: 6rem;
   margin-bottom: 1.5rem;
   resize: vertical;
@@ -71,13 +73,13 @@
 
 }
 
-.body-diagnosticoDC
+.body-diagnosticoDCT
 {
   background-color: #fbf9fb;
 }
 
-.inputDiagDC{
-  width:20rem ;
+.inputDiagDCT{
+  width:23rem ;
   height: 2.5rem;
   border-radius: 4px;
   border: solid 1px rgba(154, 102, 168, 0.35); 
@@ -85,7 +87,7 @@
   margin-right: 1rem;
 }
 
-.nombreInputDC
+.nombreInputDCT
 {
  
   font-family: Roboto;
@@ -100,7 +102,7 @@
 }
 
 
-.buttonDiagDC
+.buttonDiagDCT
 {
   border-radius: 5px;
   background-color: #9a66a8;
@@ -112,17 +114,17 @@
   
   
 }
-.buttonDiagDC:hover {
+.buttonDiagDCT:hover {
   background-color: #5a2e66;
   border-color: #5a2e66;
 }
 
-.buttonDiagDC:active {
+.buttonDiagDCT:active {
   background-color: #2a142f;
   border-color: #2a142f;
 }
 
-.contenedorAsignarDC
+.contenedorAsignarDCT
 {  
     width: 27rem;
     height: 24rem;
@@ -137,7 +139,7 @@
     
  
 }
-.Subtitulo-asignarDC
+.Subtitulo-asignarDCT
 {
   margin-left: 17.3rem;
   margin-top: 2rem;
@@ -145,7 +147,7 @@
   width: 40rem;
 }
 
-.contenedorDDC
+.contenedorDDCT
 {
   width: 117rem;
   display: flex;  

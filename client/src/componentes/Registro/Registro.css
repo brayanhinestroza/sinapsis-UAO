@@ -1,11 +1,11 @@
 
-.image
+.imageR
 {
  width: 53.7rem;
 }
 
 
-.containerprincipal
+.containerprincipalR
 {
   width: 100vw;
   height: 100vh;
@@ -14,7 +14,7 @@
   flex-direction: row;
   flex-wrap: wrap;
 }
-.containerDerecha{
+.containerDerechaR{
   width: 66rem;
   
   display: flex;
@@ -23,24 +23,24 @@
   
 }
 
-.imagehome{
+.imagehomeR{
   width: 120rem; 
   height: 100vh;
 
 }
 @media only screen and (max-width: 1600px) {
-  .imagehome{
+  .imagehomeR{
     width: 10vw; 
     height: 10vh;
   
   }
 
-  .image
+  .imageR
 {
 display: none;
 
 }
-.containerprincipal
+.containerprincipalR
 {
   display: flex;
   justify-content: center;
@@ -48,7 +48,7 @@ display: none;
   flex-wrap: wrap;
 }
 
-.containerDerecha{
+.containerDerechaR{
   width: 36rem;  
   display: flex;
   flex-direction: column;
@@ -58,8 +58,7 @@ display: none;
   
 }
 
-
-.CardRegistro
+.CardRegistroR
 {
 
     display: flex;
@@ -67,19 +66,19 @@ display: none;
     flex-direction: column;
     justify-content: center;
     width: 30rem;
-    height: 37rem;
+    height: 42rem;
     border-radius: 9px;
     box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
     background-color: #fcfcfc;
 }
 
-.imagelogo
+.imagelogoR
 {
   margin-top: 5rem;
  margin-bottom: 2.5rem;
 }
 
-.button
+.buttonR
 {
   border-radius: 5px;
   background-color: #9a66a8;
@@ -89,27 +88,27 @@ display: none;
   border-color: #9a66a8;
   
 }
-.button:hover {
+.buttonR:hover {
   background-color: #7e2e94;
   border-color: #5a2e66;
 }
 
-.button:active {
+.buttonR:active {
   background-color: #3d1647;
   border-color: #3d1647;
 }
 
 
 
-.home
+.homeR
 {
     display: flex;
     align-items: center;
     flex-direction: column;
 }
-.titulo{
+.tituloR{
     font-family: Roboto;
-    font-size: 19px;
+    font-size: 20px;
     font-weight: 500;
     font-stretch: normal;
     font-style: normal;
@@ -120,7 +119,7 @@ display: none;
     margin-bottom: 2rem;
 }
 
-.titulolink{
+.titulolinkR{
     font-family: Roboto;
     font-size: 16px;
     font-weight: 500;
@@ -138,7 +137,7 @@ small{
   padding-left: 0.5em;
 }
 
-.input,
+.inputR,
 input[type="password"]{
     width:20rem ;
     height: 2.5rem;

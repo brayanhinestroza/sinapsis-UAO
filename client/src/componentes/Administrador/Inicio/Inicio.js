@@ -17,7 +17,7 @@ class Inicio extends Component {
                 <div>
                     <Navegacion></Navegacion>
                 </div>             
-                <Image className= "ruta" src={Ruta}/>
+                <Image className= "rutaAImg" src={Ruta}/>
             </div>
         )
     }

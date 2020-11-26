@@ -30,7 +30,7 @@ const validaciones = valores =>{
   }
   const regExp1 = /^(?=.*\d).{4,8}$/
   if(!regExp1.test(contrasena)){
-    errors.contrasena = "La contraseña debe tener entre 4 y 8 caracteres y al menos un dígito"
+    errors.contrasena = "La contraseña mínimo 8 caracteres"
   }
   return errors;
 }
@@ -97,7 +97,7 @@ class Login extends React.Component {
   //Subcomponentes
   Imagenhome = () => {
     return (          
-          <Image className= "image" src={img}/> 
+          <Image className= "imageL" src={img}/> 
     );
   }
 
@@ -105,10 +105,10 @@ class Login extends React.Component {
   {
     const {errors} = this.state
     return(
-        <div className="home">
-            <form onSubmit={this.handleSubmit} className="CardLogin">
-            <Image className= "imagelogo" src={logo}/>   
-            <h3 className="titulo">Inicia sesión en Sinapsis UAO</h3>
+        <div className="homeL">
+            <form onSubmit={this.handleSubmit} className="CardLoginL">
+            <Image className= "imagelogoL" src={logo}/>   
+            <h3 className="tituloL">Inicia sesión en Sinapsis UAO</h3>
             <div className="form-controls">
               <input name="cedula" placeholder="Cédula" type= "text" onChange={this.handleChange}></input>
                 {errors.cedula && <small class="form-text font-weight-bold text-danger">{errors.cedula}</small>} 
@@ -117,8 +117,8 @@ class Login extends React.Component {
               <input name="contrasena" placeholder="Contraseña" type= "password" onChange={this.handleChange}></input>   
               {errors.contrasena && <small class="form-text font-weight-bold text-danger">{errors.contrasena}</small>}   
             </div>             
-            <Button className= "button" variant="primary" type="button" onClick={this.handleSubmit} >Iniciar sesión </Button>                                  
-            <p className="titulolink">¿No tienes una cuenta? <Link to="/Registro" >Regístrate</Link></p>
+            <Button className= "buttonL" variant="primary" type="button" onClick={this.handleSubmit} >Iniciar sesión </Button>                                  
+            <p className="titulolinkL">¿No tienes una cuenta? <Link to="/Registro" >Regístrate</Link></p>
           </form>
         </div>
     );
@@ -141,9 +141,9 @@ class Login extends React.Component {
       </Modal.Footer>
     </Modal>
     : /*Bloque del Else */
-    <div className= "containerprincipal" >    
+    <div className= "containerprincipalL" >    
     { this.Imagenhome() }      
-    <div className="containerDerecha">
+    <div className="containerDerechaL">
     { this.CardLogin() }         
     </div>    
   </div>

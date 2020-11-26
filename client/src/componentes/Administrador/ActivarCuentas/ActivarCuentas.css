@@ -1,17 +1,17 @@
-.titulopagina
+.titulopaginaAA
 {
   margin-left: 2rem;
-  margin-top: 2rem;
+  margin-top: 9rem;
 
 }
 
-.contenedorD
+.contenedorDAA
 {
   width: 117rem;
   display: flex;  
   flex-direction: row;
   flex-wrap: wrap;
-  margin-top: 3rem;  
+  margin-top: 2rem;  
 }
 
 .crumb

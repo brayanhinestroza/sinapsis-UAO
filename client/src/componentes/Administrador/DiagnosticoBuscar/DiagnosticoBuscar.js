@@ -12,10 +12,10 @@ function DiagnosticoBuscar() {
       <Navbar></Navbar>
       <Navegacion></Navegacion>     
       <div> 
-          <div className="titulopagina">
+          <div className="titulopaginaAD">
             <h3>Diagnósticos</h3>
           </div>
-          <div className= "contenedorD">
+          <div className= "contenedorDAD">
             <Tabla dato="Diagnosticos" textoBoton="Revisar" title="diagnóstico"></Tabla>
           </div>
       </div>

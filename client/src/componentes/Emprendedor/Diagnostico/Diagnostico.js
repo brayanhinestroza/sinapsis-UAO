@@ -150,6 +150,11 @@ class Diagnostico extends Component {
               </div>
               
               <div>
+                <label className="nombreInput">Correo</label>
+                <br></br>
+                <label name="cedula" className="inputDiag">{cookie.get("cedula")}</label> 
+              </div>
+              <div>
                 <label className="nombreInput">Fecha de nacimiento</label>
                 <br></br>
                 <input name="fechaNacimiento" className="inputDiag" placeholder="Fecha de nacimiento" type= "date" onChange={this.handleChange}></input> 
