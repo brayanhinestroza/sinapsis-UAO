@@ -36,4 +36,28 @@ body{
 }
 
 
+.titulopaginaMR
+{
+  margin-left: 2rem;
+  margin-top: 9rem;
 
+}
+
+
+
+.contenedorDMR
+{
+  width: 97vw;
+  height:auto;
+  display: flex; 
+  padding-bottom: 3rem;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 3rem;  
+  padding: 0px 0px 0px 0px;
+  border-radius: 4px;
+  box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.16);
+  background-color: var(--white);
+  margin-left: 1.5rem;
+  padding-bottom: 2rem;
+}

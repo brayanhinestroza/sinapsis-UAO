@@ -8,7 +8,7 @@ import DiagnosticosADM from './componentes/Administrador/DiagnosticoBuscar/Diagn
 import DiagnosticoADM from './componentes/Administrador/DiagnosticoConsulta/DiagnosticoConsulta'
 import Emprendedor from './componentes/Emprendedor/Inicio/Inicio'
 import Diagnostico from './componentes/Emprendedor/Diagnostico/Diagnostico'
-import Ruta  from './componentes/Emprendedor/Ruta/Ruta'
+import Ruta  from './componentes/Emprendedor/Ruta/MiRuta'
 import Mentor  from './componentes/Mentor/EmprendedorBuscar/EmprendedorBuscar'
 import Mentor2  from './componentes/Mentor/EmprendedorConsulta/EmprendedorConsulta'
 

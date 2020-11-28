@@ -6,7 +6,8 @@ import Navegacion from '../Navegacion/Navegacion';
 import '../../Navbar/Navbar.css'
 import './EmprendedorConsulta.css'
 import TabEmp from './TabEmprendedor'
-
+import ModalT from '../TareaModal'
+import TareaModal from '../../Emprendedor/Ruta/TareaModal';
 
 class EmprendedorConsulta extends Component {
 	
@@ -23,6 +24,8 @@ class EmprendedorConsulta extends Component {
           <div className= "contenedorMC">
                 <div className="Tab">
                     <TabEmp></TabEmp>
+
+                    <ModalT></ModalT>
                 </div>
           </div>
       </div> 
