@@ -19,7 +19,11 @@ export default class Tabla extends Component {
     }
 
     async componentDidMount(){        
-        await Axios.get("http://localhost:5000/Administrador/Diagnosticos")
+        await Axios.get("http://localhost:5000/Mentor/Tarea",{
+            params:{
+                idEmprendedor: cookies.get("idEmprendedor")
+            }
+        })
         .then(res =>{
             if(res.data.length>0){
                 this.setState({datos:res.data, loading:false});
@@ -27,15 +31,8 @@ export default class Tabla extends Component {
         })           
     }
 
-    eliminarDiagnostico =async e =>{
-        const dato = e.idUsuario;
-        await Axios.post('http://localhost:5000/Administrador/Diagnostico', {id:dato})
-        .then(res =>{
-            if(res.data.affectedRows > 0){
-                alert("Eliminacion exitosa");
-                window.location.href = "/Administrador/Diagnosticos"
-            }
-        })       
+    revisarTarea = e =>{
+
     }
 
     render() { 
@@ -44,21 +41,23 @@ export default class Tabla extends Component {
             header: "Acciones",
             td: (data) => {
               return <div>              
-                <Link className= "buttonTable btn btn-primary" onClick={() => cookies.set("idEmprendedor", data.Cedula)} to={{pathname: "/Administrador/Diagnostico", id: data.Emprendedor }}>{this.props.textoBoton}</Link>                
-                <Button className= "buttonTableO" class="btn btn-outline-primary" 
-                onClick={() =>{ 
-                  if(window.confirm("Esta seguro que desea eliminar el diagnostico?")){
-                    this.eliminarDiagnostico({idUsuario: data.Cedula})
-                  }
-                  }
-                }>
-                    Eliminar</Button>
+                <Button variant="primary" className="buttonMC" onClick={(e) =>
+                { 
+                    if(window.confirm("Esta seguro que desea Evaluar la consultoria del emprendedor?")){
+                        this.revisarTarea(e)
+                    }
+                }
+                }>Revisar</Button>
               </div>
             }
         }]
 
         return (
-        this.state.loading ? <div>Cargando datos</div> :         
+        this.state.loading ? <div>
+            <Card.Body className="cardT">
+                <h3 className="text-center">No hay datos para mostrar</h3>
+            </Card.Body>
+        </div> :         
         <div className="ContenedorT">
             <div className="cardT" >
                 <Card.Body className="cardT">

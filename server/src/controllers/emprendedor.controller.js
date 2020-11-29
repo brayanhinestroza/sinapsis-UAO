@@ -16,8 +16,8 @@ emprendedor.postDiagnostico = (req,res) => {
     Emprendedores.postDiagnostico(req, res)
 };
 
-emprendedor.getRuta = (req, res) => {
-    Emprendedores.getRuta
+emprendedor.getEtapa = async (req, res) => {
+    await Emprendedores.getEtapa(req,res);
 }
 
 

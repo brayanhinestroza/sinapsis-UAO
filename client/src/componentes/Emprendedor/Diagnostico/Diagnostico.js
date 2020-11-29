@@ -95,6 +95,7 @@ class Diagnostico extends Component {
     }
     else{
       const {errors, ...Datos} = this.state
+      console.log(Datos);
       await Axios.post("http://localhost:5000/Emprendedor/Diagnostico", Datos)
       .then(res=> {
         // eslint-disable-next-line

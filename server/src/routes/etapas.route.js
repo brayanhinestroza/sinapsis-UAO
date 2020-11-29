@@ -3,6 +3,7 @@ const router = Router();
 const Controlador = require('../controllers/controlador.controller')
 
 router.route('/')
-.get(Controlador.getEtapas) 
+.get(Controlador.getEtapas)
+.put(Controlador.updateEtapa)
 
 module.exports = router;

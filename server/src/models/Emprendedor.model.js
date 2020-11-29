@@ -4,7 +4,7 @@ const Emprendedor = {}
 
 Emprendedor.postDiagnostico = async (req , res) => {
     const {fechaNacimiento,direccion,genero,programa,nombreEmprendimiento,descripcionEmprendimiento,cedula,ciudad,celular,vinculoConU,Estudiante,necedidadEmprendimiento,clienteEmprendimiento,validacionesEmprendimeinto,instrumentosValidacion,tipoEmprendimiento,tipoEconomia, idEmprendedor} = req.body;
-    const query = "UPDATE emprendedor SET fechaNacimiento = '" + fechaNacimiento + "', celular = '" + celular + "', direccion = '" + direccion+ "', genero = '" + genero + "', programa = '" + programa  + "' WHERE cedula = '" + cedula + "';"
+    const query = "UPDATE emprendedor SET fechaNacimiento = '" + fechaNacimiento + "', celular = '" + celular + "', direccion = '" + direccion+ "', genero = '" + genero + "', programa = '" + programa  + "', ciudad = '" + ciudad + "' WHERE cedula = '" + cedula + "';"
     const query2 = "INSERT INTO diagnostico(nombreIniciativa,idea,necesidad,cliente,desValidaciones,instrumentoValidacion,tipoEmprendimiento,tipoEconomia,idEmpDiag) VALUES "
     + "('" + nombreEmprendimiento + "','" + descripcionEmprendimiento + "','" + necedidadEmprendimiento + "','" + clienteEmprendimiento + "','" + 
     validacionesEmprendimeinto + "','" + instrumentosValidacion + "','" + tipoEmprendimiento + "','" + tipoEconomia + "','" + cedula + "')";
@@ -38,6 +38,19 @@ Emprendedor.getDiagnostico = async (req,res) =>{
         }        
     })
     
+}
+
+Emprendedor.getEtapa = async (req,res) => {
+    const {idEmp} = req.query;
+    const query = "SELECT idEtapaRuta FROM ruta WHERE idEmpRuta = " + idEmp  + " LIMIT 1";
+    await pool.query(query, (err , data)=>{
+        if(err){
+            res.send(err);
+        }else{
+            console.log(data);
+            res.send(data)
+        }
+    })
 }
 
 module.exports = Emprendedor;

@@ -13,10 +13,10 @@ function Navegacion() {
                 <div className="navbar-collapse collapse" id="navbar10">
                     <ul className="navbar-nav nav-fill w-100">
                         <li className="nav-item">
-                            <Link class="nav-link" to="/Administrador">INICIO</Link>
+                            <Link class="nav-link" to="/Mentor">INICIO</Link>
                         </li>
                         <li className="nav-item">
-                            <Link class="nav-link" to="/Administrador/Activar"> EMPRENDEDORES</Link>
+                            <Link class="nav-link" to="/Mentor/Emprendedores"> EMPRENDEDORES</Link>
                         </li>                       
                     </ul>
                 </div>

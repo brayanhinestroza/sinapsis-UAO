@@ -13,4 +13,8 @@ controlador.getEtapas = async (req, res) =>{
     await Controlador.getEtapas(req,res);
 }
 
+controlador.updateEtapa = async(req,res) =>{
+    await Controlador.updateEtapa(req,res);
+}
+
 module.exports = controlador;

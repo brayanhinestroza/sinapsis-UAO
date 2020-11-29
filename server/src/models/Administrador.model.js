@@ -41,7 +41,7 @@ Controlador.getDiagnosticos = async (req , res) => {
 }
 
 Controlador.getDiagnostico = async (req , res) => {
-    const QUERY = "SELECT U.nombreCompleto, U.cedula, E.fechaNacimiento, E.direccion, E.celular, E.genero, E.Programa, D.nombreIniciativa, D.idea, D.necesidad, D.cliente, D.desValidaciones, D.instrumentoValidacion, D.tipoEmprendimiento, D.tipoEconomia FROM diagnostico AS D JOIN emprendedor AS E ON E.cedula = D.idEmpDiag JOIN usuarios AS U ON U.cedula = E.cedula WHERE U.cedula = '" + req.query.idEmprendedor + "'";
+    const QUERY = "SELECT U.nombreCompleto, U.cedula, U.correo, DATE_FORMAT(E.fechaNacimiento,'%d/%m/%Y') as fechaNacimiento , E.direccion, E.celular, E.genero, E.Programa, D.nombreIniciativa, D.idea, D.necesidad, D.cliente, D.desValidaciones, D.instrumentoValidacion, D.tipoEmprendimiento, D.tipoEconomia FROM diagnostico AS D JOIN emprendedor AS E ON E.cedula = D.idEmpDiag JOIN usuarios AS U ON U.cedula = E.cedula WHERE U.cedula = '" + req.query.idEmprendedor + "'";
     console.log(QUERY);
     const result = await pool.query(QUERY);
     return result;
@@ -65,38 +65,43 @@ Controlador.updateEstado = async (req , res) => {
     return result;
 }
 
-Controlador.postRuta = async (req , res) => {
+Controlador.postRuta = (req , res) => {
     const {etapa, mentor, emprendedor} = req.body
     const QUERY = "INSERT INTO ruta (idEmpRuta, idEtapaRuta) VALUES ('"+ emprendedor +"'," + etapa +")";
     const QUERY2 = "INSERT INTO mentor_principal(idMentorMP, idEmprenMP) VALUES ('"+ mentor +"','" + emprendedor +"')";
     const QUERY3 = "UPDATE diagnostico SET revisado = 1 WHERE idEmpDiag = '"+ emprendedor + "'";
+    const QUERY4 = "INSERT INTO mentor_emprendedor (idMentorME, idEmprenME) VALUES ('" + mentor + "' , '" + emprendedor + "')";
 
-    await pool.query(QUERY, async (err, data) =>{
+    console.log(QUERY4);
+    
+    pool.query(QUERY,(err, data) =>{
         if(err){
-            console.log(err);
             res.send(err);
         }else{
             const resultado1 = data;
-            console.log(data);
-            await pool.query(QUERY2, async (err,data) =>{
+            pool.query(QUERY2,(err,data) =>{
                 if(err){
-                    console.log(err);
                     res.send(err);
                 }else{
                     const resultado2 = data;
-                    console.log(data);
-                    await pool.query(QUERY3,async (err,data) =>{
+                    pool.query(QUERY3,(err,data) =>{
                         if(err){
                             res.send(err);
                         }else{
-                            console.log(data);
-                            res.send({res1:resultado1, res2:resultado2, res3:data });         
+                            const resultado3 = data
+                            pool.query(QUERY4, (err,data) =>{
+                                if(err){
+                                    res.send(err);
+                                }else{
+                                    res.send({res1:resultado1, res2:resultado2, res3:resultado3, res4: data});                                             
+                                }
+                            });
                         }
-                    })         
+                    });         
                 }
-            })         
+            });         
         }
-    })
+    });
 }
 
 module.exports = Controlador;

@@ -24,7 +24,7 @@ HandleChange(e){
     if(this.state.loading === false){
        this.setState({[e.target.name]: e.target.value});
     }
-   }
+}
 
 //Metodos del componente - Consulta mentores, etapas , asignacion de ruta -
 async consultarMentores(){

@@ -19,7 +19,7 @@ function EmprendedorBuscar() {
             <h3>Emprendedores</h3>
           </div>
           <div className= "contenedorDME">
-            <TablaEmp dato="Diagnosticos" textoBoton="Revisar" title="emprendedores"></TablaEmp>
+            <TablaEmp textoBoton="Revisar" title="Emprendedores"></TablaEmp>
           </div>
       </div>
 

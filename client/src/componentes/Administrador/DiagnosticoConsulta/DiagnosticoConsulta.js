@@ -14,7 +14,6 @@ const cookies =  new Cookies();
 class DiagnosticoConsulta extends Component {
   constructor(props){
     super(props);
-
     this.state = {
       idEmprendedor : cookies.get("idEmprendedor"),
       loading: true,

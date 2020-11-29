@@ -26,7 +26,7 @@ Controlador.Registro = async (req, res) => {
     const query = "INSERT INTO usuarios (cedula, nombreCompleto,correo,estado,contraseña,tipoUsuario) VALUES" + 
                 " ('" + cedula + "','" +  nombreCompleto + "','" + correo + "',0,'" + contrasena + "','"
                 + tipoUsuario + "')";    
-    const query2 = "INSERT INTO "+ tipoUsuario +  " (cedula) values ('" + cedula + "')";
+    const query2 = "INSERT INTO "+ tipoUsuario +  " (cedula, nombre) values ('" + cedula + "','" + nombreCompleto +"')";
     
     await pool.query(query, async (err, data) =>{
         if(err){
@@ -47,6 +47,20 @@ Controlador.Registro = async (req, res) => {
 
 Controlador.getEtapas = async (req,res) =>{
     await pool.query("SELECT * FROM ETAPA", (err,data)=>{
+        if(err){
+            console.log(err);
+            res.send(err)
+        }else{
+            console.log(data);
+            res.send(data);
+        }
+    })
+}
+
+Controlador.updateEtapa = async (req,res) => {
+    const {idEmp, etapa} = req.body;
+    const query = "UPDATE ruta SET idEtapaRuta = " + etapa + " WHERE idEmpRuta =" + idEmp +"";
+    await pool.query(query, (err,data)=>{
         if(err){
             console.log(err);
             res.send(err)

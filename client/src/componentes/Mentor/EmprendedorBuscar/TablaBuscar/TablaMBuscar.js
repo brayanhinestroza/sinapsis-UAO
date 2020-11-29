@@ -4,7 +4,6 @@ import Axios from 'axios'
 import Table from 'react-flexy-table'
 import "react-flexy-table/dist/index.css"
 import "./TablaMBuscar.css"
-import { Link } from 'react-router-dom'
 import Cookies from 'universal-cookie'
 
 const cookies =  new Cookies();
@@ -19,7 +18,11 @@ export default class TablaMBuscar extends Component {
     }
 
     async componentDidMount(){        
-        await Axios.get("http://localhost:5000/Administrador/Diagnosticos")
+        await Axios.get("http://localhost:5000/Mentor/MisEmprendedores",{
+            params:{
+                idMentor: cookies.get("cedula")
+            }
+        })
         .then(res =>{
             if(res.data.length>0){
                 this.setState({datos:res.data, loading:false});
@@ -27,15 +30,9 @@ export default class TablaMBuscar extends Component {
         })           
     }
 
-    eliminarDiagnostico =async e =>{
-        const dato = e.idUsuario;
-        await Axios.post('http://localhost:5000/Administrador/Diagnostico', {id:dato})
-        .then(res =>{
-            if(res.data.affectedRows > 0){
-                alert("Eliminacion exitosa");
-                window.location.href = "/Administrador/Diagnosticos"
-            }
-        })       
+    revisarEmprendedor = async e =>{
+        cookies.set("idEmprendedor" , e.idUsuario);
+        window.location.href = "/Mentor/Emprendedor";             
     }
 
     render() { 
@@ -44,15 +41,10 @@ export default class TablaMBuscar extends Component {
             header: "Acciones",
             td: (data) => {
               return <div>              
-                <Link className= "buttonTable btn btn-primary" onClick={() => cookies.set("idEmprendedor", data.Cedula)} to={{pathname: "/Administrador/Diagnostico", id: data.Emprendedor }}>{this.props.textoBoton}</Link>                
                 <Button className= "buttonTableO" class="btn btn-outline-primary" 
-                onClick={() =>{ 
-                  if(window.confirm("Esta seguro que desea eliminar el diagnostico?")){
-                    this.eliminarDiagnostico({idUsuario: data.Cedula})
-                  }
-                  }
-                }>
-                    Eliminar</Button>
+                onClick={() =>{this.revisarEmprendedor({idUsuario: data.Cedula})}}>
+                    Consultar
+                </Button>
               </div>
             }
         }]

@@ -4,46 +4,205 @@ import './TabEmprendedor.css';
 import TablaTarea from './TablaTareas/TablaTareas'
 import TablaConsultoria from './TablaConsultorias/TablaConsultorias'
 import Info from './DiagnosticoConsultaTab/DiagnosticoConsultaTab';
+import Cookies from 'universal-cookie';
+import Axios from 'axios';
+import { Link } from 'react-router-dom';
 
-
+const cookies = new Cookies();
 class TabEmprendedor extends Component {
-	constructor(props, context) {
-		super(props, context);
+	constructor(props) {
+		super(props);
 		this.state = {
-			key: 'ruta',
+            key: 'ruta',
+            ruta: {
+                sonar: {
+                    progress:0,
+                    color: ""
+                },
+                pensar: {
+                    progress:0,
+                    color: ""
+                },
+                testear: {
+                    progress:0,
+                    color: ""
+                },
+                arrancar: {
+                    progress:0,
+                    color: ""
+                }
+            }
 		};
+    }    
+
+    async componentDidMount(){
+        console.log(cookies.get("idEmprendedor"));
+        await Axios.get("http://localhost:5000/Emprendedor/Etapa",{
+            params:{
+                idEmp: cookies.get("idEmprendedor")
+            }
+        })
+        .then(res =>{
+            console.log(res.data.length);
+            if(res.data.length>0){
+                const resultado = res.data[0].idEtapaRuta
+                switch (resultado) {
+                    case 1:
+                        this.setState({ruta:{
+                            sonar: {
+                                progress:25,
+                                color: "bg-green"
+                            },
+                            pensar: {
+                                progress:0,
+                                color: ""
+                            },
+                            testear: {
+                                progress:0,
+                                color: ""
+                            },
+                            arrancar: {
+                                progress:0,
+                                color: ""
+                            }
+                        }});
+                        break;
+
+                        case 2:
+                        this.setState({ruta:{
+                            sonar: {
+                                progress:25,
+                                color: "bg-green"
+                            },
+                            pensar: {
+                                progress:25,
+                                color: "bg-green"
+                            },
+                            testear: {
+                                progress:0,
+                                color: ""
+                            },
+                            arrancar: {
+                                progress:0,
+                                color: ""
+                            }
+                        }});
+                        break;
+
+                        case 3:
+                        this.setState({ruta:{
+                            sonar: {
+                                progress:25,
+                                color: "bg-green"
+                            },
+                            pensar: {
+                                progress:25,
+                                color: "bg-green"
+                            },
+                            testear: {
+                                progress:25,
+                                color: "bg-green"
+                            },
+                            arrancar: {
+                                progress:0,
+                                color: ""
+                            }
+                        }});
+                        break;
+
+                        case 4:
+                        this.setState({ruta:{
+                            sonar: {
+                                progress:25,
+                                color: "bg-green"
+                            },
+                            pensar: {
+                                progress:25,
+                                color: "bg-green"
+                            },
+                            testear: {
+                                progress:25,
+                                color: "bg-green"
+                            },
+                            arrancar: {
+                                progress:25,
+                                color: "bg-green"
+                            }
+                        }});
+                        break;
+                
+                    default:
+                        this.setState({ruta:{
+                            sonar: {
+                                progress:0,
+                                color: ""
+                            },
+                            pensar: {
+                                progress:0,
+                                color: ""
+                            },
+                            testear: {
+                                progress:0,
+                                color: ""
+                            },
+                            arrancar: {
+                                progress:0,
+                                color: ""
+                            }
+                        }});
+                        break;
+                }
+            }
+        })
+
     }
-    
+
+    HandleChange(e){
+        this.setState({[e.target.name]: e.target.value});
+    }
+
     Progress(){
+
         return <div>
             <div className="d-flex justify-content-around mb-1">
                 <div>
                     <div className="mr-auto ml-auto">Soñar</div>
-                    <div className="circulo bg-green"><span>1</span></div>
+                    <div className={"circulo " + this.state.ruta.sonar.color}><span>1</span></div>
                 </div>
                 <div>
                     <div className="mr-auto ml-auto">Pensar</div>
-                    <div className="circulo"><span>2</span></div>
+                    <div className={"circulo " + this.state.ruta.pensar.color}><span>2</span></div>
                 </div>
                 <div>
                     <div className="mr-auto ml-auto">Probar</div>
-                    <div className="circulo"><span>3</span></div>
+                    <div className={"circulo " + this.state.ruta.testear.color}><span>3</span></div>
                 </div>
                 <div>
                     <div className="mr-auto ml-auto">Arrancar</div>
-                    <div className="circulo"><span>4</span></div>
+                    <div className={"circulo " + this.state.ruta.arrancar.color}><span>4</span></div>
                 </div>                
             </div>
 
             <ProgressBar>
-                <ProgressBar variant="success" now={5} max='25'key={1} />
-                <ProgressBar variant="warning" now={0} max='25'key={2} />
-                <ProgressBar variant="danger" now={0} max='25' key={3} />
-                <ProgressBar variant="info" now={0} max='25' key={4} />
+                <ProgressBar variant="success" now={this.state.ruta.sonar.progress} key={1} />
+                <ProgressBar variant="success" now={this.state.ruta.pensar.progress} key={2} />
+                <ProgressBar variant="success" now={this.state.ruta.testear.progress} key={3} />
+                <ProgressBar variant="success" now={this.state.ruta.arrancar.progress} key={4} />
             </ProgressBar>
 
         </div>
         
+    }
+
+    asignarRuta = e =>{
+        e.preventDefault();
+        Axios.put("http://localhost:5000/Etapas",{
+            etapa: this.state.etapa,
+            idEmp: cookies.get("idEmprendedor")
+        })
+        .then(res =>{
+            window.location.href = "/Mentor/Emprendedor"
+        })
     }
 
 	render() {
@@ -64,7 +223,7 @@ class TabEmprendedor extends Component {
                     <div>
                     <label className="etapalabel">Elige una etapa</label>
 
-                    <select name="etapa" className="inputDiagMC" type= "text">
+                    <select name="etapa" className="inputDiagMC" type= "text" onChange={(e)=> this.HandleChange(e)}>
                         <option className="inputDiag" value="-1" disabled selected>Seleccione una...</option>
                         <option className="inputDiag" value="1">Soñar</option> 
                         <option className="inputDiag" value="2">Pensar</option> 
@@ -75,7 +234,14 @@ class TabEmprendedor extends Component {
                     </div>                
                  
                         <div>
-                        <Button  variant="primary" className="buttonMC">Asignar</Button>
+                        <Button variant="primary" className="buttonMC"
+                        onClick={(e) =>{ 
+                            if(window.confirm("Esta seguro que desea actualizar la ruta del emprendedor?")){
+                              this.asignarRuta(e)
+                            }
+                            }
+                          }
+                          >Asignar</Button>
                         </div> 
                 </div>
                 </div>               
@@ -83,22 +249,25 @@ class TabEmprendedor extends Component {
 				</Tab>
 				<Tab eventKey="tareas" title="Tareas">
 
-                            <div className="buttonTab">
-                             <Button  variant="primary" className="buttonMC">Crear tarea</Button>
-                            </div> 
+                    <div className="buttonTab">
+                        <Link className="buttonMC btn btn-primary" 
+                            to="/Mentor/Emprendedor/CrearTarea"
+                        >Crear tarea</Link>
+                    </div> 
 
-                            <div >
-                            <br></br>
-                            </div>  
-                            <div className="">
-                              <TablaTarea></TablaTarea>
-                            </div> 
-
+                    <div >
+                    <br></br>
+                    </div>  
+                    <div className="">
+                        <TablaTarea title="Tareas"></TablaTarea>
+                    </div>
 				</Tab>
 				<Tab eventKey="consultorias" title="Consultorias" >
 
                             <div className="buttonTab">
-                             <Button  variant="primary" className="buttonMC">Crear consultoria</Button>
+                             <Link className="buttonMC btn btn-primary"
+                                to="Emprendedor/CrearConsultoria"
+                             >Crear consultoria</Link>
                             </div> 
                             <div className="">
                               <TablaConsultoria></TablaConsultoria>
