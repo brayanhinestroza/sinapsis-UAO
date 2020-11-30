@@ -87,7 +87,7 @@ render() {
                     <option className="inputDiagDC" value="-1" disabled selected>Seleccione uno...</option>
                     {                        
                         this.state.mentores.map(v => (
-                        <option className="inputDiagDC" value={v.cedula}>{v.nombre}</option>))
+                        <option className="inputDiagDC" value={v.cedula}>{v.nombreCompleto}</option>))
                     }
                 </select> 
             </div>

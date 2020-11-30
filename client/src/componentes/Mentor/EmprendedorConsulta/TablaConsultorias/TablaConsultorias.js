@@ -21,6 +21,7 @@ export default class Tabla extends Component {
     async componentDidMount(){        
         await Axios.get("http://localhost:5000/Administrador/Diagnosticos")
         .then(res =>{
+            console.log(res);
             if(res.data.length>0){
                 this.setState({datos:res.data, loading:false});
             }

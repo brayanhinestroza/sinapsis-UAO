@@ -28,7 +28,7 @@ CREATE TABLE `administrador` (
   PRIMARY KEY (`idadministrador`),
   KEY `fk_cedulaAd_idx` (`cedula`),
   CONSTRAINT `fk_cedulaAd` FOREIGN KEY (`cedula`) REFERENCES `usuarios` (`cedula`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,7 +37,11 @@ CREATE TABLE `administrador` (
 
 LOCK TABLES `administrador` WRITE;
 /*!40000 ALTER TABLE `administrador` DISABLE KEYS */;
+<<<<<<< Updated upstream
 INSERT INTO `administrador` VALUES (6,'1'),(7,'9'),(8,'99999'),(9,'999999');
+=======
+INSERT INTO `administrador` VALUES (12,'99999');
+>>>>>>> Stashed changes
 /*!40000 ALTER TABLE `administrador` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -82,18 +86,20 @@ DROP TABLE IF EXISTS `diagnostico`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `diagnostico` (
   `iddiagnostico` int NOT NULL AUTO_INCREMENT,
-  `nombreIniciativa` varchar(300) DEFAULT NULL,
-  `idea` varchar(300) DEFAULT NULL,
-  `necesidad` varchar(300) DEFAULT NULL,
-  `cliente` varchar(300) DEFAULT NULL,
-  `desValidaciones` varchar(300) DEFAULT NULL,
-  `instrumentoValidacion` varchar(45) DEFAULT NULL,
-  `tipoEmprendimiento` varchar(45) DEFAULT NULL,
-  `tipoEconomia` varchar(45) DEFAULT NULL,
-  `idEmpDiag` varchar(15) DEFAULT NULL,
+  `nombreIniciativa` varchar(100) DEFAULT NULL,
+  `idea` varchar(500) DEFAULT NULL,
+  `necesidad` varchar(500) DEFAULT NULL,
+  `cliente` varchar(500) DEFAULT NULL,
+  `desValidaciones` varchar(500) DEFAULT NULL,
+  `instrumentoValidacion` varchar(300) DEFAULT NULL,
+  `tipoEmprendimiento` varchar(20) DEFAULT NULL,
+  `tipoEconomia` varchar(20) DEFAULT NULL,
+  `idEmpDiag` varchar(45) NOT NULL,
   `revisado` int DEFAULT '0',
   `archivoDiagnostico` blob,
+  `vinculoConU` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`iddiagnostico`),
+  UNIQUE KEY `idEmpDiag_UNIQUE` (`idEmpDiag`),
   KEY `fk_cedula_idx` (`idEmpDiag`),
   KEY `fk_cedula_10245` (`idEmpDiag`),
   CONSTRAINT `fk_cedula_10245` FOREIGN KEY (`idEmpDiag`) REFERENCES `emprendedor` (`cedula`)
@@ -106,7 +112,10 @@ CREATE TABLE `diagnostico` (
 
 LOCK TABLES `diagnostico` WRITE;
 /*!40000 ALTER TABLE `diagnostico` DISABLE KEYS */;
+<<<<<<< Updated upstream
 INSERT INTO `diagnostico` VALUES (23,'Prueba','123','1231121','32131231','sadasdas','dasdasdasdasd','Dinamico','Digital','1005943951',0,NULL),(24,'Lorem ipsum dolor sit ame','Lorem ipsum dolor sit ame','Lorem ipsum dolor sit ame','Lorem ipsum dolor sit ame','Lorem ipsum dolor sit ame','Lorem ipsum dolor sit ame','Alto Impacto','Creativo y Cultural','123123123',1,NULL),(25,'Lorem ipsum dolor sit ame','Lorem ipsum dolor sit ame','Lorem ipsum dolor sit ame','Lorem ipsum dolor sit ame','Lorem ipsum dolor sit ame','Lorem ipsum dolor sit ame','Dinamico','Digital','567890',1,NULL);
+=======
+>>>>>>> Stashed changes
 /*!40000 ALTER TABLE `diagnostico` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -128,7 +137,11 @@ CREATE TABLE `emprendedor` (
   PRIMARY KEY (`idemprendedor`),
   KEY `fk_cedulaEm_idx` (`cedula`),
   CONSTRAINT `fk_cedulaEm` FOREIGN KEY (`cedula`) REFERENCES `usuarios` (`cedula`)
+<<<<<<< Updated upstream
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+=======
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+>>>>>>> Stashed changes
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -137,7 +150,11 @@ CREATE TABLE `emprendedor` (
 
 LOCK TABLES `emprendedor` WRITE;
 /*!40000 ALTER TABLE `emprendedor` DISABLE KEYS */;
+<<<<<<< Updated upstream
 INSERT INTO `emprendedor` VALUES (6,'1005943951','2020-11-13','Prueba','Prueba','Masculino','Ingeniera Ambiental'),(7,'123','2020-11-06','301255469831','Calle 1a2','Masculino','Ingenieria Multimedia'),(8,'1234','2020-10-29','301233454698','Calle 12a','Otro','Ingenieria Multimedia'),(16,'9090',NULL,NULL,NULL,NULL,NULL),(18,'123123123','2020-11-20','3125652342','Lorem ipsum dolor ','Femenino','Ingeniera Ambiental'),(19,'567890','2020-12-04','3125652342','Lorem ipsum dolor sit ame','Femenino','Ingeniera Ambiental'),(20,'54321',NULL,NULL,NULL,NULL,NULL);
+=======
+INSERT INTO `emprendedor` VALUES (22,'77777','2020-10-26','12345','Prueba','Masculino','Ingenieria Multimedia','Prueba'),(23,'777777',NULL,NULL,NULL,NULL,NULL,NULL),(24,'7777777',NULL,NULL,NULL,NULL,NULL,NULL),(25,'77777777',NULL,NULL,NULL,NULL,NULL,NULL),(26,'777777777',NULL,NULL,NULL,NULL,NULL,NULL);
+>>>>>>> Stashed changes
 /*!40000 ALTER TABLE `emprendedor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -161,7 +178,10 @@ CREATE TABLE `etapa` (
 
 LOCK TABLES `etapa` WRITE;
 /*!40000 ALTER TABLE `etapa` DISABLE KEYS */;
+<<<<<<< Updated upstream
 INSERT INTO `etapa` VALUES (1,'Soñar'),(2,'Pensar'),(3,'Testear'),(4,'Arrancar');
+=======
+>>>>>>> Stashed changes
 /*!40000 ALTER TABLE `etapa` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -179,7 +199,11 @@ CREATE TABLE `mentor` (
   PRIMARY KEY (`idmentor`),
   KEY `fk_cedulaMe_idx` (`cedula`),
   CONSTRAINT `fk_cedulaMe` FOREIGN KEY (`cedula`) REFERENCES `usuarios` (`cedula`)
+<<<<<<< Updated upstream
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+=======
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+>>>>>>> Stashed changes
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -188,7 +212,11 @@ CREATE TABLE `mentor` (
 
 LOCK TABLES `mentor` WRITE;
 /*!40000 ALTER TABLE `mentor` DISABLE KEYS */;
+<<<<<<< Updated upstream
 INSERT INTO `mentor` VALUES (4,'9999','Juan Esteban'),(6,'123456','Camilo');
+=======
+INSERT INTO `mentor` VALUES (8,'88888',NULL);
+>>>>>>> Stashed changes
 /*!40000 ALTER TABLE `mentor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -245,7 +273,10 @@ CREATE TABLE `mentor_principal` (
 
 LOCK TABLES `mentor_principal` WRITE;
 /*!40000 ALTER TABLE `mentor_principal` DISABLE KEYS */;
+<<<<<<< Updated upstream
 INSERT INTO `mentor_principal` VALUES (4,'9999','1005943951'),(5,'9999','123'),(6,'9999','1005943951'),(7,'9999','1005943951'),(8,'9999','1005943951'),(9,'9999','1005943951'),(10,'9999','1005943951'),(12,'9999','1005943951'),(13,'9999','123123123'),(14,'9999','567890');
+=======
+>>>>>>> Stashed changes
 /*!40000 ALTER TABLE `mentor_principal` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -273,7 +304,10 @@ CREATE TABLE `ruta` (
 
 LOCK TABLES `ruta` WRITE;
 /*!40000 ALTER TABLE `ruta` DISABLE KEYS */;
+<<<<<<< Updated upstream
 INSERT INTO `ruta` VALUES (1,1005943951,1),(2,1005943951,1),(3,123,2),(4,1005943951,1),(5,1005943951,1),(6,1005943951,1),(7,1005943951,1),(8,1005943951,1),(14,1005943951,1),(16,16,1),(17,123123123,2),(18,567890,3);
+=======
+>>>>>>> Stashed changes
 /*!40000 ALTER TABLE `ruta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -340,7 +374,11 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
+<<<<<<< Updated upstream
 INSERT INTO `usuarios` VALUES ('1','admin','admin','202cb962ac59075b964b07152d234b70','Administrador',1),('1005943951','Brayan','brayan.hinestroza@uao.edu.co','202cb962ac59075b964b07152d234b70','Emprendedor',1),('123','Juan','juan@uao.edu.co','81dc9bdb52d04dc20036dbd8313ed055','Emprendedor',1),('123123123','Epson Cortes','epson@gmail.com','25d55ad283aa400af464c76d713c07ad','Emprendedor',0),('1234','Daniel','Daniel@uao.edu.co','202cb962ac59075b964b07152d234b70','Emprendedor',1),('123456','Mentor','mentor@gmail.com','202cb962ac59075b964b07152d234b70','Mentor',0),('54321','luis','sebas@gmail.com','827ccb0eea8a706c4c34a16891f84e7b','Emprendedor',0),('567890','Daniel Hoyos','daniel@gmail.com','25d55ad283aa400af464c76d713c07ad','Emprendedor',0),('9','Prueba','Prueba','202cb962ac59075b964b07152d234b70','Administrador',1),('9090','Sinis',NULL,NULL,NULL,NULL),('9999','Juan Esteban','juan@uao.edu.co','202cb962ac59075b964b07152d234b70','Mentor',0),('99999','Administrador','admind@gmail.com','12345678','administrador',1),('999999','Admin','admin2@gmail.com','25d55ad283aa400af464c76d713c07ad','Administrador',1);
+=======
+INSERT INTO `usuarios` VALUES ('77777','Emprendedor','emprnededor@uao.edu.co','81dc9bdb52d04dc20036dbd8313ed055','Emprendedor',0),('777777','Daniel Hoyos','Daniel_hoyos@uao.edu.co','81dc9bdb52d04dc20036dbd8313ed055','Emprendedor',1),('7777777','Juan Esteban','Juan_Esteban@uao.edu.co','81dc9bdb52d04dc20036dbd8313ed055','Emprendedor',1),('77777777','Juan Sebastian','Juan_Sebastian@uao.edu.co','81dc9bdb52d04dc20036dbd8313ed055','Emprendedor',0),('777777777','Brayan Hinestroza','Brayan_Hinestroza@uao.edu.co','81dc9bdb52d04dc20036dbd8313ed055','Emprendedor',0),('88888','Mentor','mentor@uao.edu.co','81dc9bdb52d04dc20036dbd8313ed055','Mentor',0),('99999','Admin','admin@uao.edu.co','81dc9bdb52d04dc20036dbd8313ed055','Administrador',1);
+>>>>>>> Stashed changes
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -353,4 +391,8 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
+<<<<<<< Updated upstream
 -- Dump completed on 2020-11-27 20:16:42
+=======
+-- Dump completed on 2020-11-30  9:29:53
+>>>>>>> Stashed changes
