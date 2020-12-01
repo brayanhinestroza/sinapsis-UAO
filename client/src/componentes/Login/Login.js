@@ -7,6 +7,8 @@ import md5 from 'md5';
 import img from '../../Imagenes/img.png';
 import logo from '../../Imagenes/sinapsis.png';
 import './Login.css'
+import VCon from '../Modals/VerConsultoria/VerConsultoria'
+import VerConsultoria from '../Modals/VerConsultoria/VerConsultoria';
 
 const cookie = new Cookies();
 const validaciones = valores =>{
@@ -104,8 +106,11 @@ class Login extends React.Component {
   CardLogin()
   {
     const {errors} = this.state
-    return(
+    return(        
+
         <div className="homeL">
+
+            <VerConsultoria></VerConsultoria>
             <form onSubmit={this.handleSubmit} className="CardLoginL">
             <Image className= "imagelogoL" src={logo}/>   
             <h3 className="tituloL">Inicia sesión en Sinapsis UAO</h3>

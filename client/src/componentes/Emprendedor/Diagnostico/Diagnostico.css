@@ -12,7 +12,7 @@
 .contenedorDiag 
 {
   width: 116rem;
-  height: 55rem;
+  height: 70rem;
   margin-left: 2rem;
   margin-top: 2rem;
   box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.16);
@@ -118,4 +118,8 @@
   border-color: #5a2e66;
 }
 
+.input-fileD
+{
+    border: none;
+}
 
