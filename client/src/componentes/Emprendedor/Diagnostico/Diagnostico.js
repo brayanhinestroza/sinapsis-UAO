@@ -295,6 +295,16 @@ class Diagnostico extends Component {
                 </select> 
                 {errors.tipoEconomia && <small class="form-text font-weight-bold text-danger">{errors.tipoEconomia}</small>}
               </div>
+              <div>
+              <br></br>
+                <h5 className="">Descarga el formato del autodiagnóstico, digiléncialo y súbelo</h5>
+                <br></br>
+                <h6>
+                  Sube tu autodiagnóstico:
+                  <input className="input-fileD" type="file"  />
+                </h6>
+                
+              </div>
 
               <div>
                 <Button className= "buttonDiag" variant="primary" 

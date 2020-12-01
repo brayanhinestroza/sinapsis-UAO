@@ -8,6 +8,7 @@ import '../Navegacion/Navegacion';
 import '../../Navbar/Navbar.css';
 import './EmprendedorConsulta.css';
 
+
 const cookies = new Cookies()
 class EmprendedorConsulta extends Component {
   state = {
@@ -28,9 +29,10 @@ class EmprendedorConsulta extends Component {
         return (
           this.state.loading ? <></>
           :
-        <div>
+        <div>           
             <Navbar></Navbar>
             <Navegacion></Navegacion> 
+           
         <div> 
           <div className="titulopaginaMC">
         <h3>Emprendedores/ {this.state.emprendedor}</h3>

@@ -90,38 +90,45 @@ class TareaModal extends Component {
             this.state.loading ? <></>
             :
             <div>
-                <Modal show={true} onHide={this.handleClose} >
+                <Modal  show={true} onHide={this.handleClose} >
                     <ModalHeader>
                         <ModalTitle>Crear tarea</ModalTitle>
                     </ModalHeader>
-                    <ModalBody>
+                    <ModalBody className="crear-tarea">
                         <form enctype="multipart/form-data">
                         <div>
-                            <input name="nombreT" className="inputR" placeholder="Nombre tarea" type= "text" onChange={this.handleChange}></input> 
+                            <input name="nombreT" className="input-tarea" placeholder="Nombre tarea" type= "text" onChange={this.handleChange}></input> 
                                 {errors.nombreT && <small class="form-text font-weight-bold text-danger">{errors.nombreT}</small>}
                             </div>
                             <br></br>
                             <div>
-                                <input name="desT" className="inputR" placeholder="Descripción" type= "text" onChange={this.handleChange}></input> 
+                                <textarea name="desT" className="des-tarea" placeholder="Descripción" type= "text" onChange={this.handleChange}></textarea> 
                                 {errors.desT && <small class="form-text font-weight-bold text-danger">{errors.desT}</small>}
                             </div>
+                            
+                           
+                            <div>
                             <br></br>
-                            <label>Etapa de la tarea</label><br/>
-                            <select name="etapa" className="inputDiag" type= "text" onChange={this.handleChange}>
-                                <option className="inputDiag" value="-1" disabled selected>Seleccione una...</option>
+                            <label className="crearTa-label">Etapa de la tarea</label><br/>
+                            <select name="etapa" className="input-tarea" type= "text" onChange={this.handleChange}>
+                                <option className="input-tarea" value="-1" disabled selected>Seleccione una etapa</option>
                                 {                       
                                     this.state.etapas.map(v => (
                                     <option className="inputDiagDC" value={v.idetapa}>{v.etapa}</option>))
                                 } 
                             </select>
                             {errors.etapa && <small class="form-text font-weight-bold text-danger">{errors.etapa}</small>}
-                        <br></br>
+                            </div>
+                          
+                      
                             <div>
-                                <label>Fecha de Tarea</label><br/>
-                                <input name="fechaTarea" className="inputDiag" placeholder="Fecha de entrega" type="datetime-local" onChange={this.handleChange}></input> 
+                            <br></br>
+                                <label className="crearTa-label">Fecha de entrega</label><br/>
+                                <input name="fechaTarea" className="input-tarea" placeholder="Fecha de entrega" type="datetime-local" onChange={this.handleChange}></input> 
                                 {errors.fechaTarea && <small class="form-text font-weight-bold text-danger">{errors.fechaTarea}</small>}
                             </div>
                             <div>
+                            <br></br>
                                 <h6>Adjunta un archivo</h6>
                                 <input name="file" className= "modalT" type="file" onChange={this.onFileChange}/>                            
                             </div>

@@ -76,7 +76,7 @@ class ConsultoriaModal extends Component {
                     <ModalHeader>
                         <ModalTitle>Crear Consultoria</ModalTitle>
                     </ModalHeader>
-                    <ModalBody>
+                    <ModalBody className="consul-body">
                         <div>
                             <input name="titulo" className="inputR" placeholder="Titulo" type= "text" onChange={this.handleChange}></input> 
                             {errors.titulo && <small class="form-text font-weight-bold text-danger">{errors.titulo}</small>}

@@ -12,19 +12,35 @@ function TareaModal() {
                 <ModalHeader>
                     <ModalTitle>Tarea Nombre</ModalTitle>
                 </ModalHeader>
-                <ModalBody>
+                <ModalBody className="VerTarBody">
+                    
                     <div>
-                    Descripcion lorem ipsidsdsfdfdfds
-                    fdfdsfdsfdsfsdfdsfdsfdffdfdsfsdfdsfdsfdsf
-                    fdfsdfsdfdsfsdfdsfdsfdsfsfsdfdsfdsfdfdfs
+                    <label className="crearTa-label">Descripción</label><br/>  
+                     <textarea name="desT" className="des-tarea" placeholder="Descripción" type= "text" ></textarea>                                 
                     </div>
-                    <br></br>
-                    <br></br>
+                    
                     <div>
-                    <h6>Adjunta tu tarea</h6>
-                    <input className= "modalT" type="file" />
+                                     
+                      <h6>Archivo de la tarea</h6>  
+                      <div>aqui va el archivo</div>
+                    </div>
+                    
+
+                    
+                    <div>
+                    <br></br>
+                    <h6 className= "fileT-label">Sube tu tarea</h6>
+                    <input className= "fileT" type="file" />
 
                     </div>
+
+                    <div>
+                    <br></br>
+                    <h6>Retroalimentación (cuando sea revisada)</h6>
+                    <label className="crearTa-label">Comentarios </label><br/>  
+                     <textarea name="desT" className="des-tarea" placeholder="No hay comentarios" type= "text" ></textarea>  
+                    </div>
+
                 </ModalBody>
                 <ModalFooter>
                  <Button className= "buttonTable" class="btn btn-outline-primary" 

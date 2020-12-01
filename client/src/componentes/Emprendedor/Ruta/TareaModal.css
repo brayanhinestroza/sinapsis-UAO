@@ -1,4 +1,20 @@
-.modalT
+.fileT
 {
     border: none;
+    margin-left: -4rem ;
+}
+
+.fileT-label
+{
+    border: none;
+    margin-left: -3.5rem ;
+}
+
+
+.VerTarBody
+{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
 }
