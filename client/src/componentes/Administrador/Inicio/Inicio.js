@@ -7,12 +7,15 @@ import '../Navegacion/Navegacion';
 import Navegacion from '../Navegacion/Navegacion';
 import '../../Navbar/Navbar.css'
 
+
 class Inicio extends Component {
     render(){
         return (            
             <div>
+                
                 <div>
                     <Navbar></Navbar>
+                    
                 </div>       
                 <div>
                     <Navegacion></Navegacion>

@@ -18,11 +18,13 @@ import EmprendedoresMTR  from './componentes/Mentor/EmprendedorBuscar/Emprendedo
 import EmprendedorMTR  from './componentes/Mentor/EmprendedorConsulta/EmprendedorConsulta'
 import CrearTarea from './componentes/Mentor/Tarea/TareaModal'
 import CrearConsultoria from './componentes/Mentor/Consultoria/ConsultoriaModal'
+import prueba12 from './componentes/Administrador/EmprendedorConsulta/EmprendedorConsulta'
 
 
 function App() {
   return (
     <Router>
+      <Route exact path='/prueba' component={prueba12} /> 
       <Route exact path='/Mentor' component={Mentor} /> 
       <Route exact path='/Mentor/Emprendedores' component={EmprendedoresMTR} />
       <Route path='/Mentor/Emprendedor' component={EmprendedorMTR} />

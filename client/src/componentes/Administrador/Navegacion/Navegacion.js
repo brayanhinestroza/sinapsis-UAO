@@ -21,6 +21,9 @@ function Navegacion() {
                         <li className="nav-item">
                              <Link class="nav-link" to="/Administrador/Diagnosticos">DIAGNÓSTICOS</Link>
                         </li>
+                        <li className="nav-item">
+                             <Link class="nav-link" to="/Administrador/Diagnosticos">EMPRENDEDORES</Link>
+                        </li>
                     </ul>
                 </div>
             </div>
