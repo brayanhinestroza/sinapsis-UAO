@@ -2,40 +2,32 @@ const administrador = {};
 const Administrador = require('../models/Administrador.model')
 
 
-administrador.getCuentas = async (req , res) => {
-    const resultado = await Administrador.getCuentasPorActivar(req, res);
-    console.log(resultado);
-    res.json(resultado)        
+administrador.getCuentasActivar = (req , res) => {
+    Administrador.getCuentasActivar(req, res);      
 }
 
-administrador.deleteCuenta = async (req,res) =>{
-    await Administrador.deleteCuenta(req,res);
+administrador.deleteCuenta = (req,res) =>{
+    Administrador.deleteCuenta(req,res);
 }
 
-administrador.getDiagnosticos = async(req,res) => {
-    const resultado = await Administrador.getDiagnosticos(req, res);
-    console.log(resultado);
-    res.json(resultado) 
+administrador.getDiagnosticos = (req,res) => {
+    Administrador.getDiagnosticos(req, res); 
 }
 
-administrador.getDiagnostico = async(req,res) => {
-    const resultado = await Administrador.getDiagnostico(req, res);
-    console.log(resultado);
-    res.json(resultado) 
+administrador.getDiagnostico = (req,res) => {
+    Administrador.getDiagnostico(req, res);
 }
 
-administrador.deleteDiagnostico = async(req,res) =>{
-    await Administrador.deleteDiagnostico(req,res);    
+administrador.deleteDiagnostico = (req,res) =>{
+    Administrador.deleteDiagnostico(req,res);    
 }
 
-administrador.updateEstado = async(req,res) => {
-    const resultado = await Administrador.updateEstado(req, res);
-    console.log(resultado);
-    res.json(resultado)   
+administrador.activarCuenta = (req,res) => {
+    Administrador.activarCuenta(req, res);
 }
 
-administrador.postRuta = async(req,res) => {
-    await Administrador.postRuta(req, res); 
+administrador.postRuta = (req,res) => {
+    Administrador.postRuta(req, res); 
 }
 
 module.exports = administrador;

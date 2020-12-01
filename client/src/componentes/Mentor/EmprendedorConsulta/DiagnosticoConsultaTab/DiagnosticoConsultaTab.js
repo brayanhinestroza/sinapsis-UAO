@@ -1,21 +1,15 @@
 import React, { Component } from 'react'
-
 import './DiagnosticoConsultaTab.css'
 import Axios from 'axios'
-import { Redirect } from 'react-router-dom';
 import Cookies from 'universal-cookie'
 
 const cookies =  new Cookies();
 
-
 class DiagnosticoConsultaTab extends Component {
 
-  constructor(props){
-    super(props);
-    this.state = {
-      loading: true,
-      datos: null,
-    }    
+  state = {
+    loading: true,
+    datos: null,
   }  
 
   componentDidMount(){
@@ -26,7 +20,6 @@ class DiagnosticoConsultaTab extends Component {
       }
     })
     .then(res =>{
-      console.log(res);
       this.setState({datos:res.data[0], loading:false});
     });
   }
@@ -96,7 +89,7 @@ class DiagnosticoConsultaTab extends Component {
                   <div>
                     <label className="nombreInputDCT">Vinculo con la universidad</label>
                     <br></br>
-                    <label className="inputDiagDCT" type= "text" disabled></label> 
+                    <label className="inputDiagDCT" type= "text" disabled>{this.state.datos.vinculoConU}</label> 
                   </div>
 
                   <div>

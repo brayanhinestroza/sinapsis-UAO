@@ -1,11 +1,9 @@
 import React from 'react'
-import Modal from "react-bootstrap/Modal";
-import ModalBody from "react-bootstrap/ModalBody";
+import { Link } from 'react-router-dom';
 import ModalHeader from "react-bootstrap/ModalHeader";
-import ModalFooter from "react-bootstrap/ModalFooter";
-import ModalTitle from "react-bootstrap/ModalTitle";
-import { Card, Button } from 'react-bootstrap'
+import { Modal, ModalBody, ModalFooter,ModalTitle, Button } from 'react-bootstrap'
 import './TareaModal.css'
+
 
 function TareaModal() {
     return (
@@ -27,22 +25,15 @@ function TareaModal() {
                     <input className= "modalT" type="file" />
 
                     </div>
-                    
-
-                   
-                  
                 </ModalBody>
-
                 <ModalFooter>
                  <Button className= "buttonTable" class="btn btn-outline-primary" 
                     >Entregar</Button>
 
-                    <Button className= "buttonTableO" class="btn btn-outline-primary" 
-                    >Cancelar</Button> 
+                    <Link className= "buttonTableO btn btn-outline-primary" 
+                    to="/Emprendedor/Ruta">Cancelar</Link> 
                 </ModalFooter>
-
                 </Modal>
-
         </div>
     )
 }

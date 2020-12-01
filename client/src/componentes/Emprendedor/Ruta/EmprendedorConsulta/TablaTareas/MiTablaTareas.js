@@ -1,41 +1,31 @@
 import React, { Component } from 'react'
-import { Card, Button } from 'react-bootstrap'
+import { Card } from 'react-bootstrap'
 import Axios from 'axios'
 import Table from 'react-flexy-table'
-import "react-flexy-table/dist/index.css"
 import "./MiTablaTareas.css"
-import { Link } from 'react-router-dom'
 import Cookies from 'universal-cookie'
+import { Link } from 'react-router-dom'
 
 const cookies =  new Cookies();
 export default class Tabla extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            datos: null, 
-            loading: true,
-        };        
-    }
+    state = {
+        datos: null, 
+        loading: true,
+    };        
 
-    async componentDidMount(){        
-        await Axios.get("http://localhost:5000/Administrador/Diagnosticos")
+    componentDidMount(){        
+        Axios.get("http://localhost:5000/Emprendedor/Tareas",{
+            params:{
+                idEmprendedor: cookies.get("cedula")
+            }
+        })
         .then(res =>{
+            console.log(res);
             if(res.data.length>0){
                 this.setState({datos:res.data, loading:false});
             }
         })           
-    }
-
-    eliminarDiagnostico =async e =>{
-        const dato = e.idUsuario;
-        await Axios.post('http://localhost:5000/Administrador/Diagnostico', {id:dato})
-        .then(res =>{
-            if(res.data.affectedRows > 0){
-                alert("Eliminacion exitosa");
-                window.location.href = "/Administrador/Diagnosticos"
-            }
-        })       
     }
 
     render() { 
@@ -44,21 +34,24 @@ export default class Tabla extends Component {
             header: "Acciones",
             td: (data) => {
               return <div>              
-                <Link className= "buttonTable btn btn-primary" onClick={() => cookies.set("idEmprendedor", data.Cedula)} to={{pathname: "/Administrador/Diagnostico", id: data.Emprendedor }}>{this.props.textoBoton}</Link>                
-                <Button className= "buttonTableO" class="btn btn-outline-primary" 
-                onClick={() =>{ 
-                  if(window.confirm("Esta seguro que desea eliminar el diagnostico?")){
-                    this.eliminarDiagnostico({idUsuario: data.Cedula})
+                <Link className= "buttonTableO btn btn-primary" 
+                onClick={() =>{    
+                    cookies.set("idTarea", data.N);                              
                   }
-                  }
-                }>
-                    Eliminar</Button>
+                }
+                to="/Emprendedor/Ruta/Tarea">
+                    Entregar</Link>
               </div>
             }
         }]
 
         return (
-        this.state.loading ? <div>Cargando datos</div> :         
+        this.state.loading ? 
+        <div>
+            <Card.Body className="cardT">
+                <h3 className="text-center">No hay datos para mostrar</h3>
+            </Card.Body>
+        </div> :         
         <div className="ContenedorT">
             <div className="cardT" >
                 <Card.Body className="cardT">

@@ -2,23 +2,23 @@ import React, { Component } from 'react'
 import { Card, Button } from 'react-bootstrap'
 import Axios from 'axios'
 import Table from 'react-flexy-table'
-import "react-flexy-table/dist/index.css"
 import "./TablaConsultorias.css"
 import Cookies from 'universal-cookie'
 
 const cookies =  new Cookies();
 export default class Tabla extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            datos: null, 
-            loading: true,
-        };        
-    }
+    state = {
+        datos: null, 
+        loading: true,
+    };       
 
-    async componentDidMount(){        
-        await Axios.get("http://localhost:5000/Mentor/Consultoria")
+    componentDidMount(){        
+        Axios.get("http://localhost:5000/Mentor/Consultoria",{
+            params:{
+                idEmprendedor: cookies.get("idEmprendedor")
+            }
+        })
         .then(res =>{
             if(res.data.length>0){
                 this.setState({datos:res.data, loading:false});
@@ -48,7 +48,11 @@ export default class Tabla extends Component {
         }]
 
         return (
-        this.state.loading ? <div>Cargando datos</div> :         
+        this.state.loading ? <div>
+        <Card.Body className="cardT">
+                <h3 className="text-center">No hay datos para mostrar</h3>
+            </Card.Body>
+        </div> :         
         <div className="ContenedorC">
             <div className="cardC" >
                 <Card.Body className="cardC">

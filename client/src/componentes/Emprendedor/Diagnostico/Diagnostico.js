@@ -1,17 +1,17 @@
 import React, {Component} from 'react'
-import Navbar from '../../Navbar/Navbar'
-import './Diagnostico.css'
-import '../../Registro/Registro.css'
 import {Button, Modal} from 'react-bootstrap';
-import Navegacion from '../Navegacion/Navegacion'
 import Axios from 'axios'
 import Cookies from 'universal-cookie';
+import Navbar from '../../Navbar/Navbar'
+import Navegacion from '../Navegacion/Navegacion'
+import './Diagnostico.css'
+import '../../Registro/Registro.css'
 
 const cookie = new Cookies();
 const validaciones = valores =>{
   const errors = {}
   const {celular,ciudad, clienteEmprendimiento, descripcionEmprendimiento, direccion, fechaNacimiento, genero, instrumentosValidacion, 
-    necedidadEmprendimiento, nombreEmprendimiento, programa, tipoEconomia, tipoEmprendimiento, validacionesEmprendimeinto, vinculoConU} = valores
+    necedidadEmprendimiento, nombreEmprendimiento, programa, tipoEconomia, tipoEmprendimiento, validacionesEmprendimiento, vinculoConU} = valores
   if(!fechaNacimiento){
     errors.fechaNacimiento = "Campo Obligatorio"
   }
@@ -50,8 +50,8 @@ const validaciones = valores =>{
   if(!clienteEmprendimiento){
     errors.clienteEmprendimiento = "Campo Obligatorio"
   }
-  if(!validacionesEmprendimeinto){
-    errors.validacionesEmprendimeinto = "Campo Obligatorio"
+  if(!validacionesEmprendimiento){
+    errors.validacionesEmprendimiento = "Campo Obligatorio"
   }
   if(!instrumentosValidacion){
     errors.instrumentosValidacion = "Campo Obligatorio"
@@ -85,23 +85,23 @@ class Diagnostico extends Component {
     });
   }
 
-  handleClick = async e => {
+  handleClick = e => {
     e.preventDefault()
     const {errors, ...SinError} = this.state
     const result = validaciones(SinError);
-    
+    console.log(result);
     if(Object.keys(result).length){
       this.setState({errors: result})
     }
     else{
-      const {errors, ...Datos} = this.state
-      console.log(Datos);
-      await Axios.post("http://localhost:5000/Emprendedor/Diagnostico", Datos)
+      Axios.post("http://localhost:5000/Emprendedor/Diagnostico", SinError)
       .then(res=> {
-        // eslint-disable-next-line
-        if(res.status == 200){
+        if(Object.keys(res.data).length){
+          alert("Diagnostico enviado correctamente");
           window.location.href = "/Emprendedor"
-        }      
+        }else{
+          alert("Ha ocurrido un error");
+        }       
       })
     }
   }
@@ -141,19 +141,19 @@ class Diagnostico extends Component {
               <div>
                 <label className="nombreInput">Nombre completo</label>
                 <br></br>
-                <label name="nombreCompleto" className="inputDiag">{cookie.get("nombreCompleto")}</label> 
+                <label name="nombreCompleto" className="inputDiag" disabled>{cookie.get("nombreCompleto")}</label> 
               </div>
 
               <div>
                 <label className="nombreInput">Cédula</label>
                 <br></br>
-                <label name="cedula" className="inputDiag">{cookie.get("cedula")}</label> 
+                <label name="cedula" className="inputDiag" disabled>{cookie.get("cedula")}</label> 
               </div>
               
               <div>
                 <label className="nombreInput">Correo</label>
                 <br></br>
-                <label name="cedula" className="inputDiag">{cookie.get("cedula")}</label> 
+                <label name="cedula" className="inputDiag" disabled>{cookie.get("correo")}</label> 
               </div>
               <div>
                 <label className="nombreInput">Fecha de nacimiento</label>
@@ -260,8 +260,8 @@ class Diagnostico extends Component {
               <div>
                 <label className="nombreInput">Validaciones que ha realizado</label>
                 <br></br>
-                <textarea name="validacionesEmprendimeinto" className="textarea" onChange={this.handleChange}></textarea>
-                {errors.validacionesEmprendimeinto && <small class="form-text font-weight-bold text-danger">{errors.validacionesEmprendimeinto}</small>}
+                <textarea name="validacionesEmprendimiento" className="textarea" onChange={this.handleChange}></textarea>
+                {errors.validacionesEmprendimiento && <small class="form-text font-weight-bold text-danger">{errors.validacionesEmprendimiento}</small>}
               </div>                
             
               <div>

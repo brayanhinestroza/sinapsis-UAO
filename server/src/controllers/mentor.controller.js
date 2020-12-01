@@ -1,32 +1,32 @@
 const mentor = {};
 const Mentor = require('../models/Mentor.model')
 
-mentor.getMentores = async (req , res) => {
-    await Mentor.getMentores(req,res);
+mentor.getMentores = (req , res) => {
+    Mentor.getMentores(req,res);
 };
 
-mentor.getEmprendedor = async (req,res) =>{
-    await Mentor.getEmprendedor(req,res);
+mentor.getEmprendedor = (req,res) =>{
+    Mentor.getEmprendedor(req,res);
 }
 
-mentor.getEmprendedores = async (req, res) =>{
-    await Mentor.getEmprendedores(req,res);
+mentor.getEmprendedores =  (req, res) =>{
+    Mentor.getEmprendedores(req,res);
 }
 
-mentor.getConsultorias = async (req,res) =>{
-    await Mentor.getConsultorias(req,res);
+mentor.getConsultorias = (req,res) =>{
+    Mentor.getConsultorias(req,res);
 }
 
-mentor.crearConsultoria = async (req,res) =>{
-    await Mentor.crearConsultoria(req,res);
+mentor.crearConsultoria = (req,res) =>{
+    Mentor.crearConsultoria(req,res);
 }
 
-mentor.crearTarea = async (req,res) =>{
-    await Mentor.CrearTarea(req,res);
+mentor.crearTarea = (req,res) =>{
+    Mentor.CrearTarea(req,res);
 }
 
-mentor.getTareas = async (req,res) =>{
-    await Mentor.getTareas(req,res);
+mentor.getTareas = (req,res) =>{
+    Mentor.getTareas(req,res);
 }
 
 module.exports = mentor;

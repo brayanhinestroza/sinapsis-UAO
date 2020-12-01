@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import Navbar from '../../Navbar/Navbar'
-import '../Navegacion/Navegacion';
-import Navegacion from '../Navegacion/Navegacion';
-import '../../Navbar/Navbar.css'
-import './EmprendedorConsulta.css'
-import TabEmp from './TabEmprendedor'
 import Axios from 'axios'
 import Cookies from 'universal-cookie';
+import Navbar from '../../Navbar/Navbar';
+import Navegacion from '../Navegacion/Navegacion';
+import TabEmp from './TabEmprendedor';
+import '../Navegacion/Navegacion';
+import '../../Navbar/Navbar.css';
+import './EmprendedorConsulta.css';
 
 const cookies = new Cookies()
 class EmprendedorConsulta extends Component {
@@ -21,12 +21,9 @@ class EmprendedorConsulta extends Component {
       }
     })
     .then(res =>{      
-      console.log(res);
-      console.log(res.data[0].nombreCompleto);
       this.setState({emprendedor: res.data[0].nombreCompleto, loading: false})
     })
-  }
-	
+  }	
     render(){
         return (
           this.state.loading ? <></>

@@ -10,40 +10,36 @@ import { Link } from 'react-router-dom';
 
 const cookies = new Cookies();
 class TabEmprendedor extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-            key: 'ruta',
-            ruta: {
-                sonar: {
-                    progress:0,
-                    color: ""
-                },
-                pensar: {
-                    progress:0,
-                    color: ""
-                },
-                testear: {
-                    progress:0,
-                    color: ""
-                },
-                arrancar: {
-                    progress:0,
-                    color: ""
-                }
+    state = {
+        loading:true,
+        key: 'ruta',
+        ruta: {
+            sonar: {
+                progress:0,
+                color: ""
+            },
+            pensar: {
+                progress:0,
+                color: ""
+            },
+            testear: {
+                progress:0,
+                color: ""
+            },
+            arrancar: {
+                progress:0,
+                color: ""
             }
-		};
-    }    
-
-    async componentDidMount(){
-        console.log(cookies.get("idEmprendedor"));
-        await Axios.get("http://localhost:5000/Emprendedor/Etapa",{
+        }
+    };
+        
+    componentDidMount(){
+        Axios.get("http://localhost:5000/Emprendedor/Etapa",{
             params:{
                 idEmp: cookies.get("idEmprendedor")
             }
         })
         .then(res =>{
-            console.log(res.data.length);
             if(res.data.length>0){
                 const resultado = res.data[0].idEtapaRuta
                 switch (resultado) {
@@ -149,12 +145,14 @@ class TabEmprendedor extends Component {
                                 progress:0,
                                 color: ""
                             }
-                        }});
-                        break;
+                        }}
+                        );
+                    break;
                 }
             }
-        })
+        });
 
+        this.consultarEtapas();
     }
 
     HandleChange(e){
@@ -205,8 +203,17 @@ class TabEmprendedor extends Component {
         })
     }
 
+    consultarEtapas(){
+        Axios.get("http://localhost:5000/Etapas")
+        .then(res => {
+            return this.setState({etapas: res.data, loading:false});
+        });
+    }
+
 	render() {
 		return (
+            this.state.loading ? <></>
+            :
 			<Tabs
 				id="controlled-tab-example"
 				activeKey={this.state.key}
@@ -225,10 +232,10 @@ class TabEmprendedor extends Component {
 
                     <select name="etapa" className="inputDiagMC" type= "text" onChange={(e)=> this.HandleChange(e)}>
                         <option className="inputDiag" value="-1" disabled selected>Seleccione una...</option>
-                        <option className="inputDiag" value="1">Soñar</option> 
-                        <option className="inputDiag" value="2">Pensar</option> 
-                        <option className="inputDiag" value="3">Testear</option> 
-                        <option className="inputDiag" value="4">Arrancar</option>   
+                        {                       
+                            this.state.etapas.map(v => (
+                            <option className="inputDiag" value={v.idetapa}>{v.etapa}</option>))
+                        }                          
                     </select>                           
 
                     </div>                
@@ -259,7 +266,7 @@ class TabEmprendedor extends Component {
                     <br></br>
                     </div>  
                     <div className="">
-                        <TablaTarea title="Tareas"></TablaTarea>
+                        <TablaTarea/>
                     </div>
 				</Tab>
 				<Tab eventKey="consultorias" title="Consultorias" >
@@ -270,7 +277,7 @@ class TabEmprendedor extends Component {
                              >Crear consultoria</Link>
                             </div> 
                             <div className="">
-                              <TablaConsultoria></TablaConsultoria>
+                              <TablaConsultoria/>
                             </div>  
 				</Tab>
                 <Tab eventKey="informacion" title="Información" >

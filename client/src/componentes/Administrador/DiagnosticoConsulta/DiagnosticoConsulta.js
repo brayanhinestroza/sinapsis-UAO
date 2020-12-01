@@ -78,7 +78,7 @@ class DiagnosticoConsulta extends Component {
                   <div>
                     <label className="nombreInputDC">Correo</label>
                     <br></br>
-                    <label className="inputDiagDC" type= "text" disabled> {this.state.datos.cedula} </label> 
+                    <label className="inputDiagDC" type= "text" disabled> {this.state.datos.correo} </label> 
                   </div>
                   
                   <div>
@@ -90,7 +90,7 @@ class DiagnosticoConsulta extends Component {
                   <div>
                     <label className="nombreInputDC">Ciudad</label>
                     <br></br>
-                    <label className="inputDiagDC" type= "text" disabled></label> 
+                    <label className="inputDiagDC" type= "text" disabled>{this.state.datos.ciudad}</label> 
                   </div>
 
                   <div>
@@ -114,7 +114,7 @@ class DiagnosticoConsulta extends Component {
                   <div>
                     <label className="nombreInputDC">Vinculo con la universidad</label>
                     <br></br>
-                    <label className="inputDiagDC" type= "text" disabled></label> 
+                    <label className="inputDiagDC" type= "text" disabled>{this.state.datos.vinculoConU}</label> 
                   </div>
 
                   <div>

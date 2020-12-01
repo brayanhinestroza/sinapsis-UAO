@@ -16,8 +16,16 @@ emprendedor.postDiagnostico = (req,res) => {
     Emprendedores.postDiagnostico(req, res)
 };
 
-emprendedor.getEtapa = async (req, res) => {
-    await Emprendedores.getEtapa(req,res);
+emprendedor.getEtapa = (req, res) => {
+    Emprendedores.getEtapa(req,res);
+}
+
+emprendedor.getTareas = (req,res) =>{
+    Emprendedores.getTareas(req,res);
+}
+
+emprendedor.getConsultorias = (req,res) =>{
+    Emprendedores.getConsultorias(req,res);
 }
 
 

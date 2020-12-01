@@ -4,7 +4,7 @@ import ModalBody from "react-bootstrap/ModalBody";
 import ModalHeader from "react-bootstrap/ModalHeader";
 import ModalFooter from "react-bootstrap/ModalFooter";
 import ModalTitle from "react-bootstrap/ModalTitle";
-import { Card, Button } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 import './TareaModal.css'
 import { Link } from 'react-router-dom';
 import Cookies from 'universal-cookie'
@@ -12,9 +12,11 @@ import Axios from 'axios';
 
 
 const cookies = new Cookies();
+// eslint-disable-next-line
 const validaciones = valores =>{
     console.log(valores);
     const errors = {}
+    // eslint-disable-next-line
     const {titulo, fechaTarea, horaI, horaF, asunto} = valores;
     if(!titulo){
         errors.titulo = "Campo Obligatorio"
@@ -22,13 +24,15 @@ const validaciones = valores =>{
     return errors;
 }
 class TareaModal extends Component {
-    constructor(){
-        super()
-        this.state = {
-            idEmp: cookies.get("idEmprendedor"),
-            idMentor: cookies.get("cedula"),
-            errors:{}
-        }
+    state = {
+        idEmp: cookies.get("idEmprendedor"),
+        idMentor: cookies.get("cedula"),
+        loading: true,
+        errors:{}
+    }    
+
+    componentDidMount(){
+        this.consultarEtapas();
     }
 
     handleClose = () =>{
@@ -65,13 +69,26 @@ class TareaModal extends Component {
 
         Axios.post("http://localhost:5000/mentor/Tarea", form)
         .then(res =>{
-            console.log(res);
+            // eslint-disable-next-line
+            if(res.data.affectedRows == 1){
+                alert("Tarea creada correctamente");
+                this.handleClose()
+            }
         })
+    }
+
+    consultarEtapas(){
+        Axios.get("http://localhost:5000/Etapas")
+        .then(res => {
+            return this.setState({etapas: res.data, loading:false});
+        });
     }
 
     render(){
         const {errors} = this.state
         return (
+            this.state.loading ? <></>
+            :
             <div>
                 <Modal show={true} onHide={this.handleClose} >
                     <ModalHeader>
@@ -92,10 +109,10 @@ class TareaModal extends Component {
                             <label>Etapa de la tarea</label><br/>
                             <select name="etapa" className="inputDiag" type= "text" onChange={this.handleChange}>
                                 <option className="inputDiag" value="-1" disabled selected>Seleccione una...</option>
-                                <option className="inputDiag" value="1">Soñar</option> 
-                                <option className="inputDiag" value="2">Pensar</option> 
-                                <option className="inputDiag" value="3">Testear</option> 
-                                <option className="inputDiag" value="4">Arrancar</option>   
+                                {                       
+                                    this.state.etapas.map(v => (
+                                    <option className="inputDiagDC" value={v.idetapa}>{v.etapa}</option>))
+                                } 
                             </select>
                             {errors.etapa && <small class="form-text font-weight-bold text-danger">{errors.etapa}</small>}
                         <br></br>
@@ -114,7 +131,7 @@ class TareaModal extends Component {
                     <ModalFooter>
                     <Button className= "buttonTable" class="btn btn-outline-primary" 
                         onClick={ e =>{ 
-                                if(window.confirm("Esta seguro que desea crear la consultoria?")){
+                                if(window.confirm("Esta seguro que desea asignar la tarea?")){
                                     this.handleSubmit(e)
                                 }
                             }

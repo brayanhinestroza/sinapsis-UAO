@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { Card, Button } from 'react-bootstrap'
+import Cookies from 'universal-cookie'
 import Axios from 'axios'
 import Table from 'react-flexy-table'
-import "react-flexy-table/dist/index.css"
 import "./TablaMBuscar.css"
-import Cookies from 'universal-cookie'
 
 const cookies =  new Cookies();
 export default class TablaMBuscar extends Component {
@@ -17,8 +16,8 @@ export default class TablaMBuscar extends Component {
         };        
     }
 
-    async componentDidMount(){        
-        await Axios.get("http://localhost:5000/Mentor/MisEmprendedores",{
+    componentDidMount(){        
+        Axios.get("http://localhost:5000/Mentor/Emprendedores",{
             params:{
                 idMentor: cookies.get("cedula")
             }
@@ -30,7 +29,7 @@ export default class TablaMBuscar extends Component {
         })           
     }
 
-    revisarEmprendedor = async e =>{
+    consultarEmprendedor = e =>{
         cookies.set("idEmprendedor" , e.idUsuario);
         window.location.href = "/Mentor/Emprendedor";             
     }
@@ -42,7 +41,7 @@ export default class TablaMBuscar extends Component {
             td: (data) => {
               return <div>              
                 <Button className= "buttonTableO" class="btn btn-outline-primary" 
-                onClick={() =>{this.revisarEmprendedor({idUsuario: data.Cedula})}}>
+                onClick={() =>{this.consultarEmprendedor({idUsuario: data.Cedula})}}>
                     Consultar
                 </Button>
               </div>
@@ -54,7 +53,7 @@ export default class TablaMBuscar extends Component {
         <div className="Contenedor">
             <div className="card" >
                 <Card.Body className="card">
-                    <h5>Lista de {this.props.title}</h5>
+                    <h5>Lista de Emprendedores</h5>
                     <Table className="table" data={data} filteredDataText= "Datos filtrados:" nextText= "Siguiente" previousText = "Anterior"  totalDataText ="Total datos:" rowsText="Número de filas" pageText="Página" ofText =" de" filterable additionalCols={ColumnaAcciones}/>
                 </Card.Body>
             </div>

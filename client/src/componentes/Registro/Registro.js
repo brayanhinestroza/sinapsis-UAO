@@ -1,12 +1,12 @@
 import React from 'react'
-import img from '../../Imagenes/img.png';
-import logo from '../../Imagenes/sinapsis.png';
-import './Registro.css'
-import {Button, Image, Modal} from 'react-bootstrap';
 import {Link} from 'react-router-dom'
+import {Button, Image, Modal} from 'react-bootstrap';
 import Axios from 'axios'
 import Cookies from 'universal-cookie';
 import md5 from 'md5'
+import img from '../../Imagenes/img.png';
+import logo from '../../Imagenes/sinapsis.png';
+import './Registro.css'
 
 const cookie = new Cookies();
 

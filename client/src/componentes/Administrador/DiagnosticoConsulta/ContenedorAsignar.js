@@ -27,24 +27,22 @@ HandleChange(e){
 }
 
 //Metodos del componente - Consulta mentores, etapas , asignacion de ruta -
-async consultarMentores(){
-    await Axios.get("http://localhost:5000/Mentor")
+consultarMentores(){
+    Axios.get("http://localhost:5000/Mentor")
     .then(res =>{
-        this.setState({mentores: res.data});
-        return res.data     
+        return this.setState({mentores: res.data});    
     })
 }
 
-async consultarEtapas(){
-    await Axios.get("http://localhost:5000/Etapas")
+consultarEtapas(){
+    Axios.get("http://localhost:5000/Etapas")
     .then(res => {
-        this.setState({etapas: res.data});
-        return res.data
+        return this.setState({etapas: res.data});
     });
 }
 
 asignarRuta(){    
-    Axios.post("http://localhost:5000/Administrador/Ruta",{
+    Axios.post("http://localhost:5000/Administrador/Diagnostico",{
         etapa: this.state.etapa,
         emprendedor: this.state.emprendedor,
         mentor: this.state.mentorPrincipal
@@ -73,10 +71,10 @@ render() {
                 <br></br>
                 <select name="etapa" className="inputDiag" type= "text" onChange={(e)=> this.HandleChange(e)}>
                     <option className="inputDiag" value="-1" disabled selected>Seleccione una...</option>
-                    <option className="inputDiag" value="1">Soñar</option> 
-                    <option className="inputDiag" value="2">Pensar</option> 
-                    <option className="inputDiag" value="3">Testear</option> 
-                    <option className="inputDiag" value="4">Arrancar</option>   
+                    {                       
+                        this.state.etapas.map(v => (
+                        <option className="inputDiagDC" value={v.idetapa}>{v.etapa}</option>))
+                    }
                 </select> 
             </div>
             
@@ -87,7 +85,7 @@ render() {
                     <option className="inputDiagDC" value="-1" disabled selected>Seleccione uno...</option>
                     {                        
                         this.state.mentores.map(v => (
-                        <option className="inputDiagDC" value={v.cedula}>{v.nombre}</option>))
+                        <option className="inputDiagDC" value={v.cedula}>{v.nombreCompleto}</option>))
                     }
                 </select> 
             </div>

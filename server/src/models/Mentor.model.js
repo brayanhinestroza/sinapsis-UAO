@@ -2,8 +2,8 @@ const pool = require('../database')
 const Mentor = {}
 
 Mentor.getMentores = (req , res) => {
-    pool.query('SELECT * FROM mentor',(err, data) =>{
-        console.log(data);
+    const query = "SELECT M.cedula, U.nombreCompleto from mentor as M JOIN usuarios as U where U.tipoUsuario = 'Mentor'"
+    pool.query(query,(err, data) =>{
         res.send(data);
     });    
 }
@@ -17,17 +17,15 @@ Mentor.getEmprendedor = (req,res) =>{
 
 Mentor.getEmprendedores = (req,res) =>{
     const {idMentor} = req.query;
-    //const query = "SELECT U.cedula as Cedula, U.nombreCompleto as 'Nombre Completo',U.correo as 'Correo Electronico', E.celular as Celular FROM usuarios as U JOIN emprendedor as E ON U.cedula = E.cedula JOIN mentor_emprendedor as ME ON ME.idEmprenME = E.cedula WHERE ME.idMentorME = " + idMentor;
-    const query = "SELECT U.cedula as Cedula, U.nombreCompleto as 'Nombre Completo',U.correo as 'Correo Electronico', E.celular as Celular FROM usuarios as U JOIN emprendedor as E ON U.cedula = E.cedula JOIN mentor_emprendedor as ME ON ME.idEmprenME = E.cedula WHERE ME.idMentorME = 9999 ";
+    const query = "SELECT U.cedula as Cedula, U.nombreCompleto as 'Nombre Completo',U.correo as 'Correo Electronico', E.celular as Celular FROM usuarios as U JOIN emprendedor as E ON U.cedula = E.cedula JOIN mentor_emprendedor as ME ON ME.idEmprenME = E.cedula WHERE ME.idMentorME = " + idMentor;
     pool.query(query, (err, data) =>{        
         res.send(data)    
     });
 }
 
 Mentor.getConsultorias = (req,res) =>{
-    const query = "SELECT idEmpConsultoria as 'Cedula', nombreCompleto as 'Nombre Emprendedor', nombreConsultoria, asuntoConsultoria, DATE_FORMAT(fechaConsultoria, '%d/%m/%Y') as 'Fecha Consultoria', TIME_FORMAT(horaInicio, '%l:%i %p') as 'Hora inicio', TIME_FORMAT(horaFin, '%l:%i %p') as 'Hora fin'  FROM consultoria as C JOIN usuarios as U ON C.idEmpConsultoria = U.cedula where idMentorConsultoria = 11111"
+    const query = "SELECT idEmpConsultoria as 'Cedula', nombreCompleto as 'Nombre Emprendedor', nombreConsultoria, asuntoConsultoria, DATE_FORMAT(fechaConsultoria, '%d/%m/%Y') as 'Fecha Consultoria', TIME_FORMAT(horaInicio, '%l:%i %p') as 'Hora inicio', TIME_FORMAT(horaFin, '%l:%i %p') as 'Hora fin'  FROM consultoria as C JOIN usuarios as U ON C.idEmpConsultoria = U.cedula where idEmpConsultoria = " + req.query.idEmprendedor;
     pool.query(query, (err,data) =>{
-        console.log(data);
         res.send(data);
     })
 }
@@ -42,14 +40,12 @@ Mentor.crearConsultoria = (req,res) =>{
         query = "INSERT into consultoria (idEmpConsultoria, idMentorConsultoria, nombreConsultoria, asuntoConsultoria, fechaConsultoria, comentarioConsultoria, horaInicio, horaFin )" 
         + "VALUES ('" + idEmp + "' , '" + idMentor + "' , '" + titulo + "' , '" + asunto + "' , '" + fecha + "' , '" + comentario + "' , '" + horaI + "' , '" + horaF + "')"
     }
-
     pool.query(query , (err, data) =>{        
         res.send(data);
     });
 }
 
 Mentor.CrearTarea = (req,res) =>{
-    console.log(req.body);
     const {nombreT, etapa, desT, fechaTarea, idEmp, idMentor} = req.body;
     const {filename} = req.file;
     var query;
@@ -60,7 +56,9 @@ Mentor.CrearTarea = (req,res) =>{
         query = "INSERT INTO tarea (idEmpTarea, idMenTarea, nombreTarea, fechaTarea,idEtapaTarea, descripcionTarea) VALUES ('" + idEmp + "','" + idMentor + 
         "','" + nombreT + "','" + fechaTarea + "'," + etapa + ",'" +  desT + "')";
     }
-    console.log(query);
+    pool.query(query,(err,data) =>{
+        res.send(data);
+    });
 }
 
 Mentor.getTareas = (req,res) =>{

@@ -10,7 +10,6 @@ import './Login.css'
 
 const cookie = new Cookies();
 const validaciones = valores =>{
-  console.log(valores);
   const errors = {};
   const {cedula, contrasena} = valores
   //Validaciones de Cedula
@@ -20,10 +19,8 @@ const validaciones = valores =>{
     const regExp = /^\D*\d{5,11}$/
     if(!regExp.test(cedula)){
       errors.cedula = "Solo se permiten numeros de 5 a 11 digitos"
-    }
-    
+    }    
   }
-
   //Validaciones de Contrasena
   if(!contrasena){
     errors.contrasena = "Este campo es obligatorio"
@@ -34,7 +31,6 @@ const validaciones = valores =>{
   }
   return errors;
 }
-
 
 class Login extends React.Component {
   constructor(props){
@@ -83,15 +79,13 @@ class Login extends React.Component {
         cookie.set("cedula", respuesta.cedula, {path:"/"});
         cookie.set("tipoUsuario", respuesta.tipoUsuario, {path:"/"});
         cookie.set("nombreCompleto", respuesta.nombreCompleto, {path:"/"});
+        cookie.set("correo", respuesta.correo, {path:"/"});
         cookie.set("estado", respuesta.estado, {path:"/"});
         window.location.href = "/" + respuesta.tipoUsuario;
       }else{
         this.setState({mensaje: res.data.message, showModal: true});
       }
-    })
-    .catch(err =>{
-      console.log(err);
-    })
+    });
   }
 }
   //Subcomponentes

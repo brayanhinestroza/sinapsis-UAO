@@ -11,6 +11,7 @@ import DiagnosticoADM from './componentes/Administrador/DiagnosticoConsulta/Diag
 import Emprendedor from './componentes/Emprendedor/Inicio/Inicio'
 import Diagnostico from './componentes/Emprendedor/Diagnostico/Diagnostico'
 import Ruta  from './componentes/Emprendedor/Ruta/MiRuta'
+import EmprendedorT from './componentes/Emprendedor/Ruta/TareaModal'
 //Imports del Mentor
 import Mentor from './componentes/Mentor/Inicio/Inicio'
 import EmprendedoresMTR  from './componentes/Mentor/EmprendedorBuscar/EmprendedorBuscar'
@@ -35,7 +36,8 @@ function App() {
       <Route exact path='/Administrador/Diagnostico' component={DiagnosticoADM} />
       <Route exact path='/Emprendedor' component={Emprendedor} />
       <Route exact path='/Emprendedor/Diagnostico' component={Diagnostico} />
-      <Route exact path='/Emprendedor/Ruta' component={Ruta} />
+      <Route path='/Emprendedor/Ruta' component={Ruta} />
+      <Route path='/Emprendedor/Ruta/Tarea' component={EmprendedorT} />
     </Router>
   );
 }

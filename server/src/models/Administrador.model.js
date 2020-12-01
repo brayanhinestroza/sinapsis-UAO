@@ -1,56 +1,45 @@
 const pool = require('../database')
 const Controlador = {}
 
-Controlador.getCuentasPorActivar = async (req , res) => {
+Controlador.getCuentasActivar = (req , res) => {
     const QUERY = "SELECT cedula as 'Cedula', nombreCompleto as 'Nombre Completo', correo as 'Correo', tipoUsuario as 'Rol' from USUARIOS WHERE estado = 0;"
-    const result = await pool.query(QUERY);
-    return result;
-}
-
-Controlador.deleteCuenta = async (req,res) =>{
-    const {id} = req.body
-    const result = await pool.query("Select tipoUsuario from usuarios where cedula = '" + id +"'");
-    const tipoUsuario = result[0].tipoUsuario;
-
-    const query = "DELETE FROM " + tipoUsuario + " WHERE cedula = '" + id +"'";
-    const query2 = "DELETE FROM usuarios WHERE cedula = '" + id +"'";
-
-    await pool.query(query, async (err, data) =>{
-        if(err){
-            console.log(err);
-            res.send(err);
-        }else{
-            const resultado1 = data;
-            console.log(data);
-            await pool.query(query2,async (err,data) =>{
-                if(err){
-                    res.send(err);
-                }else{
-                    console.log(data);
-                    res.send({res1:resultado1, res2:data});         
-                }
-            })         
-        }
+    pool.query(QUERY,(err,data)=>{
+        res.send(data)
     })
 }
 
-Controlador.getDiagnosticos = async (req , res) => {
+Controlador.deleteCuenta = (req,res) =>{
+    const {id} = req.query
+
+    const query = "DELETE FROM usuarios WHERE cedula = '" + id +"'";            
+    pool.query(query, (err,data) =>{
+        if(err){
+            res.send(err);
+        }else{
+            console.log(data);
+            res.send(data);         
+        }
+    });    
+}
+
+Controlador.getDiagnosticos = (req , res) => {
     const QUERY = "SELECT U.cedula as 'Cedula', U.nombreCompleto as 'Nombre Completo', D.nombreIniciativa as 'Nombre Iniciativa', D.idea as 'Idea de proyecto', D.tipoEmprendimiento as 'Tipo Emprendimiento' FROM diagnostico AS D JOIN emprendedor AS E ON E.cedula = D.idEmpDiag JOIN usuarios AS U ON U.cedula = E.cedula WHERE D.revisado = 0"
-    const result = await pool.query(QUERY);
-    return result;
+    pool.query(QUERY,(err,data) => {
+        res.send(data)
+    });
 }
 
-Controlador.getDiagnostico = async (req , res) => {
-    const QUERY = "SELECT U.nombreCompleto, U.cedula, U.correo, DATE_FORMAT(E.fechaNacimiento,'%d/%m/%Y') as fechaNacimiento , E.direccion, E.celular, E.genero, E.Programa, D.nombreIniciativa, D.idea, D.necesidad, D.cliente, D.desValidaciones, D.instrumentoValidacion, D.tipoEmprendimiento, D.tipoEconomia FROM diagnostico AS D JOIN emprendedor AS E ON E.cedula = D.idEmpDiag JOIN usuarios AS U ON U.cedula = E.cedula WHERE U.cedula = '" + req.query.idEmprendedor + "'";
-    console.log(QUERY);
-    const result = await pool.query(QUERY);
-    return result;
+Controlador.getDiagnostico = (req , res) => {
+    const QUERY = "SELECT U.nombreCompleto, U.cedula, U.correo, DATE_FORMAT(E.fechaNacimiento,'%d/%m/%Y') as fechaNacimiento , E.direccion, E.celular, E.genero, E.Programa, E.ciudad, D.nombreIniciativa, D.idea, D.necesidad, D.cliente, D.desValidaciones, D.instrumentoValidacion, D.tipoEmprendimiento, D.tipoEconomia, D.vinculoConU, D.programa FROM diagnostico AS D JOIN emprendedor AS E ON E.cedula = D.idEmpDiag JOIN usuarios AS U ON U.cedula = E.cedula WHERE U.cedula = '" + req.query.idEmprendedor + "'";
+    pool.query(QUERY,(err,data)=>{
+        res.send(data);
+    });
 }
 
-Controlador.deleteDiagnostico = async (req,res) =>{
-    const {id} = req.body;
+Controlador.deleteDiagnostico = (req,res) =>{
+    const {id} = req.query;
     const query = "Delete FROM diagnostico where idEmpDiag =" + id;
-    await pool.query(query, (err, data)=>{
+    pool.query(query, (err, data)=>{
         if(err){
             res.send(err);
         }else{
@@ -59,10 +48,11 @@ Controlador.deleteDiagnostico = async (req,res) =>{
     })
 }
 
-Controlador.updateEstado = async (req , res) => {
+Controlador.activarCuenta = (req , res) => {
     const QUERY = "UPDATE usuarios SET estado = 1 WHERE cedula = '"+ req.body.cedula + "'";
-    const result = await pool.query(QUERY);
-    return result;
+    pool.query(QUERY,(err,data) =>{
+        res.send(data)
+    });
 }
 
 Controlador.postRuta = (req , res) => {
@@ -72,8 +62,6 @@ Controlador.postRuta = (req , res) => {
     const QUERY3 = "UPDATE diagnostico SET revisado = 1 WHERE idEmpDiag = '"+ emprendedor + "'";
     const QUERY4 = "INSERT INTO mentor_emprendedor (idMentorME, idEmprenME) VALUES ('" + mentor + "' , '" + emprendedor + "')";
 
-    console.log(QUERY4);
-    
     pool.query(QUERY,(err, data) =>{
         if(err){
             res.send(err);

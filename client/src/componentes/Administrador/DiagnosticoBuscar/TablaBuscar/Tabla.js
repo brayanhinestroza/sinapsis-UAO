@@ -18,8 +18,8 @@ export default class Tabla extends Component {
         };        
     }
 
-    async componentDidMount(){        
-        await Axios.get("http://localhost:5000/Administrador/Diagnosticos")
+    componentDidMount(){        
+        Axios.get("http://localhost:5000/Administrador/Diagnosticos")
         .then(res =>{
             if(res.data.length>0){
                 this.setState({datos:res.data, loading:false});
@@ -27,9 +27,12 @@ export default class Tabla extends Component {
         })           
     }
 
-    eliminarDiagnostico =async e =>{
-        const dato = e.idUsuario;
-        await Axios.post('http://localhost:5000/Administrador/Diagnostico', {id:dato})
+    eliminarDiagnostico = e =>{
+        Axios.delete('http://localhost:5000/Administrador/Diagnostico', {
+            params:{
+                id: e.idUsuario
+            }
+        })
         .then(res =>{
             if(res.data.affectedRows > 0){
                 alert("Eliminacion exitosa");
