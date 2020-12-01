@@ -7,9 +7,10 @@
 .contenedorDiagDC
 {
   width: 86rem;
-  height: 55rem;
+  height: 58rem;
   margin-left: 2rem;
   margin-top: 2rem;
+  padding-bottom: 7rem;
   box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.16);
   background-color: var(--white);
   display: flex;  
@@ -148,6 +149,8 @@
 .contenedorDDC
 {
   width: 117rem;
+  
+  padding-bottom: 3rem;
   display: flex;  
   flex-direction: row;
   flex-wrap: wrap;

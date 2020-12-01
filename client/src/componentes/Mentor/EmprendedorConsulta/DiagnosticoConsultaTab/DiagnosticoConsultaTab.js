@@ -154,7 +154,15 @@ class DiagnosticoConsultaTab extends Component {
                     <label className="nombreInputDCT">Tipo de económia</label>
                     <br></br>
                     <label className="inputDiagDCT" type= "text" disabled>{this.state.datos.tipoEconomia}</label> 
-                  </div>                  
+                  </div> 
+
+                   <div>
+                    <label className="nombreInputDC">Autodiagnóstico</label>
+                    <br></br>
+                    Aqui va el archivo xd xd
+                    <br></br>
+                    <br></br>
+                  </div>                   
               </div>                
           </div>
          

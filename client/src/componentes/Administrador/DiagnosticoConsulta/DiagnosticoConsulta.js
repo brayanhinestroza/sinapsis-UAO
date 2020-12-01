@@ -179,7 +179,15 @@ class DiagnosticoConsulta extends Component {
                     <label className="nombreInputDC">Tipo de económia</label>
                     <br></br>
                     <label className="inputDiagDC" type= "text" disabled>{this.state.datos.tipoEconomia}</label> 
-                  </div>                  
+                  </div> 
+
+                  <div>
+                    <label className="nombreInputDC">Autodiagnóstico</label>
+                    <br></br>
+                    Aqui va el archivo xd xd
+                    <br></br>
+                    <br></br>
+                  </div>                 
               </div>                
           </div>
           <ContenedorAsignar emprendedor={this.state.idEmprendedor}/>
