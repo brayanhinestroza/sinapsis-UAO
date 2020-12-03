@@ -5,7 +5,7 @@ const Emprendedor = {}
 Emprendedor.postDiagnostico = (req , res) => {
     const {cedula,fechaNacimiento, ciudad, direccion, celular, vinculoConU, programa, nombreEmprendimiento,descripcionEmprendimiento,tipoEmprendimiento,necedidadEmprendimiento,clienteEmprendimiento,validacionesEmprendimiento,instrumentosValidacion,tipoEconomia,genero} = req.body;
     const query = "UPDATE emprendedor SET fechaNacimiento = '" + fechaNacimiento + "', celular = '" + celular + "', direccion = '" + direccion+ "', genero = '" + genero + "', programa = '" + programa  + "', ciudad = '" + ciudad + "' WHERE cedula = '" + cedula + "';"
-
+    
     pool.query(query, (err, data) =>{
         if(err){
             res.send(err);
