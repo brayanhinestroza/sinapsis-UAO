@@ -45,12 +45,12 @@ consultarEtapas(){
 }
 
 asignarRuta(){
-
     Axios.post("http://localhost:5000/Administrador/Diagnostico",{
         etapa: this.state.etapa,
         emprendedor: this.state.emprendedor,
         mentor: this.state.mentorPrincipal
-    }).then(res =>{        
+    }).then(res =>{
+        console.log(res);        
         if(res.data.res1.affectedRows === 1 && res.data.res2.affectedRows === 1 && res.data.res3.affectedRows === 1 ){
             swal.fire({
                 title:"Asignado",
@@ -61,7 +61,7 @@ asignarRuta(){
                 confirmButtonColor:"#9a66a8",
                 showConfirmButton: true
             })
-            .then(()=> cookies.remove("idEmprendedor"))
+            
             .then(()=> window.location.href = "/Administrador/Diagnosticos")
         }
         else{
