@@ -46,6 +46,15 @@ export default class TablaMentores extends Component {
                     showConfirmButton: true
                 })
                 .then(()=> window.location.href = "/Administrador/Emprendedor")
+            }else{
+                swal.fire({
+                    title:"Error",
+                    text:"El mentor ya ha sido asignado al emprendedor",
+                    icon:"error",
+                    confirmButtonText:"Aceptar",
+                    confirmButtonColor:"#9a66a8",
+                    showConfirmButton: true
+                })
             }
         })
     }

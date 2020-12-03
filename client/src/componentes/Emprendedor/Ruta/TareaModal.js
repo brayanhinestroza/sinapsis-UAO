@@ -4,6 +4,7 @@ import ModalHeader from "react-bootstrap/ModalHeader";
 import { Link } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import Axios from 'axios';
+import swal from 'sweetalert2'
 import './TareaModal.css';
 
 const cookies = new Cookies();
@@ -25,11 +26,10 @@ class TareaModal extends Component {
             }            
         })
         .then(() =>{
-            console.log("object");
             console.log(this.state.datos);
-            //const {archivoM}  = this.state.datos;
-            //const buffer = Buffer.from(archivoM);
-            this.setState({/*URLarchivo : buffer.toString(),*/ loading:false })
+            const {archivoM}  = this.state.datos;
+            const buffer = Buffer.from(archivoM);
+            this.setState({URLarchivo : buffer.toString(), loading:false })
         })
     }
 
@@ -42,12 +42,12 @@ class TareaModal extends Component {
     }
 
     handleClose = () =>{
+        cookies.remove("idTarea",{path:"/Emprendedor"});
         window.location.href = "/Emprendedor/Ruta"
     }
 
     entregarTarea = e =>{
         e.preventDefault();
-        console.log(this.state);
         const {archivoE} = this.state;
         const form =  new FormData();
         form.append('file', archivoE );
@@ -57,11 +57,19 @@ class TareaModal extends Component {
         .then(res =>{
             // eslint-disable-next-line
             if(res.data.affectedRows == 1){
-                alert("Su tarea fue enviada correctamente");                
+                swal.fire({
+                    title:"Envío exitoso",
+                    icon:"success",
+                    iconColor:"#9a66a8",
+                    confirmButtonText:"Aceptar",
+                    confirmButtonColor:"#9a66a8",
+                    showConfirmButton: true
+                }) 
+                .then(()=> cookies.remove("idTarea",{path: '/Emprendedor'}))
+                .then(()=> this.handleClose())             
             }
         })
-        .then(()=> cookies.remove("idTarea",{path: '/Emprendedor'}))
-        .then(()=> this.handleClose())        
+               
     }
     
 render(){
@@ -111,11 +119,26 @@ render(){
                 </ModalBody>
                 <ModalFooter>
                  <button className= "buttonTable" class="btn btn-primary" disabled={this.state.datos.entregada} 
-                    onClick={(e) => {this.entregarTarea(e)}}>
+                    onClick={(e) => {
+                        swal.fire({
+                            title:"¿Estás seguro que deseas enviar la tarea?",
+                            icon:"question",
+                            iconColor:"#9a66a8",
+                            confirmButtonText:"Enviar",
+                            confirmButtonColor:"#9a66a8",            
+                            showConfirmButton: true,
+                            showCancelButton:true,
+                            cancelButtonText:"Cancelar",
+                        })
+                        .then(res =>{
+                            if(res.isConfirmed){
+                                this.entregarTarea(e);
+                            }
+                        })
+                        }}>
                         Entregar
                     </button>
-                    <Link className= "buttonTableO btn btn-outline-primary" 
-                    to="/Emprendedor/Ruta">Cancelar</Link> 
+                    <Button className= "buttonTableO btn btn-outline-primary" onClick={this.handleClose}>Cancelar</Button> 
                 </ModalFooter>
                 </Modal>
         </div>

@@ -14,6 +14,7 @@ class VerConsultoria extends Component {
         datos:null,
         loading:true
     }
+
     componentDidMount(){
         Axios.get("http://localhost:5000/Mentor/RevisarConsultoria",{params:{idConsultoria: cookies.get("idConsultoria")}})
         .then(res =>{
@@ -118,9 +119,12 @@ class VerConsultoria extends Component {
                 }
                     >Guardar</Button>
 
-                    <Link className= "buttonTableO" class="btn btn-outline-primary"
-                        to="/Mentor/Emprendedor" 
-                    >Cancelar</Link>
+                    <Button className= "buttonTableO" class="btn btn-outline-primary"
+                        onClick={()=> {
+                            cookies.remove("idConsultoria");
+                            window.location.href = "/Mentor/Emprendedor"
+                        }}
+                    >Cancelar</Button>
                 </ModalFooter>
 
                 </Modal>

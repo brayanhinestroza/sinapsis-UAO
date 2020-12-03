@@ -61,6 +61,7 @@ asignarRuta(){
                 confirmButtonColor:"#9a66a8",
                 showConfirmButton: true
             })
+            .then(()=> cookies.remove("idEmprendedor"))
             .then(()=> window.location.href = "/Administrador/Diagnosticos")
         }
         else{

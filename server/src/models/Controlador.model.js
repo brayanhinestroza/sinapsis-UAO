@@ -30,6 +30,8 @@ Controlador.Registro = (req, res) => {
                 + tipoUsuario + "')";    
     const query2 = "INSERT INTO "+ tipoUsuario +  " (cedula) values ('" + cedula + "')";
     
+    console.log(query);
+    console.log(query2);
     pool.query(query,(err,data) =>{
         if(data){
             const resultado1 = data

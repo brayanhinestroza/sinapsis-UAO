@@ -107,7 +107,7 @@ Administrador.getEmprendedor = (req,res) =>{
 }
 
 Administrador.getMentor = (req,res) =>{
-    const query = "SELECT U.cedula as Cédula, U.nombreCompleto as 'Nombre Completo',U.correo as 'Correo Electrónico' from mentor as M JOIN usuarios as U ON U.cedula = M.cedula;"
+    const query = "SELECT U.cedula as Cédula, U.nombreCompleto as 'Nombre Completo',U.correo as 'Correo Electrónico' from mentor as M JOIN usuarios as U ON U.cedula = M.cedula AND U.estado=1"
     pool.query(query,(err,data) =>{
         res.send(data);
     })
@@ -127,6 +127,8 @@ Administrador.agregarMentor = (req,res) =>{
     pool.query(query,(err,data)=>{
         if(!err){
             res.send(data);
+        }else{
+            res.send("El mentor ya ha sido asignado")
         }
     })
 }

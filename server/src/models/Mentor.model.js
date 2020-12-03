@@ -2,7 +2,7 @@ const pool = require('../database')
 const Mentor = {}
 
 Mentor.getMentores = (req , res) => {
-    const query = "SELECT M.cedula, U.nombreCompleto from mentor as M JOIN usuarios as U ON M.cedula = U.cedula where U.tipoUsuario = 'Mentor'"
+    const query = "SELECT M.cedula, U.nombreCompleto from mentor as M JOIN usuarios as U ON M.cedula = U.cedula where U.tipoUsuario = 'Mentor' AND U.estado=1"
     pool.query(query,(err, data) =>{
         res.send(data);
     });    

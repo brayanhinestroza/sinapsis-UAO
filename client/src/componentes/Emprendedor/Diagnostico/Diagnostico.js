@@ -66,10 +66,8 @@ const validaciones = valores =>{
   if(!file){
     errors.archivo = "Campo Obligatorio"
   }
-
   return errors
 }
-
 
 class Diagnostico extends Component {
   constructor(){
@@ -98,7 +96,6 @@ class Diagnostico extends Component {
       this.setState({errors: result})
     }
     else{
-      console.log("Entra qui");
       const form = new FormData();
       const {celular,ciudad,file, clienteEmprendimiento, descripcionEmprendimiento, direccion, fechaNacimiento, genero, instrumentosValidacion, 
         necedidadEmprendimiento, nombreEmprendimiento, programa, tipoEconomia, tipoEmprendimiento, validacionesEmprendimiento, vinculoConU} = this.state

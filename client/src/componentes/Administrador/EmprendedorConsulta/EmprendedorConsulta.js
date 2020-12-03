@@ -13,6 +13,10 @@ class EmprendedorConsulta extends Component {
     loading: true
   }
 
+  componentWillUnmount(){
+    cookies.remove("idEmprendedor")
+  }
+
   componentDidMount(){
     Axios.get("http://localhost:5000/Administrador/Emprendedor",{
       params: {
