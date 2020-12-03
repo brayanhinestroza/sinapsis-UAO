@@ -12,9 +12,10 @@
 .contenedorDiag 
 {
   width: 116rem;
-  height: 64rem;
+  height: 86rem;
   margin-left: 2rem;
   margin-top: 2rem;
+  margin-bottom: 3rem;
   box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.16);
   background-color: var(--white);
   display: flex;  
@@ -121,6 +122,28 @@
 .input-fileD
 {
     border: none;
+}
+
+.btn-archivo {
+  margin-left: 200px;
+  background: none;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  line-height: normal;
+  overflow: visible;
+  padding: 0;
+}
+
+.btn-archivo:hover {
+  cursor: pointer;
+  background: none;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  line-height: normal;
+  overflow: visible;
+  padding: 0;
 }
 
 

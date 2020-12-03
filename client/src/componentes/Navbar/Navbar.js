@@ -40,6 +40,8 @@ class Navbar extends Component {
         cookie.remove("tipoUsuario", {path:"/"});
         cookie.remove("nombreCompleto", {path:"/"});
         cookie.remove("estado",  {path:"/"});
+        cookie.remove("idEmprendedor",  {path:"/"});
+        cookie.remove("correo",  {path:"/"});
 
         window.location.href = "/";
     }

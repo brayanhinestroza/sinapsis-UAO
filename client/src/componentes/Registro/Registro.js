@@ -20,7 +20,7 @@ const validaciones = valores =>{
   }else{
     const RegExp = /^\D*\d{5,11}$/
     if(!RegExp.test(cedula)){
-      errors.cedula = "Solo se permiten numeros entre 5 a 11 digitos"
+      errors.cedula = "Solo se permiten números entre 5 a 11 dígitos"
     }
   }
   //Validaciones para el nombre
@@ -29,7 +29,7 @@ const validaciones = valores =>{
   }else{
     const RegExp = /^[A-Za-z ]{1,50}$/
     if(!RegExp.test(nombreCompleto)){
-      errors.nombreCompleto = "Solo se permiten letras, minimo 1 y maximo 50 caracteres."
+      errors.nombreCompleto = "Solo se permiten letras, mínimo 1 y máximo 50 caracteres."
     }
   }
   //Validaciones para el correo
@@ -39,7 +39,7 @@ const validaciones = valores =>{
     // eslint-disable-next-line
     const RegExp = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/
     if(!RegExp.test(correo)){
-      errors.correo = "El correo no es valido"
+      errors.correo = "El correo no es válido"
     }
   }
   //Validaciones para el tipo de usuario

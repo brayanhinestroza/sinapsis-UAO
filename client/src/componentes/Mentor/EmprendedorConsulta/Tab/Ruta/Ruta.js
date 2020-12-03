@@ -1,15 +1,10 @@
 import React, { Component } from 'react'
-import {Tab, Tabs, ProgressBar, Button,} from 'react-bootstrap';
-import './TabEmprendedor.css';
-
-import Info from './DiagnosticoConsultaTab/DiagnosticoConsultaTab';
-import Mentores from './TablaMentores/TablaMentores';
+import {ProgressBar, Button} from 'react-bootstrap';
+import Axios from 'axios'
 import Cookies from 'universal-cookie';
-import Axios from 'axios';
-import { Link } from 'react-router-dom';
 
-const cookies = new Cookies();
-class TabEmprendedor extends Component {
+const cookies = new Cookies()
+export default class Ruta extends Component {
     state = {
         loading:true,
         key: 'ruta',
@@ -32,7 +27,7 @@ class TabEmprendedor extends Component {
             }
         }
     };
-        
+
     componentDidMount(){
         Axios.get("http://localhost:5000/Emprendedor/Etapa",{
             params:{
@@ -155,44 +150,18 @@ class TabEmprendedor extends Component {
         this.consultarEtapas();
     }
 
+    consultarEtapas(){
+        Axios.get("http://localhost:5000/Etapas")
+        .then(res => {
+            return this.setState({etapas: res.data, loading:false});
+        });
+    }
+
     HandleChange(e){
         this.setState({[e.target.name]: e.target.value});
     }
 
-    Progress(){
-
-        return <div>
-            <div className="d-flex justify-content-around mb-1">
-                <div>
-                    <div className="mr-auto ml-auto">Soñar</div>
-                    <div className={"circulo " + this.state.ruta.sonar.color}><span>1</span></div>
-                </div>
-                <div>
-                    <div className="mr-auto ml-auto">Pensar</div>
-                    <div className={"circulo " + this.state.ruta.pensar.color}><span>2</span></div>
-                </div>
-                <div>
-                    <div className="mr-auto ml-auto">Probar</div>
-                    <div className={"circulo " + this.state.ruta.testear.color}><span>3</span></div>
-                </div>
-                <div>
-                    <div className="mr-auto ml-auto">Arrancar</div>
-                    <div className={"circulo " + this.state.ruta.arrancar.color}><span>4</span></div>
-                </div>                
-            </div>
-
-            <ProgressBar>
-                <ProgressBar variant="success" now={this.state.ruta.sonar.progress} key={1} />
-                <ProgressBar variant="success" now={this.state.ruta.pensar.progress} key={2} />
-                <ProgressBar variant="success" now={this.state.ruta.testear.progress} key={3} />
-                <ProgressBar variant="success" now={this.state.ruta.arrancar.progress} key={4} />
-            </ProgressBar>
-
-        </div>
-        
-    }
-
-    asignarRuta = e =>{
+    asignarRuta = e => {
         e.preventDefault();
         Axios.put("http://localhost:5000/Etapas",{
             etapa: this.state.etapa,
@@ -203,47 +172,62 @@ class TabEmprendedor extends Component {
         })
     }
 
-    consultarEtapas(){
-        Axios.get("http://localhost:5000/Etapas")
-        .then(res => {
-            return this.setState({etapas: res.data, loading:false});
-        });
-    }
-
-	render() {
-		return (
-            this.state.loading ? <></>
-            :
-			<Tabs
-				id="controlled-tab-example"
-				activeKey={this.state.key}
-				onSelect={key => this.setState({ key })}
-			>
-				<Tab eventKey="ruta" title="Ruta" >
-
-                <div className="rutaC"> 
-                <div className= 'ruta'>
-                    {this.Progress()}                   
+    render() {
+        return (
+        this.state.loading ? <></>
+        :            
+        <div className="rutaC"> 
+            <div className= 'ruta'>        
+                <div className="d-flex justify-content-around mb-1">
+                    <div>
+                        <div className="mr-auto ml-auto">Soñar</div>
+                        <div className={"circulo " + this.state.ruta.sonar.color}><span>1</span></div>
+                    </div>
+                    <div>
+                        <div className="mr-auto ml-auto">Pensar</div>
+                        <div className={"circulo " + this.state.ruta.pensar.color}><span>2</span></div>
+                    </div>
+                    <div>
+                        <div className="mr-auto ml-auto">Testear</div>
+                        <div className={"circulo " + this.state.ruta.testear.color}><span>3</span></div>
+                    </div>
+                    <div>
+                        <div className="mr-auto ml-auto">Arrancar</div>
+                        <div className={"circulo " + this.state.ruta.arrancar.color}><span>4</span></div>
+                    </div>                
                 </div>
 
-                </div>               
+                <ProgressBar>
+                    <ProgressBar variant="success" now={this.state.ruta.sonar.progress} key={1} />
+                    <ProgressBar variant="success" now={this.state.ruta.pensar.progress} key={2} />
+                    <ProgressBar variant="success" now={this.state.ruta.testear.progress} key={3} />
+                    <ProgressBar variant="success" now={this.state.ruta.arrancar.progress} key={4} />
+                </ProgressBar>
+            </div>
 
-				</Tab>
-
-                <Tab eventKey="mentores" title="Mentores" >
-					
-                    <Mentores></Mentores>
-                   
-				</Tab>				
-				
-                <Tab eventKey="informacion" title="Información" >
-					
-                    <Info></Info>
-                   
-				</Tab>
-			</Tabs>
-		);
-	}
+            <div className="etapa">
+                <div>
+                    <label className="etapalabel">Elige una etapa</label>
+                    <select name="etapa" className="inputDiagMC" type= "text" onChange={(e)=> this.HandleChange(e)}>
+                        <option className="inputDiag" value="-1" disabled selected>Seleccione una...</option>
+                        {                       
+                            this.state.etapas.map(v => (
+                            <option className="inputDiag" value={v.idetapa}>{v.etapa}</option>))
+                        }                          
+                    </select>                          
+                </div>              
+                <div>
+                    <Button variant="primary" className="buttonMC"
+                    onClick={(e) =>{ 
+                        if(window.confirm("Esta seguro que desea actualizar la ruta del emprendedor?")){
+                        this.asignarRuta(e)
+                        }
+                        }
+                    }
+                    >Asignar</Button>
+                </div> 
+            </div>
+        </div>
+        )
+    }
 }
-
-export default TabEmprendedor

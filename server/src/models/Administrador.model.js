@@ -1,8 +1,9 @@
+const { query } = require('express')
 const pool = require('../database')
 const Controlador = {}
 
 Controlador.getCuentasActivar = (req , res) => {
-    const QUERY = "SELECT cedula as 'Cedula', nombreCompleto as 'Nombre Completo', correo as 'Correo', tipoUsuario as 'Rol' from USUARIOS WHERE estado = 0;"
+    const QUERY = "SELECT cedula as 'Cédula', nombreCompleto as 'Nombre Completo', correo as 'Correo', tipoUsuario as 'Rol' from USUARIOS WHERE estado = 0;"
     pool.query(QUERY,(err,data)=>{
         res.send(data)
     })
@@ -23,14 +24,14 @@ Controlador.deleteCuenta = (req,res) =>{
 }
 
 Controlador.getDiagnosticos = (req , res) => {
-    const QUERY = "SELECT U.cedula as 'Cedula', U.nombreCompleto as 'Nombre Completo', D.nombreIniciativa as 'Nombre Iniciativa', D.idea as 'Idea de proyecto', D.tipoEmprendimiento as 'Tipo Emprendimiento' FROM diagnostico AS D JOIN emprendedor AS E ON E.cedula = D.idEmpDiag JOIN usuarios AS U ON U.cedula = E.cedula WHERE D.revisado = 0"
+    const QUERY = "SELECT U.cedula as 'Cédula', U.nombreCompleto as 'Nombre Completo', D.nombreIniciativa as 'Nombre Iniciativa', D.idea as 'Idea de proyecto', D.tipoEmprendimiento as 'Tipo Emprendimiento' FROM diagnostico AS D JOIN emprendedor AS E ON E.cedula = D.idEmpDiag JOIN usuarios AS U ON U.cedula = E.cedula WHERE D.revisado = 0"
     pool.query(QUERY,(err,data) => {
         res.send(data)
     });
 }
 
 Controlador.getDiagnostico = (req , res) => {
-    const QUERY = "SELECT U.nombreCompleto, U.cedula, U.correo, DATE_FORMAT(E.fechaNacimiento,'%d/%m/%Y') as fechaNacimiento , E.direccion, E.celular, E.genero, E.Programa, E.ciudad, D.nombreIniciativa, D.idea, D.necesidad, D.cliente, D.desValidaciones, D.instrumentoValidacion, D.tipoEmprendimiento, D.tipoEconomia, D.vinculoConU, D.programa FROM diagnostico AS D JOIN emprendedor AS E ON E.cedula = D.idEmpDiag JOIN usuarios AS U ON U.cedula = E.cedula WHERE U.cedula = '" + req.query.idEmprendedor + "'";
+    const QUERY = "SELECT U.nombreCompleto, U.cedula, U.correo, DATE_FORMAT(E.fechaNacimiento,'%d/%m/%Y') as fechaNacimiento , E.direccion, E.celular, E.genero, E.programa, E.ciudad, D.nombreIniciativa, D.idea, D.necesidad, D.cliente, D.desValidaciones, D.instrumentoValidacion, D.tipoEmprendimiento, D.tipoEconomia, D.vinculoConU, D.archivo FROM diagnostico AS D JOIN emprendedor AS E ON E.cedula = D.idEmpDiag JOIN usuarios AS U ON U.cedula = E.cedula WHERE U.cedula = '" + req.query.idEmprendedor + "'";
     pool.query(QUERY,(err,data)=>{
         res.send(data);
     });
@@ -90,6 +91,45 @@ Controlador.postRuta = (req , res) => {
             });         
         }
     });
+}
+
+Controlador.getEmprendedores = (req,res) =>{
+    const query = "SELECT U.cedula as Cédula, U.nombreCompleto as 'Nombre Completo',U.correo as 'Correo Electrónico',IF(E.celular IS NULL, '----', E.celular ) AS Celular FROM usuarios as U JOIN emprendedor as E ON U.cedula = E.cedula WHERE estado = 1"
+    pool.query(query,(err,data) =>{
+        res.send(data);
+    })
+}
+
+Controlador.getEmprendedor = (req,res) =>{
+    const {idEmprendedor} = req.query
+    pool.query("SELECT nombreCompleto from usuarios where cedula = " + idEmprendedor, (err,data) =>{
+        res.send(data)
+    })
+}
+
+Controlador.getMentor = (req,res) =>{
+    const query = "SELECT U.cedula as Cédula, U.nombreCompleto as 'Nombre Completo',U.correo as 'Correo Electrónico' from mentor as M JOIN usuarios as U ON U.cedula = M.cedula;"
+    pool.query(query,(err,data) =>{
+        res.send(data);
+    })
+}
+
+Controlador.getMentores = (req,res) =>{
+    const {idEmp} = req.query;
+    const query = "SELECT U.cedula as Cédula, U.nombreCompleto as 'Nombre Completo',U.correo as 'Correo Electrónico' FROM usuarios as U JOIN mentor as M ON U.cedula = M.cedula JOIN mentor_emprendedor as ME ON ME.idMentorME = M.cedula WHERE ME.idEmprenME = " + idEmp;
+    pool.query(query,(err,data) =>{
+        res.send(data);
+    })
+}
+
+Controlador.agregarMentor = (req,res) =>{
+    const {idEmp, idMentor} = req.body;
+    const query = "INSERT INTO mentor_emprendedor (idMentorME, idEmprenME) VALUES (" + idMentor + " , " + idEmp + ")";
+    pool.query(query,(err,data)=>{
+        if(!err){
+            res.send(data);
+        }
+    })
 }
 
 module.exports = Controlador;

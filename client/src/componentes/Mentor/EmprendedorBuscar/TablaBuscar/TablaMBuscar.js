@@ -41,7 +41,8 @@ export default class TablaMBuscar extends Component {
             td: (data) => {
               return <div>              
                 <Button className= "buttonTableO" class="btn btn-outline-primary" 
-                onClick={() =>{this.consultarEmprendedor({idUsuario: data.Cedula})}}>
+                onClick={() =>{
+                    this.consultarEmprendedor({idUsuario: data.Cédula})}}>
                     Consultar
                 </Button>
               </div>
@@ -49,7 +50,13 @@ export default class TablaMBuscar extends Component {
         }]
 
         return (
-        this.state.loading ? <div>Cargando datos</div> :         
+        this.state.loading ? 
+        <div className="container">
+            <Card.Body className="text-center">
+                <h3>No hay Emprendedores para mostrar</h3>
+            </Card.Body>
+        </div> 
+        :        
         <div className="Contenedor">
             <div className="card" >
                 <Card.Body className="card">

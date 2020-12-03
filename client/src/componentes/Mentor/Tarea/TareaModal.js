@@ -47,12 +47,9 @@ class TareaModal extends Component {
 
     onFileChange = e =>{
         e.preventDefault();
-        if(e.target.files && e.target.files.length >0){
-            const file = e.target.files[0]
-            this.setState({
-                [e.target.name] : file
-            })
-        }
+        this.setState({
+            [e.target.name] : e.target.files[0]
+        });
     }
 
     handleSubmit = e =>{
@@ -87,72 +84,64 @@ class TareaModal extends Component {
     render(){
         const {errors} = this.state
         return (
-            this.state.loading ? <></>
-            :
-            <div>
-                <Modal  show={true} onHide={this.handleClose} >
-                    <ModalHeader>
-                        <ModalTitle>Crear tarea</ModalTitle>
-                    </ModalHeader>
-                    <ModalBody className="crear-tarea">
-                        <form enctype="multipart/form-data">
+        this.state.loading ? <></>
+        :
+        <div>
+            <Modal  show={true} onHide={this.handleClose} >
+                <ModalHeader>
+                    <ModalTitle>Crear tarea</ModalTitle>
+                </ModalHeader>
+                <ModalBody className="crear-tarea">
+                    <form enctype="multipart/form-data">
+                    <div>
+                        <input name="nombreT" className="input-tarea" placeholder="Nombre tarea" type= "text" onChange={this.handleChange}></input> 
+                            {errors.nombreT && <small class="form-text font-weight-bold text-danger">{errors.nombreT}</small>}
+                        </div>
+                        <br></br>
                         <div>
-                            <input name="nombreT" className="input-tarea" placeholder="Nombre tarea" type= "text" onChange={this.handleChange}></input> 
-                                {errors.nombreT && <small class="form-text font-weight-bold text-danger">{errors.nombreT}</small>}
-                            </div>
-                            <br></br>
-                            <div>
-                                <textarea name="desT" className="des-tarea" placeholder="Descripción" type= "text" onChange={this.handleChange}></textarea> 
-                                {errors.desT && <small class="form-text font-weight-bold text-danger">{errors.desT}</small>}
-                            </div>
-                            
-                           
-                            <div>
-                            <br></br>
-                            <label className="crearTa-label">Etapa de la tarea</label><br/>
-                            <select name="etapa" className="input-tarea" type= "text" onChange={this.handleChange}>
-                                <option className="input-tarea" value="-1" disabled selected>Seleccione una etapa</option>
-                                {                       
-                                    this.state.etapas.map(v => (
-                                    <option className="inputDiagDC" value={v.idetapa}>{v.etapa}</option>))
-                                } 
-                            </select>
-                            {errors.etapa && <small class="form-text font-weight-bold text-danger">{errors.etapa}</small>}
-                            </div>
-                          
-                      
-                            <div>
-                            <br></br>
-                                <label className="crearTa-label">Fecha de entrega</label><br/>
-                                <input name="fechaTarea" className="input-tarea" placeholder="Fecha de entrega" type="datetime-local" onChange={this.handleChange}></input> 
-                                {errors.fechaTarea && <small class="form-text font-weight-bold text-danger">{errors.fechaTarea}</small>}
-                            </div>
-                            <div>
-                            <br></br>
-                                <h6>Adjunta un archivo</h6>
-                                <input name="file" className= "modalT" type="file" onChange={this.onFileChange}/>                            
-                            </div>
-                        </form>
-                    </ModalBody>
-
-                    <ModalFooter>
-                    <Button className= "buttonTable" class="btn btn-outline-primary" 
-                        onClick={ e =>{ 
-                                if(window.confirm("Esta seguro que desea asignar la tarea?")){
-                                    this.handleSubmit(e)
-                                }
+                            <textarea name="desT" className="des-tarea" placeholder="Descripción" type= "text" onChange={this.handleChange}></textarea> 
+                            {errors.desT && <small class="form-text font-weight-bold text-danger">{errors.desT}</small>}
+                        </div>             
+                        <div>
+                        <br></br>
+                        <label className="crearTa-label">Etapa de la tarea</label><br/>
+                        <select name="etapa" className="input-tarea" type= "text" onChange={this.handleChange}>
+                            <option className="input-tarea" value="-1" disabled selected>Seleccione una etapa</option>
+                            {                       
+                                this.state.etapas.map(v => (
+                                <option className="inputDiagDC" value={v.idetapa}>{v.etapa}</option>))
+                            } 
+                        </select>
+                        {errors.etapa && <small class="form-text font-weight-bold text-danger">{errors.etapa}</small>}
+                        </div>                     
+                        <div>
+                        <br></br>
+                            <label className="crearTa-label">Fecha de entrega</label><br/>
+                            <input name="fechaTarea" className="input-tarea" placeholder="Fecha de entrega" type="datetime-local" onChange={this.handleChange}></input> 
+                            {errors.fechaTarea && <small class="form-text font-weight-bold text-danger">{errors.fechaTarea}</small>}
+                        </div>
+                        <div>
+                        <br></br>
+                            <h6>Adjunta un archivo</h6>
+                            <input name="file" className= "modalT" type="file" onChange={this.onFileChange}/>                            
+                        </div>
+                    </form>
+                </ModalBody>
+                <ModalFooter>
+                <Button className= "buttonTable" class="btn btn-outline-primary" 
+                    onClick={ e =>{ 
+                            if(window.confirm("Esta seguro que desea asignar la tarea?")){
+                                this.handleSubmit(e)
                             }
                         }
-                        >Crear</Button>
-
-                        <Link className= "buttonTableO" class="btn btn-outline-primary"
-                            to="/Mentor/Emprendedor" 
-                        >Cancelar</Link> 
-                    </ModalFooter>
-
-                </Modal>
-
-            </div>
+                    }
+                    >Crear</Button>
+                    <Link className= "buttonTableO" class="btn btn-outline-primary"
+                        to="/Mentor/Emprendedor" 
+                    >Cancelar</Link> 
+                </ModalFooter>
+            </Modal>
+        </div>
         )
     }
 }

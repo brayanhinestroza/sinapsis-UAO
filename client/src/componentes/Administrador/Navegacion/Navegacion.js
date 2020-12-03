@@ -22,7 +22,7 @@ function Navegacion() {
                              <Link class="nav-link" to="/Administrador/Diagnosticos">DIAGNÓSTICOS</Link>
                         </li>
                         <li className="nav-item">
-                             <Link class="nav-link" to="/Administrador/Diagnosticos">EMPRENDEDORES</Link>
+                             <Link class="nav-link" to="/Administrador/Emprendedores">EMPRENDEDORES</Link>
                         </li>
                     </ul>
                 </div>

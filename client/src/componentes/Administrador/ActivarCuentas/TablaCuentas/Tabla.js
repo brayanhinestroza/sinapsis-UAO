@@ -25,7 +25,7 @@ export default class Tabla extends Component {
         Axios.put("http://localhost:5000/Administrador/Cuenta",{
             cedula: e.idUsuario
         })
-        .then(res =>{
+        .then(res =>{            
             alert("Activacion exitosa");
             window.location.href = "/Administrador/Activar";
         })        
@@ -40,7 +40,7 @@ export default class Tabla extends Component {
         .then(res =>{
             // eslint-disable-next-line
             if(res.data.affectedRows == 1 ){
-                alert("Eliminacion exitosa");
+                alert("Eliminación exitosa");
                 window.location.href = "/Administrador/Activar"
             }else{
                 console.log(res);
@@ -54,14 +54,20 @@ export default class Tabla extends Component {
             header: "Acciones",
             td: (data) => {
               return <div>
-                <Button className= "buttonTable" variant="primary" onClick={()=> this.ActivarCuenta({idUsuario: data.Cedula})}>Activar</Button>                
-                <Button className= "buttonTableO" class="btn btn-outline-primary" onClick={() => this.eliminarCuenta({idUsuario: data.Cedula})}>Eliminar</Button>
+                <Button className= "buttonTable" variant="primary" onClick={()=> this.ActivarCuenta({idUsuario: data.Cédula})}>Activar</Button>                
+                <Button className= "buttonTableO" class="btn btn-outline-primary" onClick={() => this.eliminarCuenta({idUsuario: data.Cédula})}>Eliminar</Button>
               </div>
             }
         }]
 
         return (
-        this.state.loading ? <div> NO CUENTAS PARA ACTIVAR</div> :         
+        this.state.loading ? 
+        <div className="container">
+            <Card.Body className="text-center">
+                <h3>No hay cuentas pendientes de activación</h3>
+            </Card.Body>
+        </div> 
+        :         
         <div className="Contenedor">
             <div className="card" >
                 <Card.Body className="card">

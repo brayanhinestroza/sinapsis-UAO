@@ -1,12 +1,11 @@
-import React, { Component } from 'react'
-import Navbar from '../../Navbar/Navbar'
-import './DiagnosticoConsulta.css'
-import '../../Registro/Registro.css'
+import React, { Component } from 'react';
+import Axios from 'axios';
 import Navegacion from '../Navegacion/Navegacion'
-import Axios from 'axios'
-import { Redirect } from 'react-router-dom';
 import ContenedorAsignar from './ContenedorAsignar';
-import Cookies from 'universal-cookie'
+import Cookies from 'universal-cookie';
+import Navbar from '../../Navbar/Navbar';
+import '../../Registro/Registro.css';
+import './DiagnosticoConsulta.css';
 
 const cookies =  new Cookies();
 
@@ -18,7 +17,7 @@ class DiagnosticoConsulta extends Component {
       idEmprendedor : cookies.get("idEmprendedor"),
       loading: true,
       datos: null,
-      diagnosticoRealizado:false
+      URLarchivo: ""
     }    
   }
 
@@ -29,22 +28,27 @@ class DiagnosticoConsulta extends Component {
         idEmprendedor: this.state.idEmprendedor
       }
     })
-    .then((response) =>{
-      this.setState({datos:response.data[0], loading:false});
-    });
+    .then(res =>{      
+      this.setState({datos:res.data[0], loading:false});
+    })
+    .then(()=> this.obtenerArchivo())
+  }
+
+  obtenerArchivo = () =>{
+    const {archivo}  = this.state.datos;
+    const buffer = Buffer.from(archivo);
+    this.setState({URLarchivo : buffer.toString() })
   }
 
   render(){
     return (
-      this.state.diagnosticoRealizado ? <Redirect to="/Administrador/Diagnosticos"/>
-      :
       this.state.loading ? 
       <div>Cargando</div>
       :
-        <div className="body-diagnosticoDC">
-          <div>
+      <div className="body-diagnosticoDC">
+        <div>
           <Navbar></Navbar>
-          </div>
+        </div>
           
           <div>
             <Navegacion></Navegacion>
@@ -184,13 +188,13 @@ class DiagnosticoConsulta extends Component {
                   <div>
                     <label className="nombreInputDC">Autodiagnóstico</label>
                     <br></br>
-                    Aqui va el archivo xd xd
+                    <p>Descarga el formato del emprendedor <a href={"http://localhost:5000/"+this.state.URLarchivo} target="_blank">Aquí</a></p>
                     <br></br>
                     <br></br>
                   </div>                 
               </div>                
           </div>
-          <ContenedorAsignar emprendedor={this.state.idEmprendedor}/>
+          <ContenedorAsignar emprendedor={"http://localhost:5000/"+this.state.idEmprendedor}/>
           </div>
         </div>
     )

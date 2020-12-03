@@ -1,11 +1,35 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import ModalHeader from "react-bootstrap/ModalHeader";
 import { Modal, ModalBody, ModalFooter,ModalTitle, Button } from 'react-bootstrap'
 import './TareaModal.css'
+import Cookies from 'universal-cookie'
+import Axios from 'axios'
 
 
-function TareaModal() {
+const cookies = new Cookies();
+class TareaModal extends Component {
+    state={URLarchivo:"#"}
+
+    /*componentDidMount(){
+        Axios.get("http://localhost:5000/Mentor//RevisarTarea",{
+            params:{
+                idTarea: cookies.get("idTareaM")
+            }
+        })
+        .then(res =>{
+            if(res.data.length>0){
+                this.setState({archivo:res.data[0].archivoM,loading:false});
+            }            
+        })
+        .then(() =>{
+            const {archivo}  = this.state;
+            const buffer = Buffer.from(archivo);
+            this.setState({URLarchivo : buffer.toString() })
+        })
+    }*/
+    
+render(){
     return (
         <div>
             <Modal show={true}>
@@ -21,8 +45,14 @@ function TareaModal() {
                     
                     <div>
                                      
-                      <h6>Archivo de la tarea</h6>  
-                      <div>aqui va el archivo</div>
+                      <h6>Archivo de la tarea</h6> 
+                      <br/>  
+                      <div>
+                        <a className="text-center" href={"http://localhost:5000/" +this.state.URLarchivo} target="_blank">
+                            <img src="http://localhost:5000/download.png" height="150"/>
+                        </a>
+                        <br/>                       
+                    </div>
                     </div>
                     
 
@@ -30,7 +60,7 @@ function TareaModal() {
                     <div>
                     <br></br>
                     <h6 className= "fileT-label">Sube tu tarea</h6>
-                    <input className= "fileT" type="file" />
+                    <input name="file" className= "fileT" type="file" />
 
                     </div>
 
@@ -38,7 +68,7 @@ function TareaModal() {
                     <br></br>
                     <h6>Retroalimentación (cuando sea revisada)</h6>
                     <label className="crearTa-label">Comentarios </label><br/>  
-                     <textarea name="desT" className="des-tarea" placeholder="No hay comentarios" type= "text" ></textarea>  
+                     <textarea name="desT" className="des-tarea" placeholder="No hay comentarios" type= "text" disabled></textarea>  
                     </div>
 
                 </ModalBody>
@@ -52,5 +82,6 @@ function TareaModal() {
                 </Modal>
         </div>
     )
+    }
 }
 export default TareaModal

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component} from 'react'
 import Modal from "react-bootstrap/Modal";
 import ModalBody from "react-bootstrap/ModalBody";
 import ModalHeader from "react-bootstrap/ModalHeader";
@@ -7,7 +7,12 @@ import ModalTitle from "react-bootstrap/ModalTitle";
 import { Card, Button } from 'react-bootstrap'
 import './VerConsultoria.css'
 
-function VerConsultoria() {
+class VerConsultoria extends Component {
+    revisarConsultoria = e =>{
+
+    }
+    
+    render(){
     return (
         <div>
             <Modal  show={true}>
@@ -55,16 +60,18 @@ function VerConsultoria() {
                 </ModalBody>
 
                 <ModalFooter>
-                 <Button className= "buttonTable" class="btn btn-outline-primary" 
-                    >Guardar</Button>
+                <Button className= "buttonTable" class="btn btn-outline-primary" onClick={()=> this.revisarConsultoria()} 
+                    >Revisar</Button>
 
-                    <Button className= "buttonTableO" class="btn btn-outline-primary" 
-                    >Cancelar</Button> 
+                    <Link className= "buttonTableO" class="btn btn-outline-primary"
+                        to="/Mentor/Emprendedor" 
+                    >Cancelar</Link>
                 </ModalFooter>
 
                 </Modal>
 
         </div>
     )
+    }
 }
 export default VerConsultoria

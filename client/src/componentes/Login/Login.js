@@ -18,7 +18,7 @@ const validaciones = valores =>{
   }else{
     const regExp = /^\D*\d{5,11}$/
     if(!regExp.test(cedula)){
-      errors.cedula = "Solo se permiten numeros de 5 a 11 digitos"
+      errors.cedula = "Solo se permiten números de 5 a 11 dígitos"
     }    
   }
   //Validaciones de Contrasena

@@ -3,7 +3,7 @@ import { Card, Button } from 'react-bootstrap'
 import Cookies from 'universal-cookie'
 import Axios from 'axios'
 import Table from 'react-flexy-table'
-import "./TablaMBuscar.css"
+import "./TablaABuscar.css"
 
 const cookies =  new Cookies();
 export default class TablaMBuscar extends Component {
@@ -17,11 +17,7 @@ export default class TablaMBuscar extends Component {
     }
 
     componentDidMount(){        
-        Axios.get("http://localhost:5000/Mentor/Emprendedores",{
-            params:{
-                idMentor: cookies.get("cedula")
-            }
-        })
+        Axios.get("http://localhost:5000/Administrador/Emprendedores")
         .then(res =>{
             if(res.data.length>0){
                 this.setState({datos:res.data, loading:false});
@@ -31,7 +27,7 @@ export default class TablaMBuscar extends Component {
 
     consultarEmprendedor = e =>{
         cookies.set("idEmprendedor" , e.idUsuario);
-        window.location.href = "/Mentor/Emprendedor";             
+        window.location.href = "/Administrador/Emprendedor";             
     }
 
     render() { 
@@ -41,7 +37,8 @@ export default class TablaMBuscar extends Component {
             td: (data) => {
               return <div>              
                 <Button className= "buttonTableO" class="btn btn-outline-primary" 
-                onClick={() =>{this.consultarEmprendedor({idUsuario: data.Cedula})}}>
+                onClick={() =>{
+                    this.consultarEmprendedor({idUsuario: data.Cédula})}}>
                     Consultar
                 </Button>
               </div>
@@ -49,7 +46,13 @@ export default class TablaMBuscar extends Component {
         }]
 
         return (
-        this.state.loading ? <div>Cargando datos</div> :         
+        this.state.loading ? 
+        <div className="container">
+            <Card.Body className="text-center">
+                <h3>No hay emprendedores para mostrar</h3>
+            </Card.Body>
+        </div> 
+        :           
         <div className="Contenedor">
             <div className="card" >
                 <Card.Body className="card">

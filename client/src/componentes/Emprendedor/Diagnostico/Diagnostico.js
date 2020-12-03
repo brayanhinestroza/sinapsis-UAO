@@ -10,7 +10,7 @@ import '../../Registro/Registro.css'
 const cookie = new Cookies();
 const validaciones = valores =>{
   const errors = {}
-  const {celular,ciudad, clienteEmprendimiento, descripcionEmprendimiento, direccion, fechaNacimiento, genero, instrumentosValidacion, 
+  const {celular,ciudad,file, clienteEmprendimiento, descripcionEmprendimiento, direccion, fechaNacimiento, genero, instrumentosValidacion, 
     necedidadEmprendimiento, nombreEmprendimiento, programa, tipoEconomia, tipoEmprendimiento, validacionesEmprendimiento, vinculoConU} = valores
   if(!fechaNacimiento){
     errors.fechaNacimiento = "Campo Obligatorio"
@@ -26,7 +26,7 @@ const validaciones = valores =>{
   }else{
     const RegExp = /^\D*\d{1,10}$/
     if(!RegExp.test(celular)){
-      errors.celular = "Solo se permiten numeros y maximo 10 digitos"
+      errors.celular = "Solo se permiten números y máximo 10 dígitos"
     }
   }
   if(!genero){
@@ -62,6 +62,10 @@ const validaciones = valores =>{
   if(!tipoEconomia){
     errors.tipoEconomia = "Campo Obligatorio"
   }
+  if(!file){
+    errors.archivo = "Campo Obligatorio"
+  }
+
   return errors
 }
 
@@ -89,20 +93,51 @@ class Diagnostico extends Component {
     e.preventDefault()
     const {errors, ...SinError} = this.state
     const result = validaciones(SinError);
-    console.log(result);
     if(Object.keys(result).length){
       this.setState({errors: result})
     }
     else{
-      Axios.post("http://localhost:5000/Emprendedor/Diagnostico", SinError)
+      console.log("Entra qui");
+      const form = new FormData();
+      const {celular,ciudad,file, clienteEmprendimiento, descripcionEmprendimiento, direccion, fechaNacimiento, genero, instrumentosValidacion, 
+        necedidadEmprendimiento, nombreEmprendimiento, programa, tipoEconomia, tipoEmprendimiento, validacionesEmprendimiento, vinculoConU} = this.state
+        form.append('cedula', this.state.cedula )
+        form.append('celular', celular )
+        form.append('ciudad', ciudad)
+        form.append('file', file)
+        form.append('clienteEmprendimiento', clienteEmprendimiento)
+        form.append('descripcionEmprendimiento', descripcionEmprendimiento)
+        form.append('direccion', direccion)
+        form.append('fechaNacimiento', fechaNacimiento)
+        form.append('genero', genero )
+        form.append('instrumentosValidacion', instrumentosValidacion)
+        form.append('necedidadEmprendimiento', necedidadEmprendimiento)
+        form.append('nombreEmprendimiento', nombreEmprendimiento)
+        form.append('programa', programa)
+        form.append('tipoEconomia', tipoEconomia)
+        form.append('tipoEmprendimiento', tipoEmprendimiento)
+        form.append('validacionesEmprendimiento', validacionesEmprendimiento )
+        form.append('vinculoConU', vinculoConU)
+
+      Axios.post("http://localhost:5000/Emprendedor/Diagnostico", form)
       .then(res=> {
-        if(Object.keys(res.data).length){
+        if(res.data.res1.affectedRows == 1 && res.data.res2.affectedRows == 1 ){
           alert("Diagnostico enviado correctamente");
           window.location.href = "/Emprendedor"
         }else{
           alert("Ha ocurrido un error");
-        }       
+        } 
       })
+    }
+  }
+
+  onFileChange = e =>{
+    e.preventDefault();
+    if(e.target.files && e.target.files.length >0){
+        const file = e.target.files[0]
+        this.setState({
+            [e.target.name] : file
+        })
     }
   }
 
@@ -122,8 +157,7 @@ class Diagnostico extends Component {
         </Modal.Footer>
       </Modal>
     )     
-    : 
-             
+    :              
     <div className="body-diagnostico">
       <Navbar></Navbar>
       <Navegacion></Navegacion>
@@ -132,7 +166,7 @@ class Diagnostico extends Component {
           <h3>Diagnóstico</h3>
       </div>
 
-      <div className="contenedorDiag">
+      <form enctype="multipart/form-data" className="contenedorDiag">
           <div className="contenedorIzqD">
               <div className="Subtitulo">
               <h5>Información del emprendedor</h5>
@@ -298,12 +332,20 @@ class Diagnostico extends Component {
               <div>
               <br></br>
                 <h5 className="">Descarga el formato del autodiagnóstico, digiléncialo y súbelo</h5>
-                <br></br>
-                <h6>
-                  Sube tu autodiagnóstico:
-                  <input className="input-fileD" type="file"  />
-                </h6>
-                
+                <br/>
+                <div>
+                  <a className="btn-archivo" href="http://localhost:5000/AutoDiagnosticoSinapsis.xlsm">
+                    <img src="http://localhost:5000/download.png" height="150"/>
+                  </a>
+                </div>
+                <br/>
+                <hr></hr>
+                <h4>Sube tu autodiagnóstico</h4>
+                <div className="mt-2">
+                  <h6> Diagnóstico:</h6>
+                  <input name="file" className="input-fileD" type="file" onChange={this.onFileChange}/>
+                  {errors.file && <small class="form-text font-weight-bold text-danger">{errors.file}</small>}
+                </div>               
               </div>
 
               <div>
@@ -317,7 +359,7 @@ class Diagnostico extends Component {
                   Enviar diagnóstico </Button>
               </div>               
           </div>
-      </div>          
+      </form>          
     </div>
     )
   }

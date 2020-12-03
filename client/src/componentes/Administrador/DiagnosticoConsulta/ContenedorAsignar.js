@@ -13,7 +13,7 @@ constructor(props){
     }
 }
 //Ciclo de vida del componente
-async componentDidMount(){
+componentDidMount(){
     this.consultarEtapas();
     this.consultarMentores();
     this.setState({loading:false})

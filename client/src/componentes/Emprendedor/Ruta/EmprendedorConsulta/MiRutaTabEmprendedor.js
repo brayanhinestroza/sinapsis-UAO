@@ -165,7 +165,7 @@ class MiRutaTabEmprendedor extends Component {
                     <div className={"circulo " + this.state.ruta.pensar.color}><span>2</span></div>
                 </div>
                 <div>
-                    <div className="mr-auto ml-auto">Probar</div>
+                    <div className="mr-auto ml-auto">Testear</div>
                     <div className={"circulo " + this.state.ruta.testear.color}><span>3</span></div>
                 </div>
                 <div>

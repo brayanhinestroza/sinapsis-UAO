@@ -1,9 +1,9 @@
 import React from 'react';
 import Navbar from '../../Navbar/Navbar'
-import '../Navegacion/Navegacion';
 import Navegacion from '../Navegacion/Navegacion';
+import TablaEmp from './TablaBuscar/TablaABuscar';
+import '../Navegacion/Navegacion';
 import '../../Navbar/Navbar.css'
-import TablaEmp from './TablaBuscar/TablaMBuscar';
 import './EmprendedorBuscar.css'
 
 function EmprendedorBuscar() {

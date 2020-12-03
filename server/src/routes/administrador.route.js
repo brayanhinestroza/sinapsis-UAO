@@ -17,4 +17,16 @@ router.route('/Diagnostico') //
     .post(Administador.postRuta)//
     .delete(Administador.deleteDiagnostico)//  
 
+router.route('/Emprendedores')
+    .get(Administador.getEmprendedores)
+
+router.route('/Emprendedor')
+    .get(Administador.getEmprendedor)
+
+router.route('/Mentor')
+    .get(Administador.getMentor)
+    .post(Administador.agregarMentor)
+router.route('/Mentores')
+    .get(Administador.getMentores)    
+
 module.exports = router;

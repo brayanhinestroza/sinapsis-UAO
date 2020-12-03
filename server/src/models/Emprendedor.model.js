@@ -9,15 +9,14 @@ Emprendedor.postDiagnostico = (req , res) => {
     pool.query(query, (err, data) =>{
         if(err){
             res.send(err);
-        }else{
+        }else{            
             const resultado1 = data;
-            const query2 = "INSERT INTO diagnostico(nombreIniciativa,idea,necesidad,cliente,desValidaciones,instrumentoValidacion,tipoEmprendimiento,tipoEconomia,idEmpDiag, vinculoConU) VALUES "
+            const archivo = req.file.originalname;
+            const query2 = "INSERT INTO diagnostico(nombreIniciativa,idea,necesidad,cliente,desValidaciones,instrumentoValidacion,tipoEmprendimiento,tipoEconomia,idEmpDiag, vinculoConU, archivo) VALUES "
                             + "('" + nombreEmprendimiento + "','" + descripcionEmprendimiento + "','" + necedidadEmprendimiento + "','" + clienteEmprendimiento +  "','" + 
-                            validacionesEmprendimiento + "','" + instrumentosValidacion + "','" + tipoEmprendimiento + "','" + tipoEconomia + "','" + cedula + "','" + vinculoConU + "')";
-
+                            validacionesEmprendimiento + "','" + instrumentosValidacion + "','" + tipoEmprendimiento + "','" + tipoEconomia + "','" + cedula + "','" + vinculoConU +"', '" + archivo + "')";
             pool.query(query2, (err,data) =>{
                 if(err){
-                    console.log(err);
                     res.send(err);
                 }else{
                     res.send({res1:resultado1, res2:data});         
@@ -62,7 +61,7 @@ Emprendedor.getTareas = (req,res) =>{
 
 Emprendedor.getConsultorias = (req,res) =>{
     const {idEmp} = req.query
-    const query = "SELECT nombreCompleto as 'Nombre Emprendedor', nombreConsultoria as 'Nombre consultoria', asuntoConsultoria as Asunto, DATE_FORMAT(fechaConsultoria, '%d/%m/%Y') as 'Fecha Consultoria', TIME_FORMAT(horaInicio, '%l:%i %p') as 'Hora inicio', TIME_FORMAT(horaFin, '%l:%i %p') as 'Hora fin' FROM consultoria as C JOIN mentor as M ON C.idMentorConsultoria = M.cedula JOIN usuarios as U ON C.idMentorConsultoria = U.cedula JOIN emprendedor as E ON C.idEmpConsultoria = E.cedula WHERE E.cedula =" + idEmp;
+    const query = "SELECT nombreCompleto as 'Nombre Emprendedor', nombreConsultoria as 'Nombre consultoría', asuntoConsultoria as 'Asunto Consultoría', DATE_FORMAT(fechaConsultoria, '%d/%m/%Y') as 'Fecha Consultoría', TIME_FORMAT(horaInicio, '%l:%i %p') as 'Hora inicio', TIME_FORMAT(horaFin, '%l:%i %p') as 'Hora fin' FROM consultoria as C JOIN mentor as M ON C.idMentorConsultoria = M.cedula JOIN usuarios as U ON C.idMentorConsultoria = U.cedula JOIN emprendedor as E ON C.idEmpConsultoria = E.cedula WHERE E.cedula =" + idEmp;
     pool.query(query, (err,data)=>{
         res.send(data);
     })

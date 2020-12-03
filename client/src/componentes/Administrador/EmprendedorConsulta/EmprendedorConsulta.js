@@ -3,7 +3,7 @@ import Axios from 'axios'
 import Cookies from 'universal-cookie';
 import Navbar from '../../Navbar/Navbar';
 import Navegacion from '../Navegacion/Navegacion';
-import TabEmp from './TabEmprendedor';
+import TabEmp from './Tab/TabEmprendedor';
 import '../Navegacion/Navegacion';
 
 
@@ -14,34 +14,34 @@ class EmprendedorConsulta extends Component {
   }
 
   componentDidMount(){
-    Axios.get("http://localhost:5000/Mentor/Emprendedor",{
+    Axios.get("http://localhost:5000/Administrador/Emprendedor",{
       params: {
         idEmprendedor: cookies.get("idEmprendedor")
       }
     })
-    .then(res =>{      
+    .then(res =>{
+      console.log(res.data);    
       this.setState({emprendedor: res.data[0].nombreCompleto, loading: false})
     })
   }	
     render(){
-        return (
-          this.state.loading ? <></>
-          :
-        <div>           
-            <Navbar></Navbar>
-            <Navegacion></Navegacion> 
-           
+      return (
+      this.state.loading ? <></>
+      :
+      <div>           
+        <Navbar></Navbar>
+        <Navegacion></Navegacion>            
         <div> 
           <div className="titulopaginaMC">
-        <h3>Emprendedores/ {this.state.emprendedor}</h3>
+            <h3>Emprendedores/ {this.state.emprendedor}</h3>
           </div>
           <div className= "contenedorMC">
-                <div className="Tab">
-                    <TabEmp></TabEmp>                    
-                </div>
+            <div className="Tab">
+                <TabEmp></TabEmp>                    
+            </div>
           </div>
-      </div> 
-        </div>
+        </div> 
+      </div>
     )
   }
 }

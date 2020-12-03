@@ -1,9 +1,9 @@
 import React from 'react';
 import Navbar from '../../Navbar/Navbar'
-import '../Navegacion/Navegacion';
 import Navegacion from '../Navegacion/Navegacion';
-import '../../Navbar/Navbar.css'
 import Tabla from './TablaBuscar/Tabla';
+import '../Navegacion/Navegacion';
+import '../../Navbar/Navbar.css'
 import './DiagnosticoBuscar.css'
 
 function DiagnosticoBuscar() {
@@ -16,7 +16,7 @@ function DiagnosticoBuscar() {
             <h3>Diagnósticos</h3>
           </div>
           <div className= "contenedorDAD">
-            <Tabla dato="Diagnosticos" textoBoton="Revisar" title="diagnóstico"></Tabla>
+            <Tabla/>
           </div>
       </div>
     </div>

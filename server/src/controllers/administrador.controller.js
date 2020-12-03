@@ -30,4 +30,24 @@ administrador.postRuta = (req,res) => {
     Administrador.postRuta(req, res); 
 }
 
+administrador.getEmprendedores = (req,res) =>{
+    Administrador.getEmprendedores(req,res);
+}
+
+administrador.getEmprendedor = (req,res) =>{
+    Administrador.getEmprendedor(req,res);
+}
+
+administrador.getMentores = (req,res) =>{
+    Administrador.getMentores(req,res);
+}
+
+administrador.getMentor = (req,res) =>{
+    Administrador.getMentor(req,res);
+}
+
+administrador.agregarMentor =(req,res) =>{
+    Administrador.agregarMentor(req,res);
+}
+
 module.exports = administrador;

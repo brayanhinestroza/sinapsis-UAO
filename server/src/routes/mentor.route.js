@@ -19,4 +19,8 @@ router.route('/Tarea')//
     .get(Mentor.getTareas)//
     .post(Mentor.crearTarea)//
 
+router.route('/RevisarTarea')
+    .get(Mentor.revisarTarea)
+    .put(Mentor.calificarTarea)
+
 module.exports = router;

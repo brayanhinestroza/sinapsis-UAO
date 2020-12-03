@@ -29,4 +29,12 @@ mentor.getTareas = (req,res) =>{
     Mentor.getTareas(req,res);
 }
 
+mentor.revisarTarea = (req,res) =>{
+    Mentor.revisarTarea (req,res);
+}
+
+mentor.calificarTarea = (req,res) =>{
+    Mentor.calificarTarea(req,res) ;
+}
+
 module.exports = mentor;
