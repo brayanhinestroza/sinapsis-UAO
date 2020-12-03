@@ -1,38 +1,67 @@
 import React, {Component} from 'react'
-import Modal from "react-bootstrap/Modal";
-import ModalBody from "react-bootstrap/ModalBody";
+import { Button, ModalBody, ModalFooter, ModalTitle, Modal } from 'react-bootstrap'
 import ModalHeader from "react-bootstrap/ModalHeader";
-import ModalFooter from "react-bootstrap/ModalFooter";
-import ModalTitle from "react-bootstrap/ModalTitle";
-import { Card, Button } from 'react-bootstrap'
+import {Link} from 'react-router-dom'
+import Axios from 'axios'
+import Cookies from 'universal-cookie'
 import './VerConsultoria.css'
 
+const cookies = new Cookies();
 class VerConsultoria extends Component {
-    revisarConsultoria = e =>{
 
+    state={
+        datos:null,
+        loading:true
+    }
+    componentDidMount(){
+        Axios.get("http://localhost:5000/Mentor/RevisarConsultoria",{params:{idConsultoria: cookies.get("idConsultoria")}})
+        .then(res =>{
+            this.setState({datos:res.data[0], loading:false});
+        })
+    }
+
+    revisarConsultoria = e =>{
+        const {comentario} = this.state;
+        Axios.put("http://localhost:5000/Mentor/RevisarConsultoria",{
+            comentario,
+            idConsultoria: cookies.get("idConsultoria")
+        })
+        .then(res =>{
+            console.log(res);
+            if(res.data.affectedRows>0){
+                alert("Comentario guardado correctamente")
+                window.location.href = "/Mentor/Emprendedor"
+            }
+        })
+    }
+
+    HandleChange(e){
+        this.setState({[e.target.name]: e.target.value});
     }
     
     render(){
     return (
+        this.state.loading?<></>
+        :
         <div>
-            <Modal  show={true}>
+            <Modal show={true}>
                 <ModalHeader>
-                    <ModalTitle>Nombre consultoria</ModalTitle>
+                    <ModalTitle>{this.state.datos.nombreConsultoria}</ModalTitle>
                 </ModalHeader>
                 <ModalBody className= "VerConBody">
 
                 <div>
-                    <label className="con-label">Asunto</label>
+                    <label className="con-label">Asunto de la Consultoría</label>
                     <br></br>
-                    <input name="direccion" className="inputVerCon" placeholder="Asunto" type= "text" ></input>                   
+                    <label name="direccion" className="inputVerCon">{this.state.datos.asuntoConsultoria}</label>                   
                 </div>
 
                 <br></br> 
 
                 <div>      
-                    <label className="con-label">Fecha</label>
+                    <label className="con-label">Fecha de la Consultoría</label>
                     <br></br>
-                    <input name="direccion" className="inputVerCon" placeholder="Fecha" type= "text" ></input>                   
+                    <label name="direccion" className="inputVerCon">{this.state.datos.fechaConsultoria}</label>                   
                 </div>
 
                 <br></br> 
@@ -40,20 +69,21 @@ class VerConsultoria extends Component {
                 <div className="con-hora">      
                     <label className="con-label">Hora de inicio</label>
                     
-                    <input name="direccion" className="input-hora" placeholder="Hora" type= "text" ></input>    
+                    <input name="direccion" className="input-hora" disabled placeholder={this.state.datos.horaInicio}></input>    
                     
                     <label className="con-label">Hora de fin</label>
                     
-                    <input name="direccion" className="input-hora" placeholder="Hora" type= "text" ></input>  
+                    <input name="direccion" className="input-hora" disabled placeholder={this.state.datos.horaFin}></input>  
                                    
                 </div>
 
                 <br></br> 
-
+                {// solo entran comentarios
+                }
                 <div>      
                     <label className="con-label">Comentarios</label>
                     <br></br>
-                    <textarea name="direccion" className="con-comentario" placeholder="Comentarios" type= "text" ></textarea>                   
+                    <textarea name="comentario" className="con-comentario" placeholder="Comentarios" type= "text" onChange={(e)=> this.HandleChange(e)}></textarea>                   
                 </div>
 
      
@@ -61,7 +91,7 @@ class VerConsultoria extends Component {
 
                 <ModalFooter>
                 <Button className= "buttonTable" class="btn btn-outline-primary" onClick={()=> this.revisarConsultoria()} 
-                    >Revisar</Button>
+                    >Guardar</Button>
 
                     <Link className= "buttonTableO" class="btn btn-outline-primary"
                         to="/Mentor/Emprendedor" 

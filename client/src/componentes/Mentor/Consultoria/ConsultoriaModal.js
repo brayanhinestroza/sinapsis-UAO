@@ -104,16 +104,13 @@ class ConsultoriaModal extends Component {
                             <textarea name="asunto" className="inputR" placeholder="Asunto" onChange={this.handleChange}></textarea> 
                             {errors.asunto && <small class="form-text font-weight-bold text-danger">{errors.asunto}</small>}
                         </div>
-                        <br></br>
-                        <div>
-                            <textarea name="comentario" className="inputR" placeholder="Comentario Adicional" onChange={this.handleChange}></textarea> 
-                        </div>         
+                        <br></br>    
                     </ModalBody>
 
                     <ModalFooter>
                         <Button className= "buttonTable" class="btn btn-outline-primary" 
                         onClick={ e =>{ 
-                            if(window.confirm("Esta seguro que desea crear la consultoria?")){
+                            if(window.confirm("¿Está seguro que desea crear la consultoría?")){
                             this.handleSubmit(e)
                             }
                             }

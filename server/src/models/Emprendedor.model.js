@@ -53,10 +53,20 @@ Emprendedor.getEtapa = (req,res) => {
 
 Emprendedor.getTareas = (req,res) =>{
     const {idEmprendedor} = req.query;
-    const query = "SELECT  T.idTarea as 'N',nombreTarea as 'Nombre de tarea', M.nombreCompleto as 'Mentor', DATE_FORMAT(fechaTarea, '%d/%m/%Y - %h:%i %p') as 'Fecha Entrega',E.etapa as 'Etapa de la Tarea', CASE WHEN T.entregada = 0 THEN 'No' ELSE 'Si' END AS Entregada FROM tarea as T JOIN usuarios as M ON T.idMenTarea = M.cedula JOIN etapa as E ON T.idEtapaTarea = E.idetapa WHERE T.idEmpTarea = " + idEmprendedor;
+    const query = "SELECT  T.idTarea as 'N',nombreTarea as 'Nombre de tarea', M.nombreCompleto as 'Mentor', DATE_FORMAT(fechaTarea, '%d/%m/%Y - %h:%i %p') as 'Fecha Entrega',E.etapa as 'Etapa de la Tarea', IF(T.entregada = 0,'No','Si') AS Entregada, IF(T.aprobada = 0,'No','Sí') AS Aprobada FROM tarea as T JOIN usuarios as M ON T.idMenTarea = M.cedula JOIN etapa as E ON T.idEtapaTarea = E.idetapa WHERE T.idEmpTarea = " + idEmprendedor;
     pool.query(query, (err,data) =>{
         res.send(data);
     });
+}
+
+Emprendedor.EnviarTarea = (req,res) =>{
+    const {originalname} = req.file;
+    const {idTarea} = req.body;
+    console.log(originalname);
+    const query = "UPDATE tarea SET entregada = 1 , archivoE = '" + originalname + "' WHERE idTarea = " + idTarea;
+    pool.query(query,(err,data)=>{
+        res.send(data)
+    })
 }
 
 Emprendedor.getConsultorias = (req,res) =>{

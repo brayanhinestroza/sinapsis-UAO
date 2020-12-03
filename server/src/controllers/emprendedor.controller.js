@@ -24,6 +24,10 @@ emprendedor.getTareas = (req,res) =>{
     Emprendedores.getTareas(req,res);
 }
 
+emprendedor.EnviarTarea = (req,res) =>{
+    Emprendedores.EnviarTarea(req,res)
+}
+
 emprendedor.getConsultorias = (req,res) =>{
     Emprendedores.getConsultorias(req,res);
 }

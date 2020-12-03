@@ -21,6 +21,14 @@ mentor.crearConsultoria = (req,res) =>{
     Mentor.crearConsultoria(req,res);
 }
 
+mentor.revisarConsultoria = (req,res) =>{
+    Mentor.revisarConsultoria(req,res);
+}
+
+mentor.ComentarConsultoria = (req,res) =>{
+    Mentor.ComentarConsultoria(req,res);
+}
+
 mentor.crearTarea = (req,res) =>{
     Mentor.CrearTarea(req,res);
 }

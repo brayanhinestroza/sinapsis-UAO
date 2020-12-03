@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { Card } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 import Axios from 'axios'
+import Cookies from 'universal-cookie'
 import Table from 'react-flexy-table'
 import "./MiTablaTareas.css"
-import Cookies from 'universal-cookie'
-import { Link } from 'react-router-dom'
 
 const cookies =  new Cookies();
 export default class Tabla extends Component {
@@ -40,7 +40,7 @@ export default class Tabla extends Component {
                   }
                 }
                 to="/Emprendedor/Ruta/Tarea">
-                    Entregar</Link>
+                    Ver</Link>
               </div>
             }
         }]
@@ -51,11 +51,12 @@ export default class Tabla extends Component {
             <Card.Body className="cardT">
                 <h3 className="text-center">No hay datos para mostrar</h3>
             </Card.Body>
-        </div> :         
+        </div> 
+        :         
         <div className="ContenedorT">
             <div className="cardT" >
                 <Card.Body className="cardT">
-                    <h5>Lista de {this.props.title}</h5>
+                    <h5>Lista de Tareas</h5>
                     <Table className="table" data={data} filteredDataText= "Datos filtrados:" nextText= "Siguiente" previousText = "Anterior"  totalDataText ="Total datos:" rowsText="Número de filas" pageText="Página" ofText =" de" filterable additionalCols={ColumnaAcciones}/>
                 </Card.Body>
             </div>

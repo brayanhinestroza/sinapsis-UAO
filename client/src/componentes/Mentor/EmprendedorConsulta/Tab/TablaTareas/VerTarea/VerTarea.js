@@ -35,14 +35,14 @@ class VerTarea extends Component {
     }
 
     componentDidMount(){
-        Axios.get("http://localhost:5000/Mentor//RevisarTarea",{
+        Axios.get("http://localhost:5000/Mentor/RevisarTarea",{
             params:{
                 idTarea: cookies.get("idTareaM")
             }
         })
         .then(res =>{
             if(res.data.length>0){
-                this.setState({archivo:res.data[0].archivoM,loading:false});
+                this.setState({archivo:res.data[0].archivoE,loading:false});
             }            
         })
         .then(() =>{
@@ -92,8 +92,8 @@ class VerTarea extends Component {
                 <br></br>
                 <select name="calificatarea" className="inputVerTarea"  type= "text" onChange={(e)=> this.HandleChange(e)}>
                         <option disabled selected>Califica la tarea</option>
-                        <option value="aprobada">Aprobada</option>
-                        <option value="reprobada">Reprobada</option> 
+                        <option value="1">Aprobada</option>
+                        <option value="0">Reprobada</option> 
                 </select> 
                 </div>
 

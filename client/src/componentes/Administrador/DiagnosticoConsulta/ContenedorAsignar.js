@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import {Button} from 'react-bootstrap';
 import Axios from 'axios'
+import Cookies from 'universal-cookie';
 
+const cookies = new Cookies();
 class ContenedorAsignar extends Component {
 constructor(props){
     super(props);
@@ -9,7 +11,7 @@ constructor(props){
         mentores: null,
         etapas: null,
         loading: true,
-        emprendedor: this.props.emprendedor
+        emprendedor: cookies.get("idEmprendedor")
     }
 }
 //Ciclo de vida del componente
@@ -46,7 +48,7 @@ asignarRuta(){
         etapa: this.state.etapa,
         emprendedor: this.state.emprendedor,
         mentor: this.state.mentorPrincipal
-    }).then(res =>{
+    }).then(res =>{        
         if(res.data.res1.affectedRows === 1 && res.data.res2.affectedRows === 1 && res.data.res3.affectedRows === 1 ){
             alert("Se ha asignado correctamente la etapa de la ruta y el mentor");
             window.location.href = "/Administrador/Diagnosticos"

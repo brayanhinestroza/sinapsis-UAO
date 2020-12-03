@@ -21,7 +21,7 @@ import EmprendedorMTR  from './componentes/Mentor/EmprendedorConsulta/Emprendedo
 import CrearTarea from './componentes/Mentor/Tarea/TareaModal'
 import CrearConsultoria from './componentes/Mentor/Consultoria/ConsultoriaModal'
 import RevisarTarea from './componentes/Mentor/EmprendedorConsulta/Tab/TablaTareas/VerTarea/VerTarea'
-
+import RevisarConsultoria from './componentes/Mentor/EmprendedorConsulta/Tab/TablaConsultorias/VerConsultoria/VerConsultoria'
 
 function App() {
   return (
@@ -32,6 +32,7 @@ function App() {
       <Route path='/Mentor/Emprendedor/CrearTarea' component={CrearTarea} />
       <Route path='/Mentor/Emprendedor/RevisarTarea' component={RevisarTarea} />
       <Route path="/Mentor/Emprendedor/CrearConsultoria" component={CrearConsultoria}/>
+      <Route path='/Mentor/Emprendedor/Consultoria' component={RevisarConsultoria} />
       <Route exact path='/' component={Login} /> 
       <Route exact path='/Registro' component={Registro} />
       <Route exact path='/Administrador' component={Administrador} />

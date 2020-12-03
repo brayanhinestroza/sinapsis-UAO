@@ -29,6 +29,8 @@ export default class TablaMentores extends Component {
 
     asignarMentor = e =>{
         const idEmp = cookies.get("idEmprendedor");
+
+
         const idMentor = e.idMentor;
 
         Axios.post("http://localhost:5000/Administrador/Mentor",{
@@ -53,7 +55,7 @@ export default class TablaMentores extends Component {
                 <Button variant="primary" className="buttonMC" onClick={(e) =>
                 { 
                     if(window.confirm("Esta seguro que desea asignar el mentor al emprendedor?")){
-                        this.asignarMentor({idMentor:data.Cedula})
+                        this.asignarMentor({idMentor:data.Cédula})
                     }
                 }
                 }>Añadir</Button>

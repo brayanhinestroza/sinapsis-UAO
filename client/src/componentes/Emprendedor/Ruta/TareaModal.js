@@ -1,46 +1,83 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react';
+import { Modal, ModalBody, ModalFooter,ModalTitle, Button } from 'react-bootstrap';
 import ModalHeader from "react-bootstrap/ModalHeader";
-import { Modal, ModalBody, ModalFooter,ModalTitle, Button } from 'react-bootstrap'
-import './TareaModal.css'
-import Cookies from 'universal-cookie'
-import Axios from 'axios'
-
+import { Link } from 'react-router-dom';
+import Cookies from 'universal-cookie';
+import Axios from 'axios';
+import './TareaModal.css';
 
 const cookies = new Cookies();
 class TareaModal extends Component {
-    state={URLarchivo:"#"}
-
-    /*componentDidMount(){
-        Axios.get("http://localhost:5000/Mentor//RevisarTarea",{
+    state={
+        datos: null,
+        loading: true
+    }
+    
+    componentDidMount(){
+        Axios.get("http://localhost:5000/Mentor/RevisarTarea",{
             params:{
-                idTarea: cookies.get("idTareaM")
+                idTarea: cookies.get("idTarea")
             }
         })
         .then(res =>{
             if(res.data.length>0){
-                this.setState({archivo:res.data[0].archivoM,loading:false});
+                this.setState({datos:res.data[0]});
             }            
         })
         .then(() =>{
-            const {archivo}  = this.state;
-            const buffer = Buffer.from(archivo);
-            this.setState({URLarchivo : buffer.toString() })
+            console.log("object");
+            console.log(this.state.datos);
+            //const {archivoM}  = this.state.datos;
+            //const buffer = Buffer.from(archivoM);
+            this.setState({/*URLarchivo : buffer.toString(),*/ loading:false })
         })
-    }*/
+    }
+
+    onFileChange = e =>{
+        e.preventDefault();
+        console.log(e.target.files);
+        this.setState({
+            archivoE : e.target.files[0]
+        });
+    }
+
+    handleClose = () =>{
+        window.location.href = "/Emprendedor/Ruta"
+    }
+
+    entregarTarea = e =>{
+        e.preventDefault();
+        console.log(this.state);
+        const {archivoE} = this.state;
+        const form =  new FormData();
+        form.append('file', archivoE );
+        form.append('idTarea', cookies.get("idTarea"));
+
+        Axios.put("http://localhost:5000/emprendedor/Tareas", form)
+        .then(res =>{
+            // eslint-disable-next-line
+            if(res.data.affectedRows == 1){
+                alert("Tarea enviada correctamente");                
+            }
+        })
+        .then(()=> cookies.remove("idTarea",{path: '/Emprendedor'}))
+        .then(()=> this.handleClose())        
+    }
     
 render(){
     return (
+        this.state.loading?<></>
+        :
         <div>
             <Modal show={true}>
                 <ModalHeader>
-                    <ModalTitle>Tarea Nombre</ModalTitle>
+                    <ModalTitle>{this.state.datos.nombreTarea}</ModalTitle>
                 </ModalHeader>
                 <ModalBody className="VerTarBody">
                     
                     <div>
                     <label className="crearTa-label">Descripción</label><br/>  
-                     <textarea name="desT" className="des-tarea" placeholder="Descripción" type= "text" ></textarea>                                 
+                     <label name="desT" className="des-tarea"> {this.state.datos.descripcionTarea} </label>                                 
                     </div>
                     
                     <div>
@@ -60,7 +97,7 @@ render(){
                     <div>
                     <br></br>
                     <h6 className= "fileT-label">Sube tu tarea</h6>
-                    <input name="file" className= "fileT" type="file" />
+                    <input name="file" className= "fileT" type="file" onChange={this.onFileChange} disabled={this.state.datos.entregada}/>
 
                     </div>
 
@@ -68,14 +105,15 @@ render(){
                     <br></br>
                     <h6>Retroalimentación (cuando sea revisada)</h6>
                     <label className="crearTa-label">Comentarios </label><br/>  
-                     <textarea name="desT" className="des-tarea" placeholder="No hay comentarios" type= "text" disabled></textarea>  
+                     <label name="desT" className="des-tarea" > {this.state.datos.comentario} </label>  
                     </div>
 
                 </ModalBody>
                 <ModalFooter>
-                 <Button className= "buttonTable" class="btn btn-outline-primary" 
-                    >Entregar</Button>
-
+                 <button className= "buttonTable" class="btn btn-primary" disabled={this.state.datos.entregada} 
+                    onClick={(e) => {this.entregarTarea(e)}}>
+                        Entregar
+                    </button>
                     <Link className= "buttonTableO btn btn-outline-primary" 
                     to="/Emprendedor/Ruta">Cancelar</Link> 
                 </ModalFooter>

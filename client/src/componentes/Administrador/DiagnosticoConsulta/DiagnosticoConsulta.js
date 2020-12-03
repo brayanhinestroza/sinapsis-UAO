@@ -25,13 +25,16 @@ class DiagnosticoConsulta extends Component {
     const URL = "http://localhost:5000/Administrador/Diagnostico"
     Axios.get(URL,{
       params: {
-        idEmprendedor: this.state.idEmprendedor
+        idEmprendedor: cookies.get("idEmprendedor")
       }
     })
     .then(res =>{      
-      this.setState({datos:res.data[0], loading:false});
+      this.setState({datos:res.data[0]});
     })
-    .then(()=> this.obtenerArchivo())
+    .then(()=> {
+      this.obtenerArchivo();      
+    })
+    .then(()=> this.setState({loading:false}))
   }
 
   obtenerArchivo = () =>{

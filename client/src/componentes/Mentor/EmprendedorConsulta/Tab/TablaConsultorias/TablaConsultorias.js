@@ -4,6 +4,7 @@ import Axios from 'axios'
 import Table from 'react-flexy-table'
 import "./TablaConsultorias.css"
 import Cookies from 'universal-cookie'
+import { Link } from 'react-router-dom'
 
 const cookies =  new Cookies();
 export default class Tabla extends Component {
@@ -36,13 +37,9 @@ export default class Tabla extends Component {
             header: "Acciones",
             td: (data) => {
               return <div>              
-                <Button variant="primary" className="buttonMC" onClick={(e) =>
-                { 
-                    if(window.confirm("Esta seguro que desea Evaluar la consultoria del emprendedor?")){
-                        this.evaluarConsultoria(e)
-                    }
-                }
-                }>Evaluar</Button>
+                <Link className="buttonMC btn btn-primary" to="/Mentor/Emprendedor/Consultoria" onClick={(e) =>
+                cookies.set("idConsultoria", data.Número)
+                }>Consultar</Link>
               </div>
             }
         }]

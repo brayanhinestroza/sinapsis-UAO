@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { Card } from 'react-bootstrap'
 import Axios from 'axios'
 import Table from 'react-flexy-table'
+import Cookies from 'universal-cookie'
 import "react-flexy-table/dist/index.css"
 import "./TablaConsultorias.css"
-import Cookies from 'universal-cookie'
 
 const cookies =  new Cookies();
 export default class Tabla extends Component {
@@ -43,7 +43,7 @@ export default class Tabla extends Component {
         <div className="ContenedorC">
             <div className="cardC" >
                 <Card.Body className="cardC">
-                    <h5>Lista de {this.props.title}</h5>
+                    <h5>Lista de Consultorías</h5>
                     <Table className="table" data={data} filteredDataText= "Datos filtrados:" nextText= "Siguiente" previousText = "Anterior"  totalDataText ="Total datos:" rowsText="Número de filas" pageText="Página" ofText =" de" filterable/>
                 </Card.Body>
             </div>

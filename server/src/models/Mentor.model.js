@@ -2,7 +2,7 @@ const pool = require('../database')
 const Mentor = {}
 
 Mentor.getMentores = (req , res) => {
-    const query = "SELECT M.cedula, U.nombreCompleto from mentor as M JOIN usuarios as U where U.tipoUsuario = 'Mentor'"
+    const query = "SELECT M.cedula, U.nombreCompleto from mentor as M JOIN usuarios as U ON M.cedula = U.cedula where U.tipoUsuario = 'Mentor'"
     pool.query(query,(err, data) =>{
         res.send(data);
     });    
@@ -24,26 +24,37 @@ Mentor.getEmprendedores = (req,res) =>{
 }
 
 Mentor.getConsultorias = (req,res) =>{
-    const query = "SELECT idEmpConsultoria as 'Cédula', nombreCompleto as 'Nombre Emprendedor', nombreConsultoria as 'Nombre Consultoría', asuntoConsultoria as 'Asunto Consultoría', DATE_FORMAT(fechaConsultoria, '%d/%m/%Y') as 'Fecha Consultoría', TIME_FORMAT(horaInicio, '%l:%i %p') as 'Hora inicio', TIME_FORMAT(horaFin, '%l:%i %p') as 'Hora fin'  FROM consultoria as C JOIN usuarios as U ON C.idEmpConsultoria = U.cedula where idEmpConsultoria = " + req.query.idEmprendedor;
+    const query = "SELECT idConsultoria as Número, idEmpConsultoria as 'Cédula', nombreCompleto as 'Nombre Emprendedor', nombreConsultoria as 'Nombre Consultoría', asuntoConsultoria as 'Asunto Consultoría', DATE_FORMAT(fechaConsultoria, '%d/%m/%Y') as 'Fecha Consultoría', TIME_FORMAT(horaInicio, '%l:%i %p') as 'Hora inicio', TIME_FORMAT(horaFin, '%l:%i %p') as 'Hora fin'  FROM consultoria as C JOIN usuarios as U ON C.idEmpConsultoria = U.cedula where idEmpConsultoria = " + req.query.idEmprendedor;
     pool.query(query, (err,data) =>{
         res.send(data);
     })
 }
 
 Mentor.crearConsultoria = (req,res) =>{
-    const {idEmp, idMentor, titulo, fecha, horaI, horaF, asunto, comentario} = req.body.SinError;
-    var query;
-    if(!comentario){
-        query = "INSERT into consultoria (idEmpConsultoria, idMentorConsultoria, nombreConsultoria, asuntoConsultoria, fechaConsultoria, horaInicio, horaFin)" 
-        + "VALUES ('" + idEmp + "' , '" + idMentor + "' , '" + titulo + "' , '" + asunto + "' , '" + fecha + "' , '" + horaI + "' , '" + horaF + "')"
-    }else{
-        query = "INSERT into consultoria (idEmpConsultoria, idMentorConsultoria, nombreConsultoria, asuntoConsultoria, fechaConsultoria, comentarioConsultoria, horaInicio, horaFin )" 
-        + "VALUES ('" + idEmp + "' , '" + idMentor + "' , '" + titulo + "' , '" + asunto + "' , '" + fecha + "' , '" + comentario + "' , '" + horaI + "' , '" + horaF + "')"
-    }
+    const {idEmp, idMentor, titulo, fecha, horaI, horaF, asunto} = req.body.SinError;
+    const query = "INSERT into consultoria (idEmpConsultoria, idMentorConsultoria, nombreConsultoria, asuntoConsultoria, fechaConsultoria, horaInicio, horaFin)" 
+        + "VALUES ('" + idEmp + "' , '" + idMentor + "' , '" + titulo + "' , '" + asunto + "' , '" + fecha + "' , '" + horaI + "' , '" + horaF + "')";
     pool.query(query , (err, data) =>{        
         res.send(data);
     });
 }
+
+Mentor.revisarConsultoria = (req,res) =>{
+    const {idConsultoria} = req.query
+    const query = "SELECT nombreConsultoria, asuntoConsultoria, DATE_FORMAT(fechaConsultoria, '%d/%m/%Y') as fechaConsultoria, TIME_FORMAT(horaInicio, '%l:%i %p') as horaInicio, TIME_FORMAT(horaFin, '%l:%i %p') as horaFin from Consultoria where idConsultoria = " + idConsultoria;
+    pool.query(query,(err,data)=>{
+        res.send(data);
+    })
+}
+
+Mentor.ComentarConsultoria = (req,res) =>{
+    const {idConsultoria, comentario} = req.body
+    const query = "UPDATE consultoria SET comentarioConsultoria ='"+ comentario+ "' WHERE idConsultoria = " + idConsultoria;
+    pool.query(query,(err,data)=>{
+        res.send(data);
+    })
+}
+
 
 Mentor.CrearTarea = (req,res) =>{
     const {nombreT, etapa, desT, fechaTarea, idEmp, idMentor} = req.body;
@@ -71,7 +82,7 @@ Mentor.getTareas = (req,res) =>{
 
 Mentor.revisarTarea = (req,res) =>{
     const {idTarea} = req.query
-    const query = "SELECT archivoM FROM tarea WHERE idTarea = " + idTarea
+    const query = "SELECT archivoM, archivoE, nombreTarea, descripcionTarea, IF(comentario IS NULL, 'No hay comentarios', comentario ) AS comentario, IF(entregada = 1, true, false ) AS entregada FROM tarea WHERE idTarea = " + idTarea
     pool.query(query, (err,data) =>{
         res.send(data);
     })
@@ -79,7 +90,7 @@ Mentor.revisarTarea = (req,res) =>{
 
 Mentor.calificarTarea = (req,res) =>{
     const {comentario, calificatarea, idTarea} = req.body;
-    const query = "UPDATE tarea SET comentario = '" + comentario + "' , Calificacion = '" + calificatarea + "' , revisada=1 WHERE idTarea = " + idTarea; 
+    const query = "UPDATE tarea SET comentario = '" + comentario + "' , aprobada = '" + calificatarea + "' , revisada=1 WHERE idTarea = " + idTarea; 
     pool.query(query,(err,data)=>{
         if(err){
             console.log(err);

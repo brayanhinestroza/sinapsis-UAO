@@ -14,6 +14,7 @@ router.route('/Etapa')//
 
 router.route('/Tareas')//
     .get(Emprendedor.getTareas)//
+    .put(Emprendedor.EnviarTarea)
 
 router.route('/Consultorias')
     .get(Emprendedor.getConsultorias)

@@ -42,7 +42,7 @@ export default class Tabla extends Component {
         <div className="ContenedorC">
             <div className="cardC" >
                 <Card.Body className="cardC">
-                    <h5>Lista de {this.props.title}</h5>
+                    <h5>Lista de Consultorías</h5>
                     <Table className="table" data={data} filteredDataText= "Datos filtrados:" nextText= "Siguiente" previousText = "Anterior"  totalDataText ="Total datos:" rowsText="Número de filas" pageText="Página" ofText =" de" filterable/>
                 </Card.Body>
             </div>

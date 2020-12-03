@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import {Tab, Tabs, ProgressBar} from 'react-bootstrap';
-import './MiRutaTabEmprendedor.css';
 import TablaTarea from './TablaTareas/MiTablaTareas'
 import TablaConsultoria from './TablaConsultorias/TablaConsultorias'
 import Info from './DiagnosticoConsultaTab/DiagnosticoConsultaTab';
 import Cookies from 'universal-cookie';
 import Axios from 'axios';
+import './MiRutaTabEmprendedor.css';
 const cookies = new Cookies();
 
 class MiRutaTabEmprendedor extends Component {
@@ -203,16 +203,16 @@ class MiRutaTabEmprendedor extends Component {
 				</Tab>
 				<Tab eventKey="tareas" title="Tareas">
                     <div className="">
-                        <TablaTarea></TablaTarea>
+                        <TablaTarea/>
                     </div> 
 				</Tab>
-				<Tab eventKey="consultorias" title="Consultorias">
+				<Tab eventKey="consultorias" title="Consultorías">
                     <div className="">
-                        <TablaConsultoria></TablaConsultoria>
+                        <TablaConsultoria/>
                     </div>  
 				</Tab>
                 <Tab eventKey="informacion" title="Información" >					
-                    <Info></Info>                   
+                    <Info/>                   
 				</Tab>
 			</Tabs>
 		);

@@ -15,6 +15,10 @@ router.route('/Consultoria')//
     .get(Mentor.getConsultorias)//
     .post(Mentor.crearConsultoria)//
 
+router.route('/RevisarConsultoria')
+    .get(Mentor.revisarConsultoria)
+    .put(Mentor.ComentarConsultoria)
+
 router.route('/Tarea')//
     .get(Mentor.getTareas)//
     .post(Mentor.crearTarea)//
