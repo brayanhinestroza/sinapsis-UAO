@@ -62,7 +62,7 @@ class ConsultoriaModal extends Component {
                 SinError
             })
             .then(res =>{
-                if(res.data.affectedRows >0) alert("Consultoria creada correctamente");
+                if(res.data.affectedRows >0) alert("La consultoría ha sido creada correctamente");
                 window.location.href = "/Mentor/Emprendedor"
             })
         }

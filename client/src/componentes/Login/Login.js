@@ -27,7 +27,7 @@ const validaciones = valores =>{
   }
   const regExp1 = /^(?=.*\d).{4,8}$/
   if(!regExp1.test(contrasena)){
-    errors.contrasena = "La contraseña mínimo 8 caracteres"
+    errors.contrasena = "La contraseña debe tener entre 4 y 8 caracteres"
   }
   return errors;
 }
@@ -45,7 +45,7 @@ class Login extends React.Component {
   //Ciclo de vida del componente
   componentDidMount(){
     if(cookie.get("cedula")){
-      alert("Ya has iniciado sesion");
+      alert("Ya has iniciado sesión");
       window.location.href = "/" + cookie.get("tipoUsuario");
     }
   }

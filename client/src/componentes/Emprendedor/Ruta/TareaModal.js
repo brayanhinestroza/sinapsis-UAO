@@ -57,7 +57,7 @@ class TareaModal extends Component {
         .then(res =>{
             // eslint-disable-next-line
             if(res.data.affectedRows == 1){
-                alert("Tarea enviada correctamente");                
+                alert("Su tarea fue enviada correctamente");                
             }
         })
         .then(()=> cookies.remove("idTarea",{path: '/Emprendedor'}))

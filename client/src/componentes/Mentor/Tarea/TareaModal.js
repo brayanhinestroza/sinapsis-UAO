@@ -68,7 +68,7 @@ class TareaModal extends Component {
         .then(res =>{
             // eslint-disable-next-line
             if(res.data.affectedRows == 1){
-                alert("Tarea creada correctamente");
+                alert("La tarea ha sido creada correctamente");
                 this.handleClose()
             }
         })

@@ -16,7 +16,7 @@ class Navbar extends Component {
     }
 
     componentDidMount(){                
-       /* if(cookie.get("cedula")){
+       if(cookie.get("cedula")){
             // eslint-disable-next-line 
             if(cookie.get("estado") == 0){
                 this.setState({showModal:true})
@@ -29,9 +29,9 @@ class Navbar extends Component {
                 }); 
             }                       
         }else{
-            alert("Debes iniciar sesion primero");
+            alert("Debes iniciar sesión primero");
             window.location.href = "/";
-        }*/
+        }
         this.setState({loading:false});
     }
 
@@ -42,6 +42,7 @@ class Navbar extends Component {
         cookie.remove("estado",  {path:"/"});
         cookie.remove("idEmprendedor",  {path:"/"});
         cookie.remove("correo",  {path:"/"});
+        cookie.remove("idConsultoria",  {path:"/"});
 
         window.location.href = "/";
     }
@@ -62,7 +63,7 @@ class Navbar extends Component {
         <Modal.Header closeButton>
             <Modal.Title>Aviso</Modal.Title>
         </Modal.Header>
-        <Modal.Body> Tu cuenta aun no ha sido activada, puedes contactarte con un administrador para agilizar el proceso</Modal.Body>
+        <Modal.Body> Tu cuenta aún no ha sido activada, puedes contactarte con un administrador para agilizar el proceso</Modal.Body>
         <Modal.Footer>
             <Button variant="secondary" onClick={this.handleClose}>
             Cerrar

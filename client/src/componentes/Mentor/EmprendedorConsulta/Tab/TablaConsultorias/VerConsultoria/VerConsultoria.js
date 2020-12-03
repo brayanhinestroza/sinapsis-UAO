@@ -29,7 +29,7 @@ class VerConsultoria extends Component {
         .then(res =>{
             console.log(res);
             if(res.data.affectedRows>0){
-                alert("Comentario guardado correctamente")
+                alert("El comentario de la consultoría ha sido guardado correctamente")
                 window.location.href = "/Mentor/Emprendedor"
             }
         })

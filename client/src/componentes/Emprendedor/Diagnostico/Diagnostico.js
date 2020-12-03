@@ -122,7 +122,7 @@ class Diagnostico extends Component {
       Axios.post("http://localhost:5000/Emprendedor/Diagnostico", form)
       .then(res=> {
         if(res.data.res1.affectedRows == 1 && res.data.res2.affectedRows == 1 ){
-          alert("Diagnostico enviado correctamente");
+          alert("Diagnóstico enviado correctamente");
           window.location.href = "/Emprendedor"
         }else{
           alert("Ha ocurrido un error");

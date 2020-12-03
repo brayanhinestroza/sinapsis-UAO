@@ -78,7 +78,7 @@ class Login extends React.Component {
   //Ciclo de vida del componente
   componentDidMount(){
     if(cookie.get("cedula")){
-      alert("Ya has iniciado sesion");
+      alert("Ya has iniciado sesión");
       window.location.href = "/" + cookie.get("tipoUsuario");
     }
   }
@@ -128,7 +128,7 @@ class Login extends React.Component {
     return(
       <div className="homeR">
         <form className="CardRegistroR">              
-        <p className="tituloR">Registrate en Sinapsis UAO</p>
+        <p className="tituloR">Regístrate en Sinapsis UAO</p>
 
         <div className="form-controls">
           <input name="nombreCompleto" className="inputR" placeholder="Nombre completo" type="text" onChange={this.handleChange} ></input>

@@ -26,10 +26,10 @@ class VerTarea extends Component {
         })
         .then(res =>{
             if(res.data.affectedRows>0){
-                alert("Tarea calificada correctamente");
+                alert("La tarea fue calificada correctamente");
                 window.location.href = "/Mentor/Emprendedor"
             }else{
-                alert("Hubo algun error");
+                alert("Hubo algún error");
             }
         })
     }
