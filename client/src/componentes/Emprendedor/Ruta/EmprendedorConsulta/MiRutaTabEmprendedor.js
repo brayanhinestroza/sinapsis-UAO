@@ -211,9 +211,11 @@ class MiRutaTabEmprendedor extends Component {
                         <TablaConsultoria/>
                     </div>  
 				</Tab>
-                <Tab eventKey="informacion" title="Información" >					
+                {
+                    cookies.get("diagnostico") && <Tab eventKey="informacion" title="Información" >					
                     <Info/>                   
-				</Tab>
+				    </Tab>
+                }                
 			</Tabs>
 		);
 	}

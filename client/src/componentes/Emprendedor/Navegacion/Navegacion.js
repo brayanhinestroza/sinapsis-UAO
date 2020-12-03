@@ -20,8 +20,9 @@ class Navegacion extends Component {
         .then(res => {
             //Si el usuario ya ha realizado el diagnostico, desaparece la opcion del menu
             if(res.data.length > 0){
+                cookie.set("diagnostico",true)
                 this.setState({diagnostico: false});
-            }            
+            }          
         })
     }
 

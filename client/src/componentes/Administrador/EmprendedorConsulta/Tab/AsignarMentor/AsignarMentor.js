@@ -3,6 +3,7 @@ import { Card, Button } from 'react-bootstrap'
 import Cookies from 'universal-cookie'
 import Axios from 'axios'
 import Table from 'react-flexy-table'
+import swal from 'sweetalert2'
 import "./AsignarMentor.css"
 
 const cookies =  new Cookies();
@@ -29,21 +30,24 @@ export default class TablaMentores extends Component {
 
     asignarMentor = e =>{
         const idEmp = cookies.get("idEmprendedor");
-
-
         const idMentor = e.idMentor;
-
         Axios.post("http://localhost:5000/Administrador/Mentor",{
             idEmp,
             idMentor
         })
         .then(res =>{
             if(res.data.affectedRows>0){
-                window.location.href = "/Administrador/Emprendedor"
+                swal.fire({
+                    title:"Se ha asignado correctamente el mentor",
+                    icon:"success",
+                    iconColor:"#9a66a8",
+                    confirmButtonText:"Aceptar",
+                    confirmButtonColor:"#9a66a8",
+                    showConfirmButton: true
+                })
+                .then(()=> window.location.href = "/Administrador/Emprendedor")
             }
         })
-
-
     }
 
     render() { 
@@ -53,10 +57,22 @@ export default class TablaMentores extends Component {
             td: (data) => {
               return <div>              
                 <Button variant="primary" className="buttonMC" onClick={(e) =>
-                { 
-                    if(window.confirm("Esta seguro que desea asignar el mentor al emprendedor?")){
-                        this.asignarMentor({idMentor:data.Cédula})
-                    }
+                {
+                    swal.fire({
+                        title:"¿Estás seguro que deseas añadir el mentor?",
+                        icon:"question",
+                        iconColor:"#9a66a8",
+                        confirmButtonText:"Aceptar",
+                        confirmButtonColor:"#9a66a8",            
+                        showConfirmButton: true,
+                        showCancelButton:true,
+                        cancelButtonText:"Cancelar",
+                    })
+                    .then(res =>{
+                        if(res.isConfirmed){
+                            this.asignarMentor({idMentor:data.Cédula})
+                        }
+                    })
                 }
                 }>Añadir</Button>
               </div>

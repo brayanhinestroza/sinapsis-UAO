@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import Cookies from 'universal-cookie'
 import Axios from 'axios'
 import Table from 'react-flexy-table'
+import swal from 'sweetalert2'
 import "./Tabla.css"
 
 const cookies =  new Cookies();
@@ -34,8 +35,15 @@ export default class Tabla extends Component {
         })
         .then(res =>{
             if(res.data.affectedRows > 0){
-                alert("Eliminacion exitosa");
-                window.location.href = "/Administrador/Diagnosticos"
+                swal.fire({
+                    title:"Eliminación exitosa",
+                    icon:"success",
+                    iconColor:"#9a66a8",
+                    confirmButtonText:"Aceptar",
+                    confirmButtonColor:"#9a66a8",
+                    showConfirmButton: true
+                })
+                .then(()=>window.location.href = "/Administrador/Diagnosticos")
             }
         })       
     }
@@ -49,10 +57,22 @@ export default class Tabla extends Component {
                 <Link className= "buttonTable btn btn-primary" onClick={() => cookies.set("idEmprendedor", data.Cédula)} to={{pathname: "/Administrador/Diagnostico", id: data.Emprendedor }}>Revisar</Link>                
                 <Button className= "buttonTableO" class="btn btn-outline-primary" 
                 onClick={() =>{ 
-                  if(window.confirm("Esta seguro que desea eliminar el diagnostico?")){
-                    this.eliminarDiagnostico({idUsuario: data.Cédula})
-                  }
-                  }
+                    swal.fire({
+                        title:"¿Estás seguro que deseas eliminar el diagnóstico del emprendedor?",
+                        icon:"warning",
+                        iconColor:"#9a66a8",
+                        confirmButtonText:"Eliminar",
+                        confirmButtonColor:"#9a66a8",            
+                        showConfirmButton: true,
+                        showCancelButton:true,
+                        cancelButtonText:"Cancelar",
+                    })
+                    .then(res =>{
+                        if(res.isConfirmed){
+                            this.eliminarDiagnostico({idUsuario: data.Cédula})
+                        }
+                    })
+                    }
                 }>
                     Eliminar</Button>
               </div>

@@ -1,14 +1,11 @@
 import React, { Component } from 'react'
-import Modal from "react-bootstrap/Modal";
-import ModalBody from "react-bootstrap/ModalBody";
+import {Button, ModalTitle, ModalFooter, ModalBody, Modal } from 'react-bootstrap'
+import { Link } from 'react-router-dom';
 import ModalHeader from "react-bootstrap/ModalHeader";
-import ModalFooter from "react-bootstrap/ModalFooter";
-import ModalTitle from "react-bootstrap/ModalTitle";
-import { Card, Button } from 'react-bootstrap'
-import './VerTarea.css'
 import Cookies from 'universal-cookie'
 import Axios from 'axios'
-import { Link } from 'react-router-dom';
+import swal from 'sweetalert2'
+import './VerTarea.css'
 
 const cookies = new Cookies();
 class VerTarea extends Component {
@@ -26,8 +23,16 @@ class VerTarea extends Component {
         })
         .then(res =>{
             if(res.data.affectedRows>0){
-                alert("La tarea fue calificada correctamente");
-                window.location.href = "/Mentor/Emprendedor"
+                swal.fire({
+                    title:"Correcto",
+                    text:"La tarea fue calificada correctamente",
+                    icon:"success",
+                    iconColor:"#9a66a8",
+                    confirmButtonText:"Aceptar",
+                    confirmButtonColor:"#9a66a8",
+                    showConfirmButton: true
+                })
+                .then(()=> window.location.href = "/Mentor/Emprendedor")
             }else{
                 alert("Hubo algún error");
             }
@@ -107,15 +112,31 @@ class VerTarea extends Component {
                 </ModalBody>
 
                 <ModalFooter>
-                 <Button className= "buttonTable" class="btn btn-outline-primary" onClick={()=> this.revisarTarea()} 
-                    >Revisar</Button>
+                 <Button className= "buttonTable" class="btn btn-outline-primary" onClick={()=> {
+                     swal.fire({
+                        title:"¿Estás seguro?",
+                        icon:"warning",
+                        iconColor:"#9a66a8",
+                        confirmButtonText:"Aceptar",
+                        confirmButtonColor:"#9a66a8",            
+                        showConfirmButton: true,
+                        showCancelButton:true,
+                        cancelButtonText:"Cancelar",
+                    })
+                    .then(res =>{
+                        if(res.isConfirmed){
+                            this.revisarTarea()
+                        }
+                    })
+                }} 
+                >Revisar</Button>
                 
-                    <Link className= "buttonTableO" class="btn btn-outline-primary"
-                        to="/Mentor/Emprendedor" 
-                    >Cancelar</Link> 
-                </ModalFooter>
+                <Link className= "buttonTableO" class="btn btn-outline-primary"
+                    to="/Mentor/Emprendedor" 
+                >Cancelar</Link> 
+            </ModalFooter>
 
-                </Modal>
+        </Modal>
 
         </div>
     )

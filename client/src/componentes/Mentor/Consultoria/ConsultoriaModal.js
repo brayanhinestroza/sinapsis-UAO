@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import ModalHeader from "react-bootstrap/ModalHeader";
 import {Button, Modal, ModalBody, ModalFooter, ModalTitle } from 'react-bootstrap'
-import './Consultoria.css'
 import { Link } from 'react-router-dom';
+import ModalHeader from "react-bootstrap/ModalHeader";
 import Axios from 'axios'
 import Cookies from 'universal-cookie'
+import swal from 'sweetalert2'
+import './Consultoria.css'
 
 const cookies = new Cookies();
 
@@ -58,13 +59,37 @@ class ConsultoriaModal extends Component {
         if(Object.keys(result).length){
             this.setState({errors: result})
         }else{
+            swal.fire({
+                title:"¿Estás seguro que deseas crear una consultoría?",
+                icon:"warning",
+                iconColor:"#9a66a8",
+                confirmButtonText:"Aceptar",
+                confirmButtonColor:"#9a66a8",            
+                showConfirmButton: true,
+                showCancelButton:true,
+                cancelButtonText:"Cancelar",
+            })
+            .then(res =>{
+                if(res.isConfirmed){
             Axios.post("http://localhost:5000/Mentor/Consultoria",{
                 SinError
             })
             .then(res =>{
-                if(res.data.affectedRows >0) alert("La consultoría ha sido creada correctamente");
-                window.location.href = "/Mentor/Emprendedor"
+                if(res.data.affectedRows >0) {
+                    swal.fire({
+                        title:"Correcto",
+                        text:"La consultoría ha sido creada correctamente",
+                        icon:"success",
+                        iconColor:"#9a66a8",
+                        confirmButtonText:"Aceptar",
+                        confirmButtonColor:"#9a66a8",
+                        showConfirmButton: true
+                    })
+                    .then(()=>window.location.href = "/Mentor/Emprendedor")
+                }                
             })
+        }
+    })
         }
     }
 
@@ -109,13 +134,7 @@ class ConsultoriaModal extends Component {
 
                     <ModalFooter>
                         <Button className= "buttonTable" class="btn btn-outline-primary" 
-                        onClick={ e =>{ 
-                            if(window.confirm("¿Está seguro que desea crear la consultoría?")){
-                            this.handleSubmit(e)
-                            }
-                            }
-                        }
-                        >Crear</Button>
+                        onClick={ e =>{this.handleSubmit(e)}}>Crear</Button>
 
                         <Link className= "buttonTableO" class="btn btn-outline-primary"
                             to="/Mentor/Emprendedor" 

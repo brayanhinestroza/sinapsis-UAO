@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {ProgressBar, Button} from 'react-bootstrap';
 import Axios from 'axios'
 import Cookies from 'universal-cookie';
+import swal from 'sweetalert2'
 
 const cookies = new Cookies()
 export default class Ruta extends Component {
@@ -168,7 +169,16 @@ export default class Ruta extends Component {
             idEmp: cookies.get("idEmprendedor")
         })
         .then(res =>{
-            window.location.href = "/Mentor/Emprendedor"
+            swal.fire({
+                title:"Asignación exitosa",
+                icon:"success",
+                iconColor:"#9a66a8",
+                confirmButtonText:"Aceptar",
+                confirmButtonColor:"#9a66a8",
+                showConfirmButton: true
+            })
+            .then(()=>
+            window.location.href = "/Mentor/Emprendedor")
         })
     }
 
@@ -218,10 +228,24 @@ export default class Ruta extends Component {
                 </div>              
                 <div>
                     <Button variant="primary" className="buttonMC"
-                    onClick={(e) =>{ 
-                        if(window.confirm("Esta seguro que desea actualizar la ruta del emprendedor?")){
-                        this.asignarRuta(e)
-                        }
+                    onClick={(e) =>{
+                        swal.fire({
+                            title:"¿Estás seguro?",
+                            text:"Se actualizará la etapa de la ruta de emprendimiento",
+                            icon:"warning",
+                            iconColor:"#9a66a8",
+                            confirmButtonText:"Aceptar",
+                            confirmButtonColor:"#9a66a8",            
+                            showConfirmButton: true,
+                            showCancelButton:true,
+                            cancelButtonText:"Cancelar",
+                        })
+                        .then(res =>{
+                            if(res.isConfirmed){
+                                this.asignarRuta(e)
+                            }
+                        })
+                    
                         }
                     }
                     >Asignar</Button>

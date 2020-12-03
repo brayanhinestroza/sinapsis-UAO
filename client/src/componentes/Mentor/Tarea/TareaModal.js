@@ -5,10 +5,11 @@ import ModalHeader from "react-bootstrap/ModalHeader";
 import ModalFooter from "react-bootstrap/ModalFooter";
 import ModalTitle from "react-bootstrap/ModalTitle";
 import { Button } from 'react-bootstrap'
-import './TareaModal.css'
 import { Link } from 'react-router-dom';
 import Cookies from 'universal-cookie'
 import Axios from 'axios';
+import swal from 'sweetalert2'
+import './TareaModal.css'
 
 
 const cookies = new Cookies();
@@ -68,8 +69,16 @@ class TareaModal extends Component {
         .then(res =>{
             // eslint-disable-next-line
             if(res.data.affectedRows == 1){
-                alert("La tarea ha sido creada correctamente");
-                this.handleClose()
+                swal.fire({
+                    title:"Correcto",
+                    text:"La tarea ha sido creada correctamente",
+                    icon:"success",
+                    iconColor:"#9a66a8",
+                    confirmButtonText:"Aceptar",
+                    confirmButtonColor:"#9a66a8",
+                    showConfirmButton: true
+                })
+                .then(()=> this.handleClose())
             }
         })
     }
@@ -129,10 +138,22 @@ class TareaModal extends Component {
                 </ModalBody>
                 <ModalFooter>
                 <Button className= "buttonTable" class="btn btn-outline-primary" 
-                    onClick={ e =>{ 
-                            if(window.confirm("Esta seguro que desea asignar la tarea?")){
-                                this.handleSubmit(e)
+                    onClick={ e =>{
+                        swal.fire({
+                            title:"¿Estás seguro que deseas asignar la tarea?",
+                            icon:"question",
+                            iconColor:"#9a66a8",
+                            confirmButtonText:"Aceptar",
+                            confirmButtonColor:"#9a66a8",            
+                            showConfirmButton: true,
+                            showCancelButton:true,
+                            cancelButtonText:"Cancelar",
+                        })
+                        .then(res =>{
+                            if(res.isConfirmed){
+                                this.handleSubmit(e);
                             }
+                        })
                         }
                     }
                     >Crear</Button>

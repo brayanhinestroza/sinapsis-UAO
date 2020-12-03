@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import { Card, Button } from 'react-bootstrap'
 import Axios from 'axios'
 import Table from 'react-flexy-table'
+import swal from 'sweetalert2'
 import "./Tabla.css"
+
 
 export default class Tabla extends Component {
 
@@ -25,27 +27,55 @@ export default class Tabla extends Component {
         Axios.put("http://localhost:5000/Administrador/Cuenta",{
             cedula: e.idUsuario
         })
-        .then(res =>{            
-            alert("Activacion exitosa");
-            window.location.href = "/Administrador/Activar";
+        .then(res =>{           
+            swal.fire({
+                title:"Activación exitosa",
+                icon:"success",
+                iconColor:"#9a66a8",
+                confirmButtonText:"Aceptar",
+                confirmButtonColor:"#9a66a8",
+                showConfirmButton: true
+            })
+            .then(()=> window.location.href = "/Administrador/Activar")           
         })        
     }
 
     eliminarCuenta = e =>{
-        Axios.delete('http://localhost:5000/Administrador/Cuenta', {
-            params:{
-                id:e.idUsuario
-            }
+        swal.fire({
+            title:"¿Estás seguro que deseas eliminar la cuenta?",
+            icon:"warning",
+            iconColor:"#9a66a8",
+            confirmButtonText:"Eliminar",
+            confirmButtonColor:"#9a66a8",            
+            showConfirmButton: true,
+            showCancelButton:true,
+            cancelButtonText:"Cancelar",
         })
         .then(res =>{
-            // eslint-disable-next-line
-            if(res.data.affectedRows == 1 ){
-                alert("Eliminación exitosa");
-                window.location.href = "/Administrador/Activar"
-            }else{
-                console.log(res);
+            if(res.isConfirmed){
+                Axios.delete('http://localhost:5000/Administrador/Cuenta', {
+                    params:{
+                        id:e.idUsuario
+                    }
+                })
+                .then(res =>{
+                    // eslint-disable-next-line
+                    if(res.data.affectedRows == 1 ){
+                        swal.fire({
+                            title:"Eliminación exitosa",
+                            icon:"success",
+                            iconColor:"#9a66a8",
+                            confirmButtonText:"Aceptar",
+                            confirmButtonColor:"#9a66a8",
+                            showConfirmButton: true
+                        })
+                        .then(()=> window.location.href = "/Administrador/Activar")
+                    }else{
+                        console.log(res);
+                    }
+                })
             }
-        })       
+        })     
     }
 
     render() { 

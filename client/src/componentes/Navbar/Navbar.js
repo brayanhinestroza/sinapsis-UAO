@@ -43,6 +43,7 @@ class Navbar extends Component {
         cookie.remove("idEmprendedor",  {path:"/"});
         cookie.remove("correo",  {path:"/"});
         cookie.remove("idConsultoria",  {path:"/"});
+        cookie.remove("idTarea",  {path:"/"});
 
         window.location.href = "/";
     }
@@ -52,6 +53,10 @@ class Navbar extends Component {
         cookie.remove("tipoUsuario", {path:"/"});
         cookie.remove("nombreCompleto", {path:"/"});
         cookie.remove("estado",  {path:"/"});
+        cookie.remove("idEmprendedor",  {path:"/"});
+        cookie.remove("correo",  {path:"/"});
+        cookie.remove("idConsultoria",  {path:"/"});
+        cookie.remove("idTarea",  {path:"/"});
 
         window.location.href = "/";
     }

@@ -22,12 +22,19 @@ class DiagnosticoConsultaTab extends Component {
     .then(res =>{
       console.log(res.data);
       this.setState({datos:res.data[0], loading:false});      
-    });
+    })
+    .then(()=> {
+      this.obtenerArchivo();      
+    })
+    .then(()=> this.setState({loading:false}))
   }
 
-  cargarArchivo = () =>{
-
+  obtenerArchivo = () =>{
+    const {archivo}  = this.state.datos;
+    const buffer = Buffer.from(archivo);
+    this.setState({URLarchivo : buffer.toString() })
   }
+
 
   render(){
     return (
@@ -160,7 +167,7 @@ class DiagnosticoConsultaTab extends Component {
             <div>
               <label className="nombreInputDC">Autodiagnóstico</label>
               <br></br>
-                <p>Descarga el formato del emprendedor <a href={this.cargarArchivo}>Aquí</a></p>
+                <p>Descarga el formato del emprendedor <a href={"http://localhost:5000/"+this.state.URLarchivo}>Aquí</a></p>
               <br></br>
               <br></br>
             </div>                   

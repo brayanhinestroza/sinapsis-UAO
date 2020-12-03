@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {Button, Modal} from 'react-bootstrap';
 import Axios from 'axios'
 import Cookies from 'universal-cookie';
+import swal from 'sweetalert2'
 import Navbar from '../../Navbar/Navbar'
 import Navegacion from '../Navegacion/Navegacion'
 import './Diagnostico.css'
@@ -122,8 +123,16 @@ class Diagnostico extends Component {
       Axios.post("http://localhost:5000/Emprendedor/Diagnostico", form)
       .then(res=> {
         if(res.data.res1.affectedRows == 1 && res.data.res2.affectedRows == 1 ){
-          alert("Diagnóstico enviado correctamente");
-          window.location.href = "/Emprendedor"
+          swal.fire({
+            title:"Correcto",
+            text:"Diagnóstico enviado correctamente",
+            icon:"success",
+            iconColor:"#9a66a8",
+            confirmButtonText:"Aceptar",
+            confirmButtonColor:"#9a66a8",
+            showConfirmButton: true
+        })
+        .then(()=> window.location.href = "/Emprendedor")
         }else{
           alert("Ha ocurrido un error");
         } 
@@ -351,9 +360,22 @@ class Diagnostico extends Component {
               <div>
                 <Button className= "buttonDiag" variant="primary" 
                 onClick={ e =>{ 
-                  if(window.confirm("Esta seguro que desea enviar el diagnostico?")){
-                    this.handleClick(e)
-                  }
+                  swal.fire({
+                    title:"¿Estás seguro?",
+                    text:"¿Estás seguro que deseas enviar el diagnóstico?",
+                    icon:"warning",
+                    iconColor:"#9a66a8",
+                    confirmButtonText:"Enviar",
+                    confirmButtonColor:"#9a66a8",            
+                    showConfirmButton: true,
+                    showCancelButton:true,
+                    cancelButtonText:"Cancelar",
+                })
+                .then(res =>{
+                    if(res.isConfirmed){
+                      this.handleClick(e)
+                    }
+                  })
                   }
                 }>
                   Enviar diagnóstico </Button>

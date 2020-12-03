@@ -4,6 +4,7 @@ import ModalHeader from "react-bootstrap/ModalHeader";
 import {Link} from 'react-router-dom'
 import Axios from 'axios'
 import Cookies from 'universal-cookie'
+import swal from 'sweetalert2'
 import './VerConsultoria.css'
 
 const cookies = new Cookies();
@@ -27,10 +28,17 @@ class VerConsultoria extends Component {
             idConsultoria: cookies.get("idConsultoria")
         })
         .then(res =>{
-            console.log(res);
             if(res.data.affectedRows>0){
-                alert("El comentario de la consultoría ha sido guardado correctamente")
-                window.location.href = "/Mentor/Emprendedor"
+                swal.fire({
+                    title:"Correcto",
+                    text:"El comentario de la consultoría ha sido guardado correctamente",
+                    icon:"success",
+                    iconColor:"#9a66a8",
+                    confirmButtonText:"Aceptar",
+                    confirmButtonColor:"#9a66a8",
+                    showConfirmButton: true
+                })
+                .then(()=> window.location.href = "/Mentor/Emprendedor")
             }
         })
     }
@@ -90,7 +98,24 @@ class VerConsultoria extends Component {
                 </ModalBody>
 
                 <ModalFooter>
-                <Button className= "buttonTable" class="btn btn-outline-primary" onClick={()=> this.revisarConsultoria()} 
+                <Button className= "buttonTable" class="btn btn-outline-primary" onClick={()=> {
+                        swal.fire({
+                            title:"¿Estás seguro?",
+                            icon:"question",
+                            iconColor:"#9a66a8",
+                            confirmButtonText:"Aceptar",
+                            confirmButtonColor:"#9a66a8",            
+                            showConfirmButton: true,
+                            showCancelButton:true,
+                            cancelButtonText:"Cancelar",
+                        })
+                        .then(res =>{
+                            if(res.isConfirmed){
+                                this.revisarConsultoria()
+                            }
+                        })                        
+                    } 
+                }
                     >Guardar</Button>
 
                     <Link className= "buttonTableO" class="btn btn-outline-primary"

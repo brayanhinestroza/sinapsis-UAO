@@ -20,15 +20,10 @@ export default class Tabla extends Component {
             }
         })
         .then(res =>{
-            console.log(res);
             if(res.data.length>0){
                 this.setState({datos:res.data, loading:false});
             }
         })           
-    }
-
-    revisarTarea = e =>{
-        console.log(e);
     }
 
     render() { 
